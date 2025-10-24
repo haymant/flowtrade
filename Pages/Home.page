@@ -13,71 +13,75 @@
         "fontFamily": "system-ui, sans-serif"
       },
       "childIds": [
-        "g8kf63ocw",
-        "jr2szsug4",
-        "88091aqjd"
+        "navigation-menu",
+        "welcome-button",
+        "zb1qujhzf"
       ]
     },
-    "g8kf63ocw": {
-      "tagName": "div",
+    "navigation-menu": {
+      "id": "navigation-menu",
+      "tagName": "NavigationMenu",
       "attributes": {
-        "data-component-type": "Markdown",
-        "data-content": "# Markdown Heading\\n\\nAdd **rich** content using markdown."
+        "data-component-type": "NavigationMenu",
+        "data-scriptable": "true",
+        "data-config": "{\"items\":[{\"id\":\"home\",\"label\":\"Home\",\"href\":\"/Home\"},{\"id\":\"services\",\"label\":\"Services\",\"children\":[{\"id\":\"rfq\",\"label\":\"RFQ\",\"href\":\"/svc/rfq\"},{\"id\":\"quote\",\"label\":\"Quote\",\"href\":\"/svc/quote\"}]},{\"id\":\"help\",\"label\":\"Help\",\"href\":\"/help\"}]}"
       },
       "styles": {
-        "width": "100%",
-        "minHeight": "120px",
-        "margin": "8px 0",
-        "border": "1px dashed #cbd5e1",
-        "borderRadius": "6px",
-        "padding": "12px",
-        "backgroundColor": "#f8fafc"
+        "padding": "8px 0",
+        "marginTop": "-20px",
+        "marginLeft": "-20px",
+        "marginBottom": "0px",
+        "display": "block",
+        "width": "100%"
       },
-      "content": "",
-      "id": "g8kf63ocw",
       "childIds": [],
       "parentId": "page-root"
     },
-    "jr2szsug4": {
+    "welcome-button": {
+      "id": "welcome-button",
       "tagName": "div",
       "attributes": {
-        "data-component-type": "MP3Player",
-        "data-src": "https://download.samplelib.com/mp3/sample-3s.mp3",
-        "data-title": "Sample Track",
-        "data-autoplay": "false",
-        "data-loop": "false"
+        "data-component-type": "Button",
+        "data-scriptable": "true",
+        "data-onclick-script": "// Update Data Grid query to use saved 'Mock Query' and provide user feedback.\n(function handleClick(payload, context){\n  const gridId = 'data-grid';\n  // Use helper exposed in PageBuilderButton context\n  context.page.updateElementAttribute(gridId, 'data-query-name', 'Mock Query');\n  context.app.showNotification('Data Grid query set to Mock Query', 'info');\n})(payload, context);"
       },
       "styles": {
-        "width": "100%",
-        "margin": "8px 0",
-        "border": "1px dashed #cbd5e1",
-        "borderRadius": "6px",
-        "padding": "16px",
-        "backgroundColor": "#f8fafc"
-      },
-      "content": "",
-      "id": "jr2szsug4",
-      "childIds": [],
-      "parentId": "page-root"
-    },
-    "88091aqjd": {
-      "tagName": "iframe",
-      "attributes": {
-        "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        "width": "560",
-        "height": "315",
-        "frameBorder": "0",
-        "allowFullScreen": "true"
-      },
-      "styles": {
-        "width": "100%",
-        "maxWidth": "560px",
-        "height": "315px",
+        "padding": "12px 24px",
+        "backgroundColor": "#3b82f6",
+        "color": "white",
         "border": "none",
-        "borderRadius": "8px",
-        "margin": "16px 0"
+        "borderRadius": "6px",
+        "cursor": "pointer",
+        "fontSize": "14px",
+        "fontWeight": "500",
+        "margin": "16px auto",
+        "display": "block",
+        "textAlign": "center"
       },
-      "id": "88091aqjd",
+      "content": "Set Data Grid Query",
+      "childIds": [],
+      "parentId": "page-root"
+    },
+    "zb1qujhzf": {
+      "tagName": "div",
+      "attributes": {
+        "data-component-type": "DynamicForm",
+        "data-scriptable": "true",
+        "data-schema-id": "QuotReq",
+        "data-ui-schema": "{\"ui:order\":[]}",
+        "data-initial-value": "{}"
+      },
+      "styles": {
+        "width": "100%",
+        "minHeight": "140px",
+        "margin": "8px 0",
+        "border": "1px dashed #cbd5e1",
+        "borderRadius": "6px",
+        "padding": "8px",
+        "background": "#f8fafc"
+      },
+      "content": "DynamicForm (configure data-schema-id)",
+      "id": "zb1qujhzf",
       "childIds": [],
       "parentId": "page-root"
     }
