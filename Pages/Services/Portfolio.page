@@ -13,23 +13,66 @@
         "fontFamily": "system-ui, sans-serif"
       },
       "childIds": [
-        "fmllbui16"
+        "nz8vzpg8r",
+        "5rzpvun26",
+        "hbaeecpga"
       ]
     },
-    "fmllbui16": {
-      "tagName": "img",
+    "nz8vzpg8r": {
+      "tagName": "div",
       "attributes": {
-        "src": "https://raw.githubusercontent.com/tracodict/goflow/refs/heads/main/public/placeholder-user.jpg",
-        "alt": "Placeholder image"
+        "data-component-type": "Markdown",
+        "data-content": "# Markdown Heading\\n\\nAdd **rich** content using markdown."
       },
       "styles": {
-        "width": "200px",
-        "height": "150px",
-        "borderRadius": "8px",
-        "objectFit": "cover",
-        "margin": "12px 0"
+        "width": "100%",
+        "minHeight": "120px",
+        "margin": "8px 0",
+        "border": "1px dashed #cbd5e1",
+        "borderRadius": "6px",
+        "padding": "12px",
+        "backgroundColor": "#f8fafc"
       },
-      "id": "fmllbui16",
+      "content": "",
+      "id": "nz8vzpg8r",
+      "childIds": [],
+      "parentId": "page-root"
+    },
+    "5rzpvun26": {
+      "tagName": "div",
+      "attributes": {
+        "data-component-type": "data-grid",
+        "data-scriptable": "true",
+        "data-query-name": ""
+      },
+      "styles": {
+        "width": "100%",
+        "minHeight": "200px",
+        "margin": "8px 0",
+        "border": "1px solid #e5e7eb",
+        "borderRadius": "6px"
+      },
+      "content": "",
+      "id": "5rzpvun26",
+      "childIds": [],
+      "parentId": "page-root"
+    },
+    "hbaeecpga": {
+      "tagName": "div",
+      "attributes": {
+        "data-component-type": "s3-explorer",
+        "data-scriptable": "true",
+        "data-query-name": ""
+      },
+      "styles": {
+        "width": "100%",
+        "minHeight": "300px",
+        "margin": "8px 0",
+        "border": "1px solid #e5e7eb",
+        "borderRadius": "6px"
+      },
+      "content": "",
+      "id": "hbaeecpga",
       "childIds": [],
       "parentId": "page-root"
     }
