@@ -15,7 +15,8 @@
       "childIds": [
         "navigation-menu",
         "welcome-button",
-        "zb1qujhzf"
+        "zb1qujhzf",
+        "gu4m9eoj1"
       ]
     },
     "navigation-menu": {
@@ -82,6 +83,28 @@
       },
       "content": "DynamicForm (configure data-schema-id)",
       "id": "zb1qujhzf",
+      "childIds": [],
+      "parentId": "page-root"
+    },
+    "gu4m9eoj1": {
+      "tagName": "div",
+      "attributes": {
+        "data-component-type": "MP3Player",
+        "data-src": "https://download.samplelib.com/mp3/sample-3s.mp3",
+        "data-title": "Sample Track",
+        "data-autoplay": "false",
+        "data-loop": "false"
+      },
+      "styles": {
+        "width": "100%",
+        "margin": "8px 0",
+        "border": "1px dashed #cbd5e1",
+        "borderRadius": "6px",
+        "padding": "16px",
+        "backgroundColor": "#f8fafc"
+      },
+      "content": "",
+      "id": "gu4m9eoj1",
       "childIds": [],
       "parentId": "page-root"
     }
