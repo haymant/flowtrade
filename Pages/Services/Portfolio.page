@@ -1,0 +1,37 @@
+{
+  "elements": {
+    "page-root": {
+      "id": "page-root",
+      "tagName": "div",
+      "attributes": {
+        "className": "page-container"
+      },
+      "styles": {
+        "minHeight": "40vh",
+        "padding": "20px",
+        "backgroundColor": "#ffffff",
+        "fontFamily": "system-ui, sans-serif"
+      },
+      "childIds": [
+        "fmllbui16"
+      ]
+    },
+    "fmllbui16": {
+      "tagName": "img",
+      "attributes": {
+        "src": "https://raw.githubusercontent.com/tracodict/goflow/refs/heads/main/public/placeholder-user.jpg",
+        "alt": "Placeholder image"
+      },
+      "styles": {
+        "width": "200px",
+        "height": "150px",
+        "borderRadius": "8px",
+        "objectFit": "cover",
+        "margin": "12px 0"
+      },
+      "id": "fmllbui16",
+      "childIds": [],
+      "parentId": "page-root"
+    }
+  }
+}

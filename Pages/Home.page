@@ -1,4 +1,85 @@
 {
-  "components": [],
-  "layout": "default"
+  "elements": {
+    "page-root": {
+      "id": "page-root",
+      "tagName": "div",
+      "attributes": {
+        "className": "page-container"
+      },
+      "styles": {
+        "minHeight": "40vh",
+        "padding": "20px",
+        "backgroundColor": "#ffffff",
+        "fontFamily": "system-ui, sans-serif"
+      },
+      "childIds": [
+        "g8kf63ocw",
+        "jr2szsug4",
+        "88091aqjd"
+      ]
+    },
+    "g8kf63ocw": {
+      "tagName": "div",
+      "attributes": {
+        "data-component-type": "Markdown",
+        "data-content": "# Markdown Heading\\n\\nAdd **rich** content using markdown."
+      },
+      "styles": {
+        "width": "100%",
+        "minHeight": "120px",
+        "margin": "8px 0",
+        "border": "1px dashed #cbd5e1",
+        "borderRadius": "6px",
+        "padding": "12px",
+        "backgroundColor": "#f8fafc"
+      },
+      "content": "",
+      "id": "g8kf63ocw",
+      "childIds": [],
+      "parentId": "page-root"
+    },
+    "jr2szsug4": {
+      "tagName": "div",
+      "attributes": {
+        "data-component-type": "MP3Player",
+        "data-src": "https://download.samplelib.com/mp3/sample-3s.mp3",
+        "data-title": "Sample Track",
+        "data-autoplay": "false",
+        "data-loop": "false"
+      },
+      "styles": {
+        "width": "100%",
+        "margin": "8px 0",
+        "border": "1px dashed #cbd5e1",
+        "borderRadius": "6px",
+        "padding": "16px",
+        "backgroundColor": "#f8fafc"
+      },
+      "content": "",
+      "id": "jr2szsug4",
+      "childIds": [],
+      "parentId": "page-root"
+    },
+    "88091aqjd": {
+      "tagName": "iframe",
+      "attributes": {
+        "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "width": "560",
+        "height": "315",
+        "frameBorder": "0",
+        "allowFullScreen": "true"
+      },
+      "styles": {
+        "width": "100%",
+        "maxWidth": "560px",
+        "height": "315px",
+        "border": "none",
+        "borderRadius": "8px",
+        "margin": "16px 0"
+      },
+      "id": "88091aqjd",
+      "childIds": [],
+      "parentId": "page-root"
+    }
+  }
 }
