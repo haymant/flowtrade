@@ -1,4 +1,14 @@
 {
-  "query_type": "sql",
-  "query": "SELECT 1"
+  "id": "Q1",
+  "name": "Q1",
+  "data_source_id": "ds_1760173027_640629",
+  "query_type": "mongo",
+  "enabled": true,
+  "parameters": {
+    "pipeline": [
+      {
+        "$limit": 50
+      }
+    ]
+  }
 }
