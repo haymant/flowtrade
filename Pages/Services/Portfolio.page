@@ -14,8 +14,6 @@
       },
       "childIds": [
         "navigation-menu",
-        "main-title",
-        "welcome-button",
         "i6p0cfozi",
         "9bhfd5ye1"
       ]
@@ -36,47 +34,6 @@
         "display": "block",
         "width": "100%"
       },
-      "childIds": [],
-      "parentId": "page-root"
-    },
-    "main-title": {
-      "id": "main-title",
-      "tagName": "h1",
-      "attributes": {},
-      "styles": {
-        "fontSize": "32px",
-        "fontWeight": "bold",
-        "color": "#1f2937",
-        "margin": "24px 0",
-        "lineHeight": "1.2",
-        "textAlign": "center"
-      },
-      "content": "Welcome to Our Website",
-      "childIds": [],
-      "parentId": "page-root"
-    },
-    "welcome-button": {
-      "id": "welcome-button",
-      "tagName": "div",
-      "attributes": {
-        "data-component-type": "Button",
-        "data-scriptable": "true",
-        "data-onclick-script": "// Update Data Grid query to use saved 'Mock Query' and provide user feedback.\n(function handleClick(payload, context){\n  const gridId = 'data-grid';\n  // Use helper exposed in PageBuilderButton context\n  context.page.updateElementAttribute(gridId, 'data-query-name', 'Mock Query');\n  context.app.showNotification('Data Grid query set to Mock Query', 'info');\n})(payload, context);"
-      },
-      "styles": {
-        "padding": "12px 24px",
-        "backgroundColor": "#3b82f6",
-        "color": "white",
-        "border": "none",
-        "borderRadius": "6px",
-        "cursor": "pointer",
-        "fontSize": "14px",
-        "fontWeight": "500",
-        "margin": "16px auto",
-        "display": "block",
-        "textAlign": "center"
-      },
-      "content": "Set Data Grid Query",
       "childIds": [],
       "parentId": "page-root"
     },
