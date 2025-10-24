@@ -1,4 +1,13 @@
 {
+  "id": "M1",
+  "name": "M1",
   "type": "mongodb",
-  "config": {}
+  "config": {
+    "database": "go-petri-flow",
+    "uri": "djE6551NtwPPTITCTDcjN0147nGAYdstlYezHydDqfs8gnXd7F6tUyd8YudIo4IcztsOZIhXzfk=",
+    "host": "localhost",
+    "port": 27017
+  },
+  "credentials": {},
+  "enabled": true
 }
