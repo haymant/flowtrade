@@ -1,4 +1,9 @@
 {
   "type": "mongodb",
-  "config": {}
+  "config": {
+    "uri": "ddd"
+  },
+  "id": "M1",
+  "name": "testA",
+  "enabled": true
 }
