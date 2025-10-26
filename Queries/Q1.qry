@@ -1,0 +1,4 @@
+{
+  "query_type": "sql",
+  "query": "SELECT 1"
+}
