@@ -15,7 +15,7 @@
       "childIds": [
         "g8kf63ocw",
         "jr2szsug4",
-        "88091aqjd"
+        "1bbdl30st"
       ]
     },
     "g8kf63ocw": {
@@ -60,24 +60,22 @@
       "childIds": [],
       "parentId": "page-root"
     },
-    "88091aqjd": {
-      "tagName": "iframe",
+    "1bbdl30st": {
+      "tagName": "div",
       "attributes": {
-        "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        "width": "560",
-        "height": "315",
-        "frameBorder": "0",
-        "allowFullScreen": "true"
+        "data-component-type": "ECharts",
+        "data-option": "{\"title\":{\"text\":\"ECharts Example\"},\"tooltip\":{},\"grid\":{\"left\":50,\"right\":50,\"top\":60,\"bottom\":50,\"containLabel\":true},\"xAxis\":{\"type\":\"category\",\"data\":[\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fri\",\"Sat\",\"Sun\"]},\"yAxis\":{\"type\":\"value\"},\"series\":[{\"type\":\"bar\",\"data\":[120,200,150,80,70,110,130]}]}"
       },
       "styles": {
         "width": "100%",
-        "maxWidth": "560px",
-        "height": "315px",
-        "border": "none",
-        "borderRadius": "8px",
-        "margin": "16px 0"
+        "minHeight": "320px",
+        "margin": "8px 0",
+        "border": "1px dashed #cbd5e1",
+        "borderRadius": "6px",
+        "backgroundColor": "#ffffff"
       },
-      "id": "88091aqjd",
+      "content": "",
+      "id": "1bbdl30st",
       "childIds": [],
       "parentId": "page-root"
     }
