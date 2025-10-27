@@ -1,0 +1,362 @@
+{
+  "command": "",
+  "args": [],
+  "id": "T1",
+  "name": "T1",
+  "baseUrl": "https://data.lizhao.net/api/mcp",
+  "timeoutMs": 8000,
+  "tools": [
+    {
+      "inputSchema": {
+        "properties": {
+          "options": {
+            "additionalProperties": false,
+            "properties": {
+              "enableFuzzyQuery": {
+                "type": "boolean"
+              },
+              "lang": {
+                "type": "string"
+              },
+              "newsCount": {
+                "type": "number"
+              },
+              "quotesCount": {
+                "type": "number"
+              },
+              "region": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "query": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "type": "object"
+      },
+      "name": "yahoo_search",
+      "description": "Search for symbols, companies, news, and articles",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "options": {
+            "additionalProperties": false,
+            "properties": {
+              "fields": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "return": {
+                "enum": [
+                  "object",
+                  "array"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "symbol": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "yahoo_quote",
+      "description": "Get essential symbol information",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "options": {
+            "additionalProperties": false,
+            "properties": {
+              "includeAdjustedClose": {
+                "type": "boolean"
+              },
+              "interval": {
+                "type": "string"
+              },
+              "period1": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                ]
+              },
+              "period2": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "period1"
+            ],
+            "type": "object"
+          },
+          "symbol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "yahoo_historical",
+      "description": "Retrieve historical market prices",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "options": {
+            "additionalProperties": false,
+            "properties": {
+              "events": {
+                "type": "string"
+              },
+              "includePrePost": {
+                "type": "boolean"
+              },
+              "interval": {
+                "type": "string"
+              },
+              "period1": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                ]
+              },
+              "period2": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                ]
+              },
+              "return": {
+                "enum": [
+                  "object",
+                  "array"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "period1"
+            ],
+            "type": "object"
+          },
+          "symbol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "yahoo_chart",
+      "description": "Get advanced chart data with events",
+      "enabled": false
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "options": {
+            "additionalProperties": false,
+            "properties": {
+              "modules": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "symbol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "yahoo_quote_summary",
+      "description": "Get comprehensive symbol information",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "symbol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "yahoo_recommendations",
+      "description": "Get similar symbol recommendations",
+      "enabled": false
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "options": {
+            "additionalProperties": false,
+            "properties": {
+              "count": {
+                "type": "number"
+              },
+              "lang": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "country"
+        ],
+        "type": "object"
+      },
+      "name": "yahoo_trending",
+      "description": "Get trending symbols by country",
+      "enabled": false
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "options": {
+            "additionalProperties": false,
+            "properties": {
+              "date": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                ]
+              },
+              "formatted": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "symbol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "yahoo_options",
+      "description": "Retrieve options trading data",
+      "enabled": false
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "options": {
+            "additionalProperties": false,
+            "properties": {
+              "lang": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              },
+              "reportsCount": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "symbol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "yahoo_insights",
+      "description": "Get insights and scores for symbols",
+      "enabled": false
+    }
+  ]
+}
