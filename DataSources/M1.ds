@@ -1,4 +1,13 @@
 {
+  "id": "M1",
+  "name": "M1",
   "type": "mongodb",
-  "config": {}
+  "config": {
+    "database": "app",
+    "uri": "djE6YmD+uSjXDdT9k49Bb2pv8d0W7990qDb3k5VgPZrLW05jTdFztxEZGTJ4pV02FvlQmfG/iaM=",
+    "host": "localhost",
+    "port": 27017
+  },
+  "credentials": {},
+  "enabled": true
 }
