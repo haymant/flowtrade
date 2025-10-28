@@ -7,29 +7,162 @@
     "colset JSON = string;",
     "colset MARKDOWN = string;"
   ],
+  "jsonSchemas": [],
   "places": [
-    {"id": "p_city_collector", "name": "city_collector", "colorSet": "STRING"},
-    {"id": "p_fetch_and_extract", "name": "fetch_and_extract", "colorSet": "JSON"},
-    {"id": "p_normalizer", "name": "normalizer", "colorSet": "JSON"},
-    {"id": "p_qa_reviewer", "name": "qa_reviewer", "colorSet": "JSON"},
-    {"id": "p_comparator", "name": "comparator", "colorSet": "JSON"},
-    {"id": "p_dag_builder", "name": "dag_builder", "colorSet": "JSON"},
-    {"id": "p_sap_generator", "name": "sap_generator", "colorSet": "MARKDOWN"},
-    {"id": "p_power_calc", "name": "power_calc", "colorSet": "JSON"},
-    {"id": "p_robustness_planner", "name": "robustness_planner", "colorSet": "JSON"},
-    {"id": "p_evalue_calculator", "name": "evalue_calculator", "colorSet": "JSON"},
-    {"id": "p_diagnostics_planner", "name": "diagnostics_planner", "colorSet": "JSON"},
-    {"id": "p_asset_renderer", "name": "asset_renderer", "colorSet": "JSON"},
-    {"id": "p_factor_extractor", "name": "factor_extractor", "colorSet": "JSON"},
-    {"id": "p_correlator", "name": "correlator", "colorSet": "JSON"},
-    {"id": "p_survival", "name": "survival", "colorSet": "JSON"},
-    {"id": "p_reporter", "name": "reporter", "colorSet": "MARKDOWN"}
+    {
+      "id": "p_city_collector",
+      "name": "city_collector",
+      "colorSet": "STRING",
+      "position": {
+        "x": 146,
+        "y": 66
+      }
+    },
+    {
+      "id": "p_fetch_and_extract",
+      "name": "fetch_and_extract",
+      "colorSet": "JSON",
+      "position": {
+        "x": 640,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_normalizer",
+      "name": "normalizer",
+      "colorSet": "JSON",
+      "position": {
+        "x": 1160,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_qa_reviewer",
+      "name": "qa_reviewer",
+      "colorSet": "JSON",
+      "position": {
+        "x": 1680,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_comparator",
+      "name": "comparator",
+      "colorSet": "JSON",
+      "position": {
+        "x": 2200,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_dag_builder",
+      "name": "dag_builder",
+      "colorSet": "JSON",
+      "position": {
+        "x": 2720,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_sap_generator",
+      "name": "sap_generator",
+      "colorSet": "MARKDOWN",
+      "position": {
+        "x": 3240,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_power_calc",
+      "name": "power_calc",
+      "colorSet": "JSON",
+      "position": {
+        "x": 3760,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_robustness_planner",
+      "name": "robustness_planner",
+      "colorSet": "JSON",
+      "position": {
+        "x": 4280,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_evalue_calculator",
+      "name": "evalue_calculator",
+      "colorSet": "JSON",
+      "position": {
+        "x": 4800,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_diagnostics_planner",
+      "name": "diagnostics_planner",
+      "colorSet": "JSON",
+      "position": {
+        "x": 5320,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_asset_renderer",
+      "name": "asset_renderer",
+      "colorSet": "JSON",
+      "position": {
+        "x": 5840,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_factor_extractor",
+      "name": "factor_extractor",
+      "colorSet": "JSON",
+      "position": {
+        "x": 6360,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_correlator",
+      "name": "correlator",
+      "colorSet": "JSON",
+      "position": {
+        "x": 6880,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_survival",
+      "name": "survival",
+      "colorSet": "JSON",
+      "position": {
+        "x": 7400,
+        "y": 80
+      }
+    },
+    {
+      "id": "p_reporter",
+      "name": "reporter",
+      "colorSet": "MARKDOWN",
+      "position": {
+        "x": 7920,
+        "y": 80
+      }
+    }
   ],
   "transitions": [
     {
       "id": "t_city_collector",
       "name": "city_collector",
       "kind": "LLM",
+      "position": {
+        "x": 380,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -42,13 +175,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_fetch_and_extract",
       "name": "fetch_and_extract",
       "kind": "LLM",
+      "position": {
+        "x": 900,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -61,13 +201,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_normalizer",
       "name": "normalizer",
       "kind": "LLM",
+      "position": {
+        "x": 1420,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -80,13 +227,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_qa_reviewer",
       "name": "qa_reviewer",
       "kind": "LLM",
+      "position": {
+        "x": 1940,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -99,13 +253,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_comparator",
       "name": "comparator",
       "kind": "LLM",
+      "position": {
+        "x": 2460,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -118,13 +279,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_dag_builder",
       "name": "dag_builder",
       "kind": "LLM",
+      "position": {
+        "x": 2980,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -137,13 +305,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_sap_generator",
       "name": "sap_generator",
       "kind": "LLM",
+      "position": {
+        "x": 3500,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -156,13 +331,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_power_calc",
       "name": "power_calc",
       "kind": "LLM",
+      "position": {
+        "x": 4020,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -175,13 +357,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_robustness_planner",
       "name": "robustness_planner",
       "kind": "LLM",
+      "position": {
+        "x": 4540,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -194,13 +383,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_evalue_calculator",
       "name": "evalue_calculator",
       "kind": "LLM",
+      "position": {
+        "x": 5060,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -213,13 +409,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_diagnostics_planner",
       "name": "diagnostics_planner",
       "kind": "LLM",
+      "position": {
+        "x": 5580,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -232,13 +435,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_asset_renderer",
       "name": "asset_renderer",
       "kind": "LLM",
+      "position": {
+        "x": 6100,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -251,13 +461,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_factor_extractor",
       "name": "factor_extractor",
       "kind": "LLM",
+      "position": {
+        "x": 6620,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -270,13 +487,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_correlator",
       "name": "correlator",
       "kind": "LLM",
+      "position": {
+        "x": 7140,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -289,13 +513,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_survival",
       "name": "survival",
       "kind": "LLM",
+      "position": {
+        "x": 7660,
+        "y": 80
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -308,13 +539,20 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     },
     {
       "id": "t_reporter",
       "name": "reporter",
       "kind": "LLM",
+      "position": {
+        "x": 120,
+        "y": 200
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -327,63 +565,235 @@
           }
         ]
       },
-      "LlmOptions": { "temperature": 0.0 },
+      "LlmVars": {},
+      "LlmOptions": {
+        "temperature": 0
+      },
       "Stream": false
     }
   ],
   "arcs": [
-    {"id": "a_city_collector_in", "sourceId": "p_city_collector", "targetId": "t_city_collector", "expression": "token", "direction": "IN"},
-    {"id": "a_fetch_out", "sourceId": "t_city_collector", "targetId": "p_fetch_and_extract", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_fetch_in", "sourceId": "p_fetch_and_extract", "targetId": "t_fetch_and_extract", "expression": "token", "direction": "IN"},
-    {"id": "a_normalizer_out", "sourceId": "t_fetch_and_extract", "targetId": "p_normalizer", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_normalizer_in", "sourceId": "p_normalizer", "targetId": "t_normalizer", "expression": "token", "direction": "IN"},
-    {"id": "a_qa_out", "sourceId": "t_normalizer", "targetId": "p_qa_reviewer", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_qa_in", "sourceId": "p_qa_reviewer", "targetId": "t_qa_reviewer", "expression": "token", "direction": "IN"},
-    {"id": "a_comparator_out", "sourceId": "t_qa_reviewer", "targetId": "p_comparator", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_comparator_in", "sourceId": "p_comparator", "targetId": "t_comparator", "expression": "token", "direction": "IN"},
-    {"id": "a_dag_out", "sourceId": "t_comparator", "targetId": "p_dag_builder", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_dag_in", "sourceId": "p_dag_builder", "targetId": "t_dag_builder", "expression": "token", "direction": "IN"},
-    {"id": "a_sap_out", "sourceId": "t_dag_builder", "targetId": "p_sap_generator", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_sap_in", "sourceId": "p_sap_generator", "targetId": "t_sap_generator", "expression": "token", "direction": "IN"},
-    {"id": "a_power_out", "sourceId": "t_sap_generator", "targetId": "p_power_calc", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_power_in", "sourceId": "p_power_calc", "targetId": "t_power_calc", "expression": "token", "direction": "IN"},
-    {"id": "a_robustness_out", "sourceId": "t_power_calc", "targetId": "p_robustness_planner", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_robustness_in", "sourceId": "p_robustness_planner", "targetId": "t_robustness_planner", "expression": "token", "direction": "IN"},
-    {"id": "a_evalue_out", "sourceId": "t_robustness_planner", "targetId": "p_evalue_calculator", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_evalue_in", "sourceId": "p_evalue_calculator", "targetId": "t_evalue_calculator", "expression": "token", "direction": "IN"},
-    {"id": "a_diagnostics_out", "sourceId": "t_evalue_calculator", "targetId": "p_diagnostics_planner", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_diagnostics_in", "sourceId": "p_diagnostics_planner", "targetId": "t_diagnostics_planner", "expression": "token", "direction": "IN"},
-    {"id": "a_asset_out", "sourceId": "t_diagnostics_planner", "targetId": "p_asset_renderer", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_asset_in", "sourceId": "p_asset_renderer", "targetId": "t_asset_renderer", "expression": "token", "direction": "IN"},
-    {"id": "a_factor_out", "sourceId": "t_asset_renderer", "targetId": "p_factor_extractor", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_factor_in", "sourceId": "p_factor_extractor", "targetId": "t_factor_extractor", "expression": "token", "direction": "IN"},
-    {"id": "a_correlator_out", "sourceId": "t_factor_extractor", "targetId": "p_correlator", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_correlator_in", "sourceId": "p_correlator", "targetId": "t_correlator", "expression": "token", "direction": "IN"},
-    {"id": "a_survival_out", "sourceId": "t_correlator", "targetId": "p_survival", "expression": "token", "direction": "OUT"},
-
-    {"id": "a_survival_in", "sourceId": "p_survival", "targetId": "t_survival", "expression": "token", "direction": "IN"},
-    {"id": "a_reporter_out", "sourceId": "t_survival", "targetId": "p_reporter", "expression": "token", "direction": "OUT"}
+    {
+      "id": "a_city_collector_in",
+      "sourceId": "p_city_collector",
+      "targetId": "t_city_collector",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_fetch_out",
+      "sourceId": "t_city_collector",
+      "targetId": "p_fetch_and_extract",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_fetch_in",
+      "sourceId": "p_fetch_and_extract",
+      "targetId": "t_fetch_and_extract",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_normalizer_out",
+      "sourceId": "t_fetch_and_extract",
+      "targetId": "p_normalizer",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_normalizer_in",
+      "sourceId": "p_normalizer",
+      "targetId": "t_normalizer",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_qa_out",
+      "sourceId": "t_normalizer",
+      "targetId": "p_qa_reviewer",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_qa_in",
+      "sourceId": "p_qa_reviewer",
+      "targetId": "t_qa_reviewer",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_comparator_out",
+      "sourceId": "t_qa_reviewer",
+      "targetId": "p_comparator",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_comparator_in",
+      "sourceId": "p_comparator",
+      "targetId": "t_comparator",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_dag_out",
+      "sourceId": "t_comparator",
+      "targetId": "p_dag_builder",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_dag_in",
+      "sourceId": "p_dag_builder",
+      "targetId": "t_dag_builder",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_sap_out",
+      "sourceId": "t_dag_builder",
+      "targetId": "p_sap_generator",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_sap_in",
+      "sourceId": "p_sap_generator",
+      "targetId": "t_sap_generator",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_power_out",
+      "sourceId": "t_sap_generator",
+      "targetId": "p_power_calc",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_power_in",
+      "sourceId": "p_power_calc",
+      "targetId": "t_power_calc",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_robustness_out",
+      "sourceId": "t_power_calc",
+      "targetId": "p_robustness_planner",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_robustness_in",
+      "sourceId": "p_robustness_planner",
+      "targetId": "t_robustness_planner",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_evalue_out",
+      "sourceId": "t_robustness_planner",
+      "targetId": "p_evalue_calculator",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_evalue_in",
+      "sourceId": "p_evalue_calculator",
+      "targetId": "t_evalue_calculator",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_diagnostics_out",
+      "sourceId": "t_evalue_calculator",
+      "targetId": "p_diagnostics_planner",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_diagnostics_in",
+      "sourceId": "p_diagnostics_planner",
+      "targetId": "t_diagnostics_planner",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_asset_out",
+      "sourceId": "t_diagnostics_planner",
+      "targetId": "p_asset_renderer",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_asset_in",
+      "sourceId": "p_asset_renderer",
+      "targetId": "t_asset_renderer",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_factor_out",
+      "sourceId": "t_asset_renderer",
+      "targetId": "p_factor_extractor",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_factor_in",
+      "sourceId": "p_factor_extractor",
+      "targetId": "t_factor_extractor",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_correlator_out",
+      "sourceId": "t_factor_extractor",
+      "targetId": "p_correlator",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_correlator_in",
+      "sourceId": "p_correlator",
+      "targetId": "t_correlator",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_survival_out",
+      "sourceId": "t_correlator",
+      "targetId": "p_survival",
+      "expression": "token",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_survival_in",
+      "sourceId": "p_survival",
+      "targetId": "t_survival",
+      "expression": "token",
+      "direction": "IN"
+    },
+    {
+      "id": "a_reporter_out",
+      "sourceId": "t_survival",
+      "targetId": "p_reporter",
+      "expression": "token",
+      "direction": "OUT"
+    }
+  ],
+  "endPlaces": [
+    "p_reporter"
   ],
   "initialMarking": {
-    "p_city_collector": [
+    "city_collector": [
       {
         "value": "# Diabetes Study Research Request\n\n## Objective\nInitiate comprehensive research on diabetes treatment patterns across multiple cities.\n\n## Parameters\n- **Cities**: Multiple metropolitan areas\n- **Year Range**: 2020-2024\n- **Focus Areas**:\n  - Patient demographics (age, gender, BMI, blood pressure)\n  - Medication patterns and classes\n  - Healthcare visit frequency\n  - Treatment outcomes\n\n## Data Sources Priority\n1. Government health departments (.gov)\n2. Academic institutions (.edu)\n3. CDC/ADA official reports\n4. State health department publications\n5. Major hospital system reports\n6. Peer-reviewed medical literature\n\n## Expected Deliverables\n- Structured data extraction\n- Cross-city comparative analysis\n- Statistical analysis plan\n- Comprehensive research report\n\nBegin with city_collector phase to identify credible data sources.",
         "timestamp": 0
       }
     ]
   },
-  "endPlaces": ["p_reporter"]
+  "subWorkflows": []
 }

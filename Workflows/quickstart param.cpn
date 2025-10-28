@@ -1,0 +1,160 @@
+{
+  "id": "mc-ko-quickstart-param",
+  "name": "Monte Carlo KO Pricing (Single Param Token)",
+  "description": "QuickStart: single JSON params token self-looped; computes discounted payoff as premium.",
+  "colorSets": [
+    "colset STR = string;",
+    "colset J = json;",
+    "colset REAL = real;",
+    "colset INT = int;",
+    "colset RFQ = json;",
+    "colset Quote = json;",
+    "colset Order = json;"
+  ],
+  "jsonSchemas": [],
+  "places": [
+    {
+      "id": "rfq",
+      "name": "RFQ",
+      "colorSet": "J",
+      "position": {
+        "x": 185.18433,
+        "y": -54.147465
+      }
+    },
+    {
+      "id": "EndPrices",
+      "name": "End Prices",
+      "colorSet": "J",
+      "position": {
+        "x": 554.0323,
+        "y": -74.93088
+      }
+    },
+    {
+      "id": "Payoffs",
+      "name": "Payoffs",
+      "colorSet": "J",
+      "position": {
+        "x": 947.4424,
+        "y": -76.820274
+      }
+    },
+    {
+      "id": "Premium",
+      "name": "Premium",
+      "colorSet": "REAL",
+      "position": {
+        "x": 1338.0184,
+        "y": -64.53917
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t_sim",
+      "name": "SimulateEndPrices",
+      "kind": "Auto",
+      "position": {
+        "x": 282.69586,
+        "y": 130.06912
+      },
+      "actionFunction": "function t_sim_action(rfq)\n  inParams = rfq\n  local S = rfq.Spot or 100\n  local N = rfq.PathNum or 50\n  local r = rfq.Rate or 0.01\n  local v = rfq.Vol or 0.2\n  local T = rfq.Maturity or 30\n  if N < 1 then N = 1 end\n  local dt = T / 365.0\n  local prices = {}\n  for i=1,N do\n    local u1 = math.random(); if u1 < 1e-12 then u1 = 1e-12 end\n    local u2 = math.random()\n    local z = math.sqrt(-2 * math.log(u1)) * math.cos(2 * math.pi * u2)\n    local ST = S * math.exp((r - 0.5*v*v)*dt + v*math.sqrt(dt)*z)\n    prices[i] = ST\n  end\n  return prices\nend",
+      "actionFunctionOutput": [
+        "endPrices"
+      ]
+    },
+    {
+      "id": "t_pay",
+      "name": "CalcPayoffs",
+      "kind": "Auto",
+      "position": {
+        "x": 732.788,
+        "y": 96.059906
+      },
+      "actionFunction": "function t_pay_action(endPrices)\n  local K=inParams.Strike; local KO=inParams.KOLevel\n  local pay = {}\n  for i=1,#endPrices do\n    local ep = endPrices[i]\n    if ep > KO then\n      pay[i] = 0\n    else\n      local p = ep - K; if p < 0 then p = 0 end\n      pay[i] = p\n    end\n  end\n  return pay\nend",
+      "actionFunctionOutput": [
+        "payoffs"
+      ]
+    },
+    {
+      "id": "t_avg",
+      "name": "AggregatePremium",
+      "kind": "Auto",
+      "position": {
+        "x": 1092.189,
+        "y": 89.56226
+      },
+      "actionFunction": "function t_avg_action(payoffs)\n  local r=inParams.Rate; local T=inParams.Maturity\n  local sum=0; for i=1,#payoffs do sum = sum + payoffs[i] end\n  local avg = (#payoffs>0) and (sum/#payoffs) or 0\n  local premium = avg * math.exp(-r * (T/365.0))\n  return premium\nend",
+      "actionFunctionOutput": [
+        "premium"
+      ]
+    }
+  ],
+  "arcs": [
+    {
+      "id": "a_sim_in_params",
+      "sourceId": "rfq",
+      "targetId": "t_sim",
+      "expression": "rfq",
+      "direction": "IN"
+    },
+    {
+      "id": "a_sim_out_prices",
+      "sourceId": "t_sim",
+      "targetId": "EndPrices",
+      "expression": "return endPrices",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_pay_in_prices",
+      "sourceId": "EndPrices",
+      "targetId": "t_pay",
+      "expression": "endPrices",
+      "direction": "IN"
+    },
+    {
+      "id": "a_pay_out_pay",
+      "sourceId": "t_pay",
+      "targetId": "Payoffs",
+      "expression": "return payoffs",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_avg_in_pay",
+      "sourceId": "Payoffs",
+      "targetId": "t_avg",
+      "expression": "payoffs",
+      "direction": "IN"
+    },
+    {
+      "id": "a_avg_out_premium",
+      "sourceId": "t_avg",
+      "targetId": "Premium",
+      "expression": "return premium",
+      "direction": "OUT"
+    }
+  ],
+  "endPlaces": [
+    "Premium"
+  ],
+  "initialMarking": {
+    "RFQ": [
+      {
+        "value": {
+          "KOLevel": 130,
+          "Maturity": 30,
+          "PathNum": 1000,
+          "Rate": 0.03,
+          "ReqID": "REQ-001",
+          "Spot": 100,
+          "Strike": 105,
+          "Underlying": "XYZ",
+          "Vol": 0.2
+        },
+        "timestamp": 0
+      }
+    ]
+  },
+  "subWorkflows": []
+}

@@ -1,5 +1,57 @@
 {
-  "places": [],
-  "transitions": [],
-  "arcs": []
+  "id": "Trade",
+  "name": "Trade",
+  "description": "",
+  "colorSets": [],
+  "jsonSchemas": [],
+  "places": [
+    {
+      "id": "p-a8s0t",
+      "name": "Place #3f5",
+      "colorSet": "INT",
+      "position": {
+        "x": -31.555572509765625,
+        "y": 205.44617462158203
+      }
+    },
+    {
+      "id": "p-mstdz",
+      "name": "Place #474",
+      "colorSet": "INT",
+      "position": {
+        "x": 454.52774810791016,
+        "y": 245.16926193237305
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t-04ma8",
+      "name": "Transition #aa9",
+      "kind": "Manual",
+      "position": {
+        "x": 166.66664123535156,
+        "y": 219.66926193237305
+      }
+    }
+  ],
+  "arcs": [
+    {
+      "id": "e-dxkbw",
+      "sourceId": "p-a8s0t",
+      "targetId": "t-04ma8",
+      "expression": "",
+      "direction": "IN"
+    },
+    {
+      "id": "e-d1trp",
+      "sourceId": "t-04ma8",
+      "targetId": "p-mstdz",
+      "expression": "",
+      "direction": "OUT"
+    }
+  ],
+  "endPlaces": [],
+  "initialMarking": {},
+  "subWorkflows": []
 }
