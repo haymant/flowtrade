@@ -29,6 +29,7 @@
       "id": "t-04ma8",
       "name": "Transition #aa9",
       "kind": "Manual",
+      "guardExpression": "",
       "position": {
         "x": 166.66664123535156,
         "y": 219.66926193237305
