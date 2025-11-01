@@ -30,7 +30,7 @@
       "name": "Transition #aa9",
       "kind": "Manual",
       "guardExpression": "",
-      "scriptLanguage": "lua",
+      "scriptLanguage": "go",
       "position": {
         "x": 166.66664123535156,
         "y": 219.66926193237305
@@ -41,7 +41,7 @@
       "name": "Transition #19a",
       "kind": "Manual",
       "guardExpression": "true",
-      "scriptLanguage": "go",
+      "scriptLanguage": "lua",
       "position": {
         "x": 143.1214942932129,
         "y": 394.44544792175293
@@ -55,7 +55,7 @@
       "targetId": "t-04ma8",
       "expression": "",
       "direction": "IN",
-      "scriptLanguage": "lua"
+      "scriptLanguage": "go"
     },
     {
       "id": "e-d1trp",
@@ -63,14 +63,15 @@
       "targetId": "p-mstdz",
       "expression": "",
       "direction": "OUT",
-      "scriptLanguage": "lua"
+      "scriptLanguage": "go"
     },
     {
       "id": "e-u5tun",
       "sourceId": "p-mstdz",
       "targetId": "t-kpyf1",
       "expression": "",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "lua"
     }
   ],
   "endPlaces": [],
