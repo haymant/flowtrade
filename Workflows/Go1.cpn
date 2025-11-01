@@ -27,7 +27,7 @@
       "kind": "Auto",
       "scriptLanguage": "go",
       "guardExpression": "x > 0 && y > 0",
-      "actionExpression": "x + y",
+      "actionFunction": "x + y",
       "actionFunctionOutput": ["result"]
     }
   ],
