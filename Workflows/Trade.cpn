@@ -30,6 +30,7 @@
       "name": "Transition #aa9",
       "kind": "Manual",
       "guardExpression": "",
+      "scriptLanguage": "go",
       "position": {
         "x": 166.66664123535156,
         "y": 219.66926193237305
@@ -42,14 +43,16 @@
       "sourceId": "p-a8s0t",
       "targetId": "t-04ma8",
       "expression": "",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-d1trp",
       "sourceId": "t-04ma8",
       "targetId": "p-mstdz",
       "expression": "",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     }
   ],
   "endPlaces": [],
