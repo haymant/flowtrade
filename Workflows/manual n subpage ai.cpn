@@ -1,5 +1,5 @@
 {
-  "id": "manual-n-subpage",
+  "id": "manual n subpage ai",
   "name": "Manual RFQ → Quote → Order (with Subpage)",
   "description": "Manual RFQ flow that calls a pricing subpage and supports ACK/REJ and multi-order placement.",
   "colorSets": [
@@ -207,8 +207,8 @@
       "name": "Symbol",
       "colorSet": "J",
       "position": {
-        "x": 228.50954,
-        "y": -17.353472
+        "x": 202.66815058035712,
+        "y": -35.53815344345239
       }
     }
   ],
@@ -231,6 +231,7 @@
       "id": "t_price",
       "name": "PriceRFQ (Subpage Call)",
       "kind": "Auto",
+      "guardExpression": "",
       "position": {
         "x": 591.1794,
         "y": 114.80888
@@ -513,7 +514,7 @@
   "subWorkflows": [
     {
       "id": "sw-price",
-      "cpnId": "mc-ko-quickstart-param",
+      "cpnId": "quickstart param",
       "callTransitionId": "t_price",
       "autoStart": true,
       "propagateOnComplete": true,

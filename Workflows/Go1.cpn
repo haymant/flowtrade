@@ -1,0 +1,61 @@
+{
+  "id": "test_go_workflow",
+  "name": "Go Script Test Workflow",
+  "description": "Test workflow for Go scripting integration",
+  "colorSets": ["colset INT = int;"],
+  "places": [
+    {
+      "id": "input1",
+      "name": "Input 1",
+      "colorSet": "INT"
+    },
+    {
+      "id": "input2",
+      "name": "Input 2",
+      "colorSet": "INT"
+    },
+    {
+      "id": "output",
+      "name": "Output",
+      "colorSet": "INT"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "add",
+      "name": "Add Numbers",
+      "kind": "Auto",
+      "scriptLanguage": "go",
+      "guardExpression": "x > 0 && y > 0",
+      "actionExpression": "x + y",
+      "actionFunctionOutput": ["result"]
+    }
+  ],
+  "arcs": [
+    {
+      "id": "arc1",
+      "sourceId": "input1",
+      "targetId": "add",
+      "expression": "x",
+      "direction": "IN"
+    },
+    {
+      "id": "arc2",
+      "sourceId": "input2",
+      "targetId": "add",
+      "expression": "y",
+      "direction": "IN"
+    },
+    {
+      "id": "arc3",
+      "sourceId": "add",
+      "targetId": "output",
+      "expression": "result",
+      "direction": "OUT"
+    }
+  ],
+  "initialMarking": {
+    "input1": [{"value": 5, "timestamp": 0}],
+    "input2": [{"value": 3, "timestamp": 0}]
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "id": "mc-ko-quickstart-param",
+  "id": "quickstart param",
   "name": "Monte Carlo KO Pricing (Single Param Token)",
   "description": "QuickStart: single JSON params token self-looped; computes discounted payoff as premium.",
   "colorSets": [
@@ -18,8 +18,8 @@
       "name": "RFQ",
       "colorSet": "J",
       "position": {
-        "x": 185.18433,
-        "y": -54.147465
+        "x": 201.45483444940476,
+        "y": -58.932907485119046
       }
     },
     {
