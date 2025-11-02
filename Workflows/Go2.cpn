@@ -1,100 +1,106 @@
 {
-    "success": true,
-    "data": {
-        "id": "Go2",
-        "name": "Go Script Test Workflow",
-        "description": "Test workflow for Go scripting integration",
-        "colorSets": [
-            "colset INT = int;"
-        ],
-        "jsonSchemas": [],
-        "places": [
-            {
-                "id": "input1",
-                "name": "Input 1",
-                "colorSet": "INT",
-                "position": {
-                    "x": 120,
-                    "y": 80
-                }
-            },
-            {
-                "id": "input2",
-                "name": "Input 2",
-                "colorSet": "INT",
-                "position": {
-                    "x": 120,
-                    "y": 200
-                }
-            },
-            {
-                "id": "output",
-                "name": "Output",
-                "colorSet": "INT",
-                "position": {
-                    "x": 640,
-                    "y": 80
-                }
-            }
-        ],
-        "transitions": [
-            {
-                "id": "add",
-                "name": "Add Numbers",
-                "kind": "Auto",
-                "guardExpression": "",
-                "scriptLanguage": "go",
-                "position": {
-                    "x": 350,
-                    "y": 95.5
-                },
-                "actionFunction": "x + y - 1",
-                "actionFunctionOutput": [
-                    "result"
-                ]
-            }
-        ],
-        "arcs": [
-            {
-                "id": "arc1",
-                "sourceId": "input1",
-                "targetId": "add",
-                "expression": "x",
-                "direction": "IN",
-                "scriptLanguage": "go"
-            },
-            {
-                "id": "arc2",
-                "sourceId": "input2",
-                "targetId": "add",
-                "expression": "y",
-                "direction": "IN",
-                "scriptLanguage": "go"
-            },
-            {
-                "id": "arc3",
-                "sourceId": "add",
-                "targetId": "output",
-                "expression": "result",
-                "direction": "OUT",
-                "scriptLanguage": "go"
-            }
-        ],
-        "endPlaces": [],
-        "initialMarking": {
-            "Input 1": [
-                {
-                    "value": 5,
-                    "timestamp": 0
-                }
-            ],
-            "Input 2": [
-                {
-                    "value": 3,
-                    "timestamp": 0
-                }
-            ]
-        },
-        "subWorkflows": []
+  "id": "Go2",
+  "name": "Go2",
+  "description": "",
+  "colorSets": [],
+  "jsonSchemas": [],
+  "places": [
+    {
+      "id": "input1",
+      "name": "Input 1",
+      "colorSet": "INT",
+      "position": {
+        "x": 120,
+        "y": 80
+      }
+    },
+    {
+      "id": "input2",
+      "name": "Input 2",
+      "colorSet": "INT",
+      "position": {
+        "x": 120,
+        "y": 200
+      }
+    },
+    {
+      "id": "output",
+      "name": "Output",
+      "colorSet": "INT",
+      "position": {
+        "x": 640,
+        "y": 80
+      }
+    },
+    {
+      "id": "p-58zj5",
+      "name": "Place #656",
+      "colorSet": "INT",
+      "position": {
+        "x": 3.1861839294433594,
+        "y": 141.6377296447754
+      }
     }
+  ],
+  "transitions": [
+    {
+      "id": "add",
+      "name": "Add Numbers",
+      "kind": "Auto",
+      "guardExpression": "x > 0 && y > 0",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 350,
+        "y": 95.5
+      },
+      "actionFunction": "x + y - z",
+      "actionFunctionOutput": [
+        "result"
+      ]
+    }
+  ],
+  "arcs": [
+    {
+      "id": "arc1",
+      "sourceId": "input1",
+      "targetId": "add",
+      "expression": "x",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "arc2",
+      "sourceId": "input2",
+      "targetId": "add",
+      "expression": "y",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "arc3",
+      "sourceId": "add",
+      "targetId": "output",
+      "expression": "result",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "e-p-58zj5--add--lzqta",
+      "sourceId": "p-58zj5",
+      "targetId": "add",
+      "expression": "z",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    }
+  ],
+  "endPlaces": [],
+  "initialMarking": {
+    "Output": [
+      {
+        "value": 7,
+        "timestamp": 0
+      }
+    ]
+  },
+  "subWorkflows": []
 }
