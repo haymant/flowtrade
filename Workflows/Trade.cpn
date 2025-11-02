@@ -29,6 +29,8 @@
       "id": "t-04ma8",
       "name": "Transition #aa9",
       "kind": "Manual",
+      "guardExpression": "x > 0",
+      "scriptLanguage": "go",
       "position": {
         "x": 166.66664123535156,
         "y": 219.66926193237305
@@ -40,15 +42,17 @@
       "id": "e-dxkbw",
       "sourceId": "p-a8s0t",
       "targetId": "t-04ma8",
-      "expression": "",
-      "direction": "IN"
+      "expression": "x",
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-d1trp",
       "sourceId": "t-04ma8",
       "targetId": "p-mstdz",
       "expression": "",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     }
   ],
   "endPlaces": [],
