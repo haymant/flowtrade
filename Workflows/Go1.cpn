@@ -1,23 +1,38 @@
 {
-  "id": "test_go_workflow",
+  "id": "Go1",
   "name": "Go Script Test Workflow",
   "description": "Test workflow for Go scripting integration",
-  "colorSets": ["colset INT = int;"],
+  "colorSets": [
+    "colset INT = int;"
+  ],
+  "jsonSchemas": [],
   "places": [
     {
       "id": "input1",
       "name": "Input 1",
-      "colorSet": "INT"
+      "colorSet": "INT",
+      "position": {
+        "x": 120,
+        "y": 80
+      }
     },
     {
       "id": "input2",
       "name": "Input 2",
-      "colorSet": "INT"
+      "colorSet": "INT",
+      "position": {
+        "x": 120,
+        "y": 200
+      }
     },
     {
       "id": "output",
       "name": "Output",
-      "colorSet": "INT"
+      "colorSet": "INT",
+      "position": {
+        "x": 640,
+        "y": 80
+      }
     }
   ],
   "transitions": [
@@ -25,10 +40,16 @@
       "id": "add",
       "name": "Add Numbers",
       "kind": "Auto",
+      "guardExpression": "",
       "scriptLanguage": "go",
-      "guardExpression": "x > 0 && y > 0",
-      "actionFunction": "x + y",
-      "actionFunctionOutput": ["result"]
+      "position": {
+        "x": 350,
+        "y": 95.5
+      },
+      "actionFunction": "x + y - 1",
+      "actionFunctionOutput": [
+        "result"
+      ]
     }
   ],
   "arcs": [
@@ -37,25 +58,40 @@
       "sourceId": "input1",
       "targetId": "add",
       "expression": "x",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "arc2",
       "sourceId": "input2",
       "targetId": "add",
       "expression": "y",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "arc3",
       "sourceId": "add",
       "targetId": "output",
       "expression": "result",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     }
   ],
+  "endPlaces": [],
   "initialMarking": {
-    "input1": [{"value": 5, "timestamp": 0}],
-    "input2": [{"value": 3, "timestamp": 0}]
-  }
+    "Input 1": [
+      {
+        "value": 5,
+        "timestamp": 0
+      }
+    ],
+    "Input 2": [
+      {
+        "value": 3,
+        "timestamp": 0
+      }
+    ]
+  },
+  "subWorkflows": []
 }
