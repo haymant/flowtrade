@@ -79,7 +79,7 @@
   "status": "loaded",
   "transitions": [
     {
-      "actionFunction": "x + y - 1",
+      "actionFunction": "x + y - 2",
       "actionFunctionOutput": [
         "result"
       ],
