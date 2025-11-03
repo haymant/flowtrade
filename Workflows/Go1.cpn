@@ -1,97 +1,96 @@
 {
-  "id": "Go1",
-  "name": "Go Script Test Workflow",
-  "description": "Test workflow for Go scripting integration",
+  "arcs": [
+    {
+      "direction": "IN",
+      "expression": "token",
+      "id": "arc1",
+      "multiplicity": 1,
+      "sourceId": "input1",
+      "targetId": "add"
+    },
+    {
+      "direction": "IN",
+      "expression": "token",
+      "id": "arc2",
+      "multiplicity": 1,
+      "sourceId": "input2",
+      "targetId": "add"
+    },
+    {
+      "direction": "OUT",
+      "expression": "result",
+      "id": "arc3",
+      "multiplicity": 1,
+      "sourceId": "add",
+      "targetId": "output"
+    }
+  ],
   "colorSets": [
     "colset INT = int;"
   ],
-  "jsonSchemas": [],
+  "currentStep": 0,
+  "description": "Test workflow for Go scripting integration",
+  "globalClock": 0,
+  "id": "Go1",
+  "initialMarking": {
+    "input1": [
+      {
+        "timestamp": 0,
+        "value": 5
+      }
+    ],
+    "input2": [
+      {
+        "timestamp": 0,
+        "value": 3
+      }
+    ]
+  },
+  "name": "Go Script Test Workflow",
   "places": [
     {
+      "colorSet": "INT",
       "id": "input1",
       "name": "Input 1",
-      "colorSet": "INT",
       "position": {
         "x": 120,
         "y": 80
       }
     },
     {
+      "colorSet": "INT",
       "id": "input2",
       "name": "Input 2",
-      "colorSet": "INT",
       "position": {
         "x": 120,
         "y": 200
       }
     },
     {
+      "colorSet": "INT",
       "id": "output",
       "name": "Output",
-      "colorSet": "INT",
       "position": {
         "x": 640,
         "y": 80
       }
     }
   ],
+  "status": "loaded",
   "transitions": [
     {
-      "id": "add",
-      "name": "Add Numbers",
-      "kind": "Auto",
-      "guardExpression": "x > 0 && y > 0",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 304.44446,
-        "y": 120
-      },
       "actionFunction": "x + y + 10",
       "actionFunctionOutput": [
         "result"
-      ]
-    }
-  ],
-  "arcs": [
-    {
-      "id": "arc1",
-      "sourceId": "input1",
-      "targetId": "add",
-      "expression": "token",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "arc2",
-      "sourceId": "input2",
-      "targetId": "add",
-      "expression": "token",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "arc3",
-      "sourceId": "add",
-      "targetId": "output",
-      "expression": "result",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    }
-  ],
-  "endPlaces": [],
-  "initialMarking": {
-    "Input 1": [
-      {
-        "value": 5,
-        "timestamp": 0
+      ],
+      "guardExpression": "x > 0 && y > 0",
+      "id": "add",
+      "kind": "Auto",
+      "name": "Add Numbers",
+      "position": {
+        "x": 304.44446,
+        "y": 120
       }
-    ],
-    "Input 2": [
-      {
-        "value": 3,
-        "timestamp": 0
-      }
-    ]
-  },
-  "subWorkflows": []
+    }
+  ]
 }
