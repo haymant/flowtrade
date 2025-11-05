@@ -1,0 +1,163 @@
+{
+  "id": "5.Scripting",
+  "name": "Monte Carlo KO Pricing (Go Script)",
+  "description": "Go Scripting Example: Monte Carlo simulation for knockout option pricing with Go functions",
+  "colorSets": [
+    "colset STR = string;",
+    "colset J = json;",
+    "colset REAL = real;",
+    "colset INT = int;",
+    "colset RFQ = json;",
+    "colset Quote = json;",
+    "colset Order = json;"
+  ],
+  "jsonSchemas": [],
+  "places": [
+    {
+      "id": "rfq",
+      "name": "RFQ",
+      "colorSet": "J",
+      "position": {
+        "x": 185.18433,
+        "y": -54.147465
+      }
+    },
+    {
+      "id": "EndPrices",
+      "name": "End Prices",
+      "colorSet": "J",
+      "position": {
+        "x": 554.0323,
+        "y": -74.93088
+      }
+    },
+    {
+      "id": "Payoffs",
+      "name": "Payoffs",
+      "colorSet": "J",
+      "position": {
+        "x": 947.4424,
+        "y": -76.820274
+      }
+    },
+    {
+      "id": "Premium",
+      "name": "Premium",
+      "colorSet": "REAL",
+      "position": {
+        "x": 1338.0184,
+        "y": -64.53917
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t_sim",
+      "name": "SimulateEndPrices",
+      "kind": "Auto",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 282.69586,
+        "y": 130.06912
+      },
+      "actionFunction": "t_sim_action",
+      "actionFunctionOutput": [
+        "endPrices"
+      ]
+    },
+    {
+      "id": "t_pay",
+      "name": "CalcPayoffs",
+      "kind": "Auto",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 732.788,
+        "y": 96.059906
+      },
+      "actionFunction": "t_pay_action",
+      "actionFunctionOutput": [
+        "payoffs"
+      ]
+    },
+    {
+      "id": "t_avg",
+      "name": "AggregatePremium",
+      "kind": "Auto",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 1092.189,
+        "y": 89.56226
+      },
+      "actionFunction": "t_avg_action",
+      "actionFunctionOutput": [
+        "premium"
+      ]
+    }
+  ],
+  "arcs": [
+    {
+      "id": "a_sim_in_params",
+      "sourceId": "rfq",
+      "targetId": "t_sim",
+      "expression": "rfq",
+      "direction": "IN"
+    },
+    {
+      "id": "a_sim_out_prices",
+      "sourceId": "t_sim",
+      "targetId": "EndPrices",
+      "expression": "endPrices",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_pay_in_prices",
+      "sourceId": "EndPrices",
+      "targetId": "t_pay",
+      "expression": "endPrices",
+      "direction": "IN"
+    },
+    {
+      "id": "a_pay_out_pay",
+      "sourceId": "t_pay",
+      "targetId": "Payoffs",
+      "expression": "payoffs",
+      "direction": "OUT"
+    },
+    {
+      "id": "a_avg_in_pay",
+      "sourceId": "Payoffs",
+      "targetId": "t_avg",
+      "expression": "payoffs",
+      "direction": "IN"
+    },
+    {
+      "id": "a_avg_out_premium",
+      "sourceId": "t_avg",
+      "targetId": "Premium",
+      "expression": "premium",
+      "direction": "OUT"
+    }
+  ],
+  "endPlaces": [
+    "Premium"
+  ],
+  "initialMarking": {
+    "rfq": [
+      {
+        "value": {
+          "KOLevel": 130,
+          "Maturity": 30,
+          "PathNum": 1000,
+          "Rate": 0.03,
+          "ReqID": "REQ-001",
+          "Spot": 100,
+          "Strike": 105,
+          "Underlying": "XYZ",
+          "Vol": 0.2
+        },
+        "timestamp": 0
+      }
+    ]
+  },
+  "subWorkflows": []
+}
