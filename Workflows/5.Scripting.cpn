@@ -71,7 +71,7 @@
         "x": 732.788,
         "y": 96.059906
       },
-      "actionFunction": "T_t_pay_action",
+      "actionFunction": "// T_t_pay_action calculates payoffs from end prices using knockout barrier\n// This matches the Lua implementation: KO barrier check and call option payoff\nfunc T_t_pay_action(endPrices []interface{}) interface{} {\n   // Extract parameters from global inParams\n   strike := 105.0\n   if s, ok := G_inParams[\"Strike\"].(float64); ok {\n       strike = s\n   }\n   koLevel := 130.0\n   if k, ok := G_inParams[\"KOLevel\"].(float64); ok {\n       koLevel = k\n   }\n\n   // Calculate payoffs for each end price\n   payoffs := make([]interface{}, len(endPrices))\n   for i, ep := range endPrices {\n       price := 0.0\n       if p, ok := ep.(float64); ok {\n           price = p\n       }\n\n       if price > koLevel {\n           // Knocked out - zero payoff\n           payoffs[i] = 0.0\n       } else {\n           // Call option payoff: max(0, price - strike)\n           payoff := price - strike\n           if payoff < 0 {\n               payoff = 0\n           }\n           payoffs[i] = payoff\n       }\n   }\n\n   return interface{}(payoffs)\n}\n",
       "actionFunctionOutput": [
         "payoffs"
       ]
@@ -85,7 +85,7 @@
         "x": 1092.189,
         "y": 89.56226
       },
-      "actionFunction": "T_t_avg_action",
+      "actionFunction": "// T_t_avg_action aggregates payoffs into discounted premium\n// This matches the Lua implementation: average payoffs with exponential discounting\nfunc T_t_avg_action(payoffs []interface{}) interface{} {\n   // Extract parameters from global inParams\n   rate := 0.03\n   if r, ok := G_inParams[\"Rate\"].(float64); ok {\n       rate = r\n   }\n   maturity := 30.0\n   if m, ok := G_inParams[\"Maturity\"].(float64); ok {\n       maturity = m\n   }\n\n   // Calculate sum of payoffs\n   sum := 0.0\n   for _, p := range payoffs {\n       if payoff, ok := p.(float64); ok {\n           sum += payoff\n       }\n   }\n\n   // Calculate average\n   avg := 0.0\n   if len(payoffs) > 0 {\n       avg = sum / float64(len(payoffs))\n   }\n\n   // Discount by exp(-r * T/365.0)\n   discountFactor := math.Exp(-rate * (maturity / 365.0))\n   premium := avg * discountFactor\n\n   return interface{}(premium)\n}\n",
       "actionFunctionOutput": [
         "premium"
       ]
