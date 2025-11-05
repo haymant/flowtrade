@@ -50,7 +50,7 @@
   "transitions": [
     {
       "id": "t_sim",
-      "name": "SimulateEndPrices", 
+      "name": "SimulateEndPrices",
       "kind": "Auto",
       "scriptLanguage": "go",
       "position": {
@@ -97,49 +97,55 @@
       "sourceId": "rfq",
       "targetId": "t_sim",
       "expression": "rfq",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "a_sim_out_prices",
       "sourceId": "t_sim",
       "targetId": "EndPrices",
       "expression": "endPrices",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "a_pay_in_prices",
       "sourceId": "EndPrices",
       "targetId": "t_pay",
       "expression": "endPrices",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "a_pay_out_pay",
       "sourceId": "t_pay",
       "targetId": "Payoffs",
       "expression": "payoffs",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "a_avg_in_pay",
       "sourceId": "Payoffs",
       "targetId": "t_avg",
       "expression": "payoffs",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "a_avg_out_premium",
       "sourceId": "t_avg",
       "targetId": "Premium",
       "expression": "premium",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     }
   ],
   "endPlaces": [
     "Premium"
   ],
   "initialMarking": {
-    "rfq": [
+    "RFQ": [
       {
         "value": {
           "KOLevel": 130,
