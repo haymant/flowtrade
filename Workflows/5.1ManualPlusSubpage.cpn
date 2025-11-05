@@ -281,7 +281,7 @@
       },
       "formSchema": "Order",
       "scriptLanguage": "go",
-      "actionFunction": "func t_order_action(q map[string]interface{}, formData map[string]interface{}) { map[string]interface{} {\n\tord := q\n\tif ord == nil {\n\t\tord = make(map[string]interface{})\n\t}\n\tif formData != nil {\n\t\tfor k, v := range formData {\n\t\t\tord[k] = v\n\t\t}\n\t}\n\treturn ord\n}",
+      "actionFunction": "func t_order_action(q map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n\tord := q\n\tif ord == nil {\n\t\tord = make(map[string]interface{})\n\t}\n\tif formData != nil {\n\t\tfor k, v := range formData {\n\t\t\tord[k] = v\n\t\t}\n\t}\n\treturn ord\n}",
       "actionFunctionOutput": [
         "order"
       ]
