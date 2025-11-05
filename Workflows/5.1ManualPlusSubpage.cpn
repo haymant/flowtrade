@@ -213,7 +213,21 @@
     }
   ],
   "transitions": [
-    "actionFunction": "func t_fill_action(newRfq map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if newRfq != nil {\n        for k, v := range newRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}",
+    {
+      "id": "t_fill",
+      "name": "FillRFQ",
+      "kind": "Manual",
+      "position": {
+        "x": 567.3887,
+        "y": 433.29462
+      },
+      "formSchema": "RFQ",
+      "scriptLanguage": "go",
+      "actionFunction": "func t_fill_action(newRfq map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if newRfq != nil {\n        for k, v := range newRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}",
+      "actionFunctionOutput": [
+        "rfq"
+      ]
+    },
     {
       "id": "t_price",
       "name": "PriceRFQ (Subpage Call)",
