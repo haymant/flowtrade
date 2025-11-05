@@ -217,12 +217,12 @@
       "id": "t_fill",
       "name": "FillRFQ",
       "kind": "Manual",
+      "scriptLanguage": "go",
       "position": {
         "x": 567.3887,
         "y": 433.29462
       },
       "formSchema": "RFQ",
-      "scriptLanguage": "go",
       "actionFunction": "t_fill_action",
       "actionFunctionOutput": [
         "rfq"
@@ -232,11 +232,11 @@
       "id": "t_price",
       "name": "PriceRFQ (Subpage Call)",
       "kind": "Auto",
+      "scriptLanguage": "go",
       "position": {
         "x": 591.1794,
         "y": 114.80888
       },
-      "scriptLanguage": "go",
       "actionFunction": "t_price_action",
       "actionFunctionOutput": [
         "rfq"
@@ -246,11 +246,11 @@
       "id": "t_build",
       "name": "BuildQuote",
       "kind": "Auto",
+      "scriptLanguage": "go",
       "position": {
         "x": 825.2911,
         "y": 57.172237
       },
-      "scriptLanguage": "go",
       "actionFunction": "t_build_action",
       "actionFunctionOutput": [
         "quote"
@@ -260,11 +260,11 @@
       "id": "t_review",
       "name": "ReviewQuote",
       "kind": "Manual",
+      "scriptLanguage": "go",
       "position": {
         "x": 1099.9738,
         "y": 58.245476
       },
-      "scriptLanguage": "go",
       "actionFunction": "t_review_action",
       "actionFunctionOutput": [
         "revQ"
@@ -275,12 +275,12 @@
       "name": "PlaceOrder (keeps quote)",
       "kind": "Manual",
       "guardExpression": "",
+      "scriptLanguage": "go",
       "position": {
         "x": 1423.138,
         "y": 458.14746
       },
       "formSchema": "Order",
-      "scriptLanguage": "go",
       "actionFunction": "t_order_action",
       "actionFunctionOutput": [
         "order"
@@ -291,6 +291,7 @@
       "name": "isRejected?",
       "kind": "Auto",
       "guardExpression": "rquote.Status == \"REJ\"",
+      "scriptLanguage": "go",
       "position": {
         "x": 1485.8538,
         "y": 9.46244
@@ -301,6 +302,7 @@
       "name": "isAcked",
       "kind": "Auto",
       "guardExpression": "rquote.Status == \"ACK\"",
+      "scriptLanguage": "go",
       "position": {
         "x": 1507.0892,
         "y": 214.14828
@@ -311,6 +313,7 @@
       "name": "AI Assist",
       "kind": "LLM",
       "guardExpression": "true",
+      "scriptLanguage": "go",
       "position": {
         "x": 470.40533,
         "y": -79.41517
@@ -336,6 +339,7 @@
       "name": "GetSpotPx",
       "kind": "Tools",
       "guardExpression": "true",
+      "scriptLanguage": "go",
       "position": {
         "x": 214.99199,
         "y": 212.65584
@@ -353,70 +357,80 @@
       "sourceId": "t_fill",
       "targetId": "RFQ",
       "expression": "return rfq",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "a_build_out",
       "sourceId": "t_build",
       "targetId": "NewQuote",
       "expression": "return quote",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "a_ack_in",
       "sourceId": "NewQuote",
       "targetId": "t_review",
       "expression": "q",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "a_ack_out",
       "sourceId": "t_review",
       "targetId": "revquote",
       "expression": "return revQ",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "a_ord_out1",
       "sourceId": "t_order",
       "targetId": "NewOrder",
       "expression": "return order",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-p-ybw8g--t_build--of1se",
       "sourceId": "p-ybw8g",
       "targetId": "t_build",
       "expression": "rfq1",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-ggj78",
       "sourceId": "revquote",
       "targetId": "t-ixbgi",
       "expression": "rquote",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-t-ixbgi--RejectedQuote--ngxfd",
       "sourceId": "t-ixbgi",
       "targetId": "RejectedQuote",
       "expression": "return rquote",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-e0keb",
       "sourceId": "revquote",
       "targetId": "t-68az1",
       "expression": "rquote",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-qamkz",
       "sourceId": "t-68az1",
       "targetId": "p-63byi",
       "expression": "return rquote",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-p-63byi--t_order--b50ek",
@@ -424,63 +438,72 @@
       "targetId": "t_order",
       "expression": "q",
       "direction": "IN",
-      "readonly": true
+      "readonly": true,
+      "scriptLanguage": "go"
     },
     {
       "id": "e-RFQ--t-64vlf--ge1s6",
       "sourceId": "RFQ",
       "targetId": "t_ai",
       "expression": "rfq",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-47pxf",
       "sourceId": "t_ai",
       "targetId": "p-vxbb9",
       "expression": "return (function(_t,_a) if type(_t)=='table' then local c={}; for k,v in pairs(_t) do c[k]=v end; c.AIOpinion=_a; return c else return {Original=_t, AIOpinion=_a} end end)(rfq, answer)",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-p-vxbb9--t_price--s11yz",
       "sourceId": "p-vxbb9",
       "targetId": "t_price",
       "expression": "rfq",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-y2nbr",
       "sourceId": "t_price",
       "targetId": "p-ybw8g",
       "expression": "return rfq",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-h5pmg",
       "sourceId": "t-p3vcu",
       "targetId": "prfq1",
       "expression": "tool_result",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-EmptyRFQ--t_fill--b6gpv",
       "sourceId": "EmptyRFQ",
       "targetId": "t_fill",
       "expression": "newRfq",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-my6sn",
       "sourceId": "psymb",
       "targetId": "t-p3vcu",
       "expression": "symb",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-prfq1--t_ai--h8kg8",
       "sourceId": "prfq1",
       "targetId": "t_ai",
       "expression": "quote",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     }
   ],
   "endPlaces": [
