@@ -290,7 +290,7 @@
       "id": "t-ixbgi",
       "name": "isRejected?",
       "kind": "Auto",
-      "guardExpression": "rquote.Status == 'REJ'",
+      "guardExpression": "rquote.Status == \"REJ\"",
       "position": {
         "x": 1485.8538,
         "y": 9.46244
@@ -300,7 +300,7 @@
       "id": "t-68az1",
       "name": "isAcked",
       "kind": "Auto",
-      "guardExpression": "rquote.Status == 'ACK'",
+      "guardExpression": "rquote.Status == \"ACK\"",
       "position": {
         "x": 1507.0892,
         "y": 214.14828
