@@ -223,7 +223,7 @@
       },
       "formSchema": "RFQ",
       "scriptLanguage": "go",
-      "actionFunction": "func t_fill_action(newRfq map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if newRfq != nil {\n        for k, v := range newRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}",
+      "actionFunction": "func t_fill_action(newRfq map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if newRfq != nil {\n        for k, v := range newRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}",
       "actionFunctionOutput": [
         "rfq"
       ]
