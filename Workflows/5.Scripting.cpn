@@ -6,10 +6,7 @@
     "colset STR = string;",
     "colset J = json;",
     "colset REAL = real;",
-    "colset INT = int;",
-    "colset RFQ = json;",
-    "colset Quote = json;",
-    "colset Order = json;"
+    "colset INT = int;"
   ],
   "jsonSchemas": [],
   "places": [
@@ -60,7 +57,7 @@
         "x": 282.69586,
         "y": 130.06912
       },
-      "actionFunction": "t_sim_action",
+      "actionFunction": "T_t_sim_action",
       "actionFunctionOutput": [
         "endPrices"
       ]
@@ -74,7 +71,7 @@
         "x": 732.788,
         "y": 96.059906
       },
-      "actionFunction": "t_pay_action",
+      "actionFunction": "T_t_pay_action",
       "actionFunctionOutput": [
         "payoffs"
       ]
@@ -88,7 +85,7 @@
         "x": 1092.189,
         "y": 89.56226
       },
-      "actionFunction": "t_avg_action",
+      "actionFunction": "T_t_avg_action",
       "actionFunctionOutput": [
         "premium"
       ]
