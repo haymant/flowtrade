@@ -1,169 +1,156 @@
 {
-    "success": true,
-    "data": {
-        "id": "5.Scripting",
-        "name": "Monte Carlo KO Pricing (Go Script)",
-        "description": "Go Scripting Example: Monte Carlo simulation for knockout option pricing with Go functions",
-        "colorSets": [
-            "colset STR = string;",
-            "colset J = json;",
-            "colset REAL = real;",
-            "colset INT = int;"
-        ],
-        "jsonSchemas": [],
-        "places": [
-            {
-                "id": "rfq",
-                "name": "RFQ",
-                "colorSet": "J",
-                "position": {
-                    "x": 185.18433,
-                    "y": -54.147465
-                }
-            },
-            {
-                "id": "EndPrices",
-                "name": "End Prices",
-                "colorSet": "J",
-                "position": {
-                    "x": 554.0323,
-                    "y": -74.93088
-                }
-            },
-            {
-                "id": "Payoffs",
-                "name": "Payoffs",
-                "colorSet": "J",
-                "position": {
-                    "x": 947.4424,
-                    "y": -76.820274
-                }
-            },
-            {
-                "id": "Premium",
-                "name": "Premium",
-                "colorSet": "REAL",
-                "position": {
-                    "x": 1338.0184,
-                    "y": -64.53917
-                }
-            }
-        ],
-        "transitions": [
-            {
-                "id": "t_sim",
-                "name": "SimulateEndPrices",
-                "kind": "Auto",
-                "scriptLanguage": "go",
-                "position": {
-                    "x": 282.69586,
-                    "y": 130.06912
-                },
-                "actionFunction": "// T_t_sim_action simulates end prices using single-step Geometric Brownian Motion\n// This matches the Lua implementation: one time step dt = T/365 for N paths\nfunc T_t_sim_action(rfq C_J) interface{} {\n   // Extract parameters with defaults (matching Lua behavior)\n   spot := 100.0\n   if s, ok := rfq[\"Spot\"].(float64); ok {\n       spot = s\n   }\n   pathNum := 50.0\n   if p, ok := rfq[\"PathNum\"].(float64); ok {\n       pathNum = p\n   }\n   rate := 0.01\n   if r, ok := rfq[\"Rate\"].(float64); ok {\n       rate = r\n   }\n   vol := 0.2\n   if v, ok := rfq[\"Vol\"].(float64); ok {\n       vol = v\n   }\n   maturity := 30.0\n   if m, ok := rfq[\"Maturity\"].(float64); ok {\n       maturity = m\n   }\n\n   // Ensure minimum path number\n   N := int(pathNum)\n   if N < 1 {\n       N = 1\n   }\n\n   // Single time step: dt = T/365\n   dt := maturity / 365.0\n   prices := make([]interface{}, N)\n\n   for i := 0; i < N; i++ {\n       // Generate random numbers for Box-Muller transform\n       u1 := rand.Float64()\n       if u1 < 1e-12 {\n           u1 = 1e-12\n       }\n       u2 := rand.Float64()\n\n       // Box-Muller transform to generate standard normal\n       z := math.Sqrt(-2*math.Log(u1)) * math.Cos(2*math.Pi*u2)\n\n       // Single-step Geometric Brownian Motion: S_T = S_0 * exp((r - 0.5*v²)*dt + v*sqrt(dt)*z)\n       ST := spot * math.Exp((rate-0.5*vol*vol)*dt+vol*math.Sqrt(dt)*z)\n       prices[i] = ST\n   }\n\n   return interface{}(prices)\n}\n",
-                "actionFunctionOutput": [
-                    "endPrices"
-                ]
-            },
-            {
-                "id": "t_pay",
-                "name": "CalcPayoffs",
-                "kind": "Auto",
-                "scriptLanguage": "go",
-                "position": {
-                    "x": 732.788,
-                    "y": 96.059906
-                },
-                "actionFunction": "// T_t_pay_action calculates payoffs from end prices using knockout barrier\n// This matches the Lua implementation: KO barrier check and call option payoff\nfunc T_t_pay_action(endPrices []interface{}) interface{} {\n   // Extract parameters from global inParams\n   strike := 105.0\n   if s, ok := G_inParams[\"Strike\"].(float64); ok {\n       strike = s\n   }\n   koLevel := 130.0\n   if k, ok := G_inParams[\"KOLevel\"].(float64); ok {\n       koLevel = k\n   }\n\n   // Calculate payoffs for each end price\n   payoffs := make([]interface{}, len(endPrices))\n   for i, ep := range endPrices {\n       price := 0.0\n       if p, ok := ep.(float64); ok {\n           price = p\n       }\n\n       if price > koLevel {\n           // Knocked out - zero payoff\n           payoffs[i] = 0.0\n       } else {\n           // Call option payoff: max(0, price - strike)\n           payoff := price - strike\n           if payoff < 0 {\n               payoff = 0\n           }\n           payoffs[i] = payoff\n       }\n   }\n\n   return interface{}(payoffs)\n}\n",
-                "actionFunctionOutput": [
-                    "payoffs"
-                ]
-            },
-            {
-                "id": "t_avg",
-                "name": "AggregatePremium",
-                "kind": "Auto",
-                "scriptLanguage": "go",
-                "position": {
-                    "x": 1092.189,
-                    "y": 89.56226
-                },
-                "actionFunction": "// T_t_avg_action aggregates payoffs into discounted premium\n// This matches the Lua implementation: average payoffs with exponential discounting\nfunc T_t_avg_action(payoffs []interface{}) interface{} {\n   // Extract parameters from global inParams\n   rate := 0.03\n   if r, ok := G_inParams[\"Rate\"].(float64); ok {\n       rate = r\n   }\n   maturity := 30.0\n   if m, ok := G_inParams[\"Maturity\"].(float64); ok {\n       maturity = m\n   }\n\n   // Calculate sum of payoffs\n   sum := 0.0\n   for _, p := range payoffs {\n       if payoff, ok := p.(float64); ok {\n           sum += payoff\n       }\n   }\n\n   // Calculate average\n   avg := 0.0\n   if len(payoffs) > 0 {\n       avg = sum / float64(len(payoffs))\n   }\n\n   // Discount by exp(-r * T/365.0)\n   discountFactor := math.Exp(-rate * (maturity / 365.0))\n   premium := avg * discountFactor\n\n   return interface{}(premium)\n}\n",
-                "actionFunctionOutput": [
-                    "premium"
-                ]
-            }
-        ],
-        "arcs": [
-            {
-                "id": "a_sim_in_params",
-                "sourceId": "rfq",
-                "targetId": "t_sim",
-                "expression": "rfq",
-                "direction": "IN",
-                "scriptLanguage": "go"
-            },
-            {
-                "id": "a_sim_out_prices",
-                "sourceId": "t_sim",
-                "targetId": "EndPrices",
-                "expression": "endPrices",
-                "direction": "OUT",
-                "scriptLanguage": "go"
-            },
-            {
-                "id": "a_pay_in_prices",
-                "sourceId": "EndPrices",
-                "targetId": "t_pay",
-                "expression": "endPrices",
-                "direction": "IN",
-                "scriptLanguage": "go"
-            },
-            {
-                "id": "a_pay_out_pay",
-                "sourceId": "t_pay",
-                "targetId": "Payoffs",
-                "expression": "payoffs",
-                "direction": "OUT",
-                "scriptLanguage": "go"
-            },
-            {
-                "id": "a_avg_in_pay",
-                "sourceId": "Payoffs",
-                "targetId": "t_avg",
-                "expression": "payoffs",
-                "direction": "IN",
-                "scriptLanguage": "go"
-            },
-            {
-                "id": "a_avg_out_premium",
-                "sourceId": "t_avg",
-                "targetId": "Premium",
-                "expression": "premium",
-                "direction": "OUT",
-                "scriptLanguage": "go"
-            }
-        ],
-        "endPlaces": [
-            "Premium"
-        ],
-        "initialMarking": {
-            "RFQ": [
-                {
-                    "value": {
-                        "KOLevel": 130,
-                        "Maturity": 30,
-                        "PathNum": 1000,
-                        "Rate": 0.03,
-                        "ReqID": "REQ-001",
-                        "Spot": 100,
-                        "Strike": 105,
-                        "Underlying": "XYZ",
-                        "Vol": 0.2
-                    },
-                    "timestamp": 0
-                }
-            ]
-        },
-        "subWorkflows": []
+  "id": "5.Scripting",
+  "name": "Monte Carlo KO Pricing (Go Script)",
+  "description": "Go Scripting Example: Monte Carlo simulation for knockout option pricing with Go functions",
+  "colorSets": [
+    "colset STR = string;",
+    "colset J = json;",
+    "colset REAL = real;",
+    "colset INT = int;"
+  ],
+  "jsonSchemas": [],
+  "places": [
+    {
+      "id": "rfq",
+      "name": "RFQ",
+      "colorSet": "J",
+      "position": {
+        "x": 185.18433,
+        "y": -54.147465
+      }
+    },
+    {
+      "id": "EndPrices",
+      "name": "End Prices",
+      "colorSet": "J",
+      "position": {
+        "x": 554.0323,
+        "y": -74.93088
+      }
+    },
+    {
+      "id": "Payoffs",
+      "name": "Payoffs",
+      "colorSet": "J",
+      "position": {
+        "x": 947.4424,
+        "y": -76.820274
+      }
+    },
+    {
+      "id": "Premium",
+      "name": "Premium",
+      "colorSet": "REAL",
+      "position": {
+        "x": 1338.0184,
+        "y": -64.53917
+      }
     }
+  ],
+  "transitions": [
+    {
+      "id": "t_sim",
+      "name": "SimulateEndPrices",
+      "kind": "Auto",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 282.69586,
+        "y": 130.06912
+      },
+      "actionFunction": "// T_t_sim_action simulates end prices using single-step Geometric Brownian Motion\n// This matches the Lua implementation: one time step dt = T/365 for N paths\nfunc T_t_sim_action(rfq C_J) interface{} {\n   // Extract parameters with defaults (matching Lua behavior)\n   spot := 100.0\n   if s, ok := rfq[\"Spot\"].(float64); ok {\n       spot = s\n   }\n   pathNum := 50.0\n   if p, ok := rfq[\"PathNum\"].(float64); ok {\n       pathNum = p\n   }\n   rate := 0.01\n   if r, ok := rfq[\"Rate\"].(float64); ok {\n       rate = r\n   }\n   vol := 0.2\n   if v, ok := rfq[\"Vol\"].(float64); ok {\n       vol = v\n   }\n   maturity := 30.0\n   if m, ok := rfq[\"Maturity\"].(float64); ok {\n       maturity = m\n   }\n\n   // Ensure minimum path number\n   N := int(pathNum)\n   if N < 1 {\n       N = 1\n   }\n\n   // Single time step: dt = T/365\n   dt := maturity / 365.0\n   prices := make([]interface{}, N)\n\n   for i := 0; i < N; i++ {\n       // Generate random numbers for Box-Muller transform\n       u1 := rand.Float64()\n       if u1 < 1e-12 {\n           u1 = 1e-12\n       }\n       u2 := rand.Float64()\n\n       // Box-Muller transform to generate standard normal\n       z := math.Sqrt(-2*math.Log(u1)) * math.Cos(2*math.Pi*u2)\n\n       // Single-step Geometric Brownian Motion: S_T = S_0 * exp((r - 0.5*v²)*dt + v*sqrt(dt)*z)\n       ST := spot * math.Exp((rate-0.5*vol*vol)*dt+vol*math.Sqrt(dt)*z)\n       prices[i] = ST\n   }\n\n   return interface{}(prices)\n}\n",
+      "actionFunctionOutput": [
+        "endPrices"
+      ]
+    },
+    {
+      "id": "t_pay",
+      "name": "CalcPayoffs",
+      "kind": "Auto",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 732.788,
+        "y": 96.059906
+      },
+      "actionFunction": "// T_t_pay_action calculates payoffs from end prices using knockout barrier\n// This matches the Lua implementation: KO barrier check and call option payoff\nfunc T_t_pay_action(endPrices []interface{}) interface{} {\n   // Extract parameters from global inParams\n   strike := 105.0\n   if s, ok := G_inParams[\"Strike\"].(float64); ok {\n       strike = s\n   }\n   koLevel := 130.0\n   if k, ok := G_inParams[\"KOLevel\"].(float64); ok {\n       koLevel = k\n   }\n\n   // Calculate payoffs for each end price\n   payoffs := make([]interface{}, len(endPrices))\n   for i, ep := range endPrices {\n       price := 0.0\n       if p, ok := ep.(float64); ok {\n           price = p\n       }\n\n       if price > koLevel {\n           // Knocked out - zero payoff\n           payoffs[i] = 0.0\n       } else {\n           // Call option payoff: max(0, price - strike)\n           payoff := price - strike\n           if payoff < 0 {\n               payoff = 0\n           }\n           payoffs[i] = payoff\n       }\n   }\n\n   return interface{}(payoffs)\n}\n",
+      "actionFunctionOutput": [
+        "payoffs"
+      ]
+    },
+    {
+      "id": "t_avg",
+      "name": "AggregatePremium",
+      "kind": "Auto",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 1092.189,
+        "y": 89.56226
+      },
+      "actionFunction": "// T_t_avg_action aggregates payoffs into discounted premium\n// This matches the Lua implementation: average payoffs with exponential discounting\nfunc T_t_avg_action(payoffs []interface{}) interface{} {\n   // Extract parameters from global inParams\n   rate := 0.03\n   if r, ok := G_inParams[\"Rate\"].(float64); ok {\n       rate = r\n   }\n   maturity := 30.0\n   if m, ok := G_inParams[\"Maturity\"].(float64); ok {\n       maturity = m\n   }\n\n   // Calculate sum of payoffs\n   sum := 0.0\n   for _, p := range payoffs {\n       if payoff, ok := p.(float64); ok {\n           sum += payoff\n       }\n   }\n\n   // Calculate average\n   avg := 0.0\n   if len(payoffs) > 0 {\n       avg = sum / float64(len(payoffs))\n   }\n\n   // Discount by exp(-r * T/365.0)\n   discountFactor := math.Exp(-rate * (maturity / 365.0))\n   premium := avg * discountFactor\n\n   return interface{}(premium)\n}\n",
+      "actionFunctionOutput": [
+        "premium"
+      ]
+    }
+  ],
+  "arcs": [
+    {
+      "id": "a_sim_in_params",
+      "sourceId": "rfq",
+      "targetId": "t_sim",
+      "expression": "rfq",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "a_sim_out_prices",
+      "sourceId": "t_sim",
+      "targetId": "EndPrices",
+      "expression": "endPrices",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "a_pay_in_prices",
+      "sourceId": "EndPrices",
+      "targetId": "t_pay",
+      "expression": "endPrices",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "a_pay_out_pay",
+      "sourceId": "t_pay",
+      "targetId": "Payoffs",
+      "expression": "payoffs",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "a_avg_in_pay",
+      "sourceId": "Payoffs",
+      "targetId": "t_avg",
+      "expression": "payoffs",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "a_avg_out_premium",
+      "sourceId": "t_avg",
+      "targetId": "Premium",
+      "expression": "premium",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    }
+  ],
+  "endPlaces": [
+    "Premium"
+  ],
+  "initialMarking": {
+    "Premium": [
+      {
+        "value": 0.7877470075859299,
+        "timestamp": 0
+      }
+    ]
+  },
+  "subWorkflows": []
 }
