@@ -353,127 +353,36 @@
   ],
   "endPlaces": [],
   "initialMarking": {
-    "pYf": [
+    "StockSymbol": [
       {
         "value": {
-          "content": [
-            {
-              "text": [
-                {
-                  "ask": 270.48,
-                  "askSize": 2,
-                  "averageAnalystRating": "2.0 - Buy",
-                  "averageDailyVolume10Day": 50905660,
-                  "averageDailyVolume3Month": 53143573,
-                  "bid": 269.96,
-                  "bidSize": 1,
-                  "bookValue": 4.991,
-                  "corporateActions": [
-                    {
-                      "header": "Dividend",
-                      "message": "AAPL announced a cash dividend of 0.26 with an ex-date of Nov. 10, 2025",
-                      "meta": {
-                        "amount": "0.26",
-                        "dateEpochMs": 1762750800000,
-                        "eventType": "DIVIDEND"
-                      }
-                    }
-                  ],
-                  "cryptoTradeable": false,
-                  "currency": "USD",
-                  "customPriceAlertConfidence": "HIGH",
-                  "displayName": "Apple",
-                  "dividendDate": "2025-11-13T00:00:00.000Z",
-                  "dividendRate": 1.04,
-                  "dividendYield": 0.38,
-                  "earningsCallTimestampEnd": 1761858000,
-                  "earningsCallTimestampStart": 1761858000,
-                  "earningsTimestamp": "2025-10-30T20:00:00.000Z",
-                  "earningsTimestampEnd": "2026-01-29T21:00:00.000Z",
-                  "earningsTimestampStart": "2026-01-29T21:00:00.000Z",
-                  "epsCurrentYear": 8.20994,
-                  "epsForward": 8.31,
-                  "epsTrailingTwelveMonths": 7.46,
-                  "esgPopulated": false,
-                  "exchange": "NMS",
-                  "exchangeDataDelayedBy": 0,
-                  "exchangeTimezoneName": "America/New_York",
-                  "exchangeTimezoneShortName": "EST",
-                  "fiftyDayAverage": 249.9318,
-                  "fiftyDayAverageChange": 20.208221,
-                  "fiftyDayAverageChangePercent": 0.080854945,
-                  "fiftyTwoWeekChangePercent": 18.709337,
-                  "fiftyTwoWeekHigh": 277.32,
-                  "fiftyTwoWeekHighChange": -7.1799927,
-                  "fiftyTwoWeekHighChangePercent": -0.02589064,
-                  "fiftyTwoWeekLow": 169.21,
-                  "fiftyTwoWeekLowChange": 100.93001,
-                  "fiftyTwoWeekLowChangePercent": 0.59647775,
-                  "fiftyTwoWeekRange": {
-                    "high": 277.32,
-                    "low": 169.21
-                  },
-                  "financialCurrency": "USD",
-                  "firstTradeDateMilliseconds": "1980-12-12T14:30:00.000Z",
-                  "forwardPE": 32.50782,
-                  "fullExchangeName": "NasdaqGS",
-                  "gmtOffSetMilliseconds": -18000000,
-                  "hasPrePostMarketData": true,
-                  "isEarningsDateEstimate": true,
-                  "language": "en-US",
-                  "longName": "Apple Inc.",
-                  "market": "us_market",
-                  "marketCap": 3991684251648,
-                  "marketState": "PRE",
-                  "messageBoardId": "finmb_24937",
-                  "preMarketChange": -0.89001465,
-                  "preMarketChangePercent": -0.3294642,
-                  "preMarketPrice": 269.25,
-                  "preMarketTime": "2025-11-06T09:56:42.000Z",
-                  "priceEpsCurrentYear": 32.90402,
-                  "priceHint": 2,
-                  "priceToBook": 54.125427,
-                  "quoteSourceName": "Nasdaq Real Time Price",
-                  "quoteType": "EQUITY",
-                  "region": "US",
-                  "regularMarketChange": 0.100006,
-                  "regularMarketChangePercent": 0.0370338,
-                  "regularMarketDayHigh": 271.7,
-                  "regularMarketDayLow": 266.93,
-                  "regularMarketDayRange": {
-                    "high": 271.7,
-                    "low": 266.93
-                  },
-                  "regularMarketOpen": 268.59,
-                  "regularMarketPreviousClose": 270.04,
-                  "regularMarketPrice": 270.14,
-                  "regularMarketTime": "2025-11-05T21:00:01.000Z",
-                  "regularMarketVolume": 40361476,
-                  "sharesOutstanding": 14776353000,
-                  "shortName": "Apple Inc.",
-                  "sourceInterval": 15,
-                  "symbol": "AAPL",
-                  "tradeable": false,
-                  "trailingAnnualDividendRate": 1.02,
-                  "trailingAnnualDividendYield": 0.003777218,
-                  "trailingPE": 36.2118,
-                  "triggerable": true,
-                  "twoHundredDayAverage": 223.70625,
-                  "twoHundredDayAverageChange": 46.43376,
-                  "twoHundredDayAverageChangePercent": 0.20756577,
-                  "typeDisp": "Equity"
-                }
-              ],
-              "type": "text"
-            }
+          "symbol": [
+            "AAPL"
           ]
         },
         "timestamp": 0
       }
     ],
-    "pRFQ": [
+    "pInitRFQ": [
       {
         "value": {
+          "KOLevel": 130,
+          "Maturity": 30,
+          "PathNum": 1000,
+          "Rate": 0.03,
+          "ReqID": "REQ-001",
+          "Spot": 100,
+          "Strike": 105,
+          "Underlying": "AAPL",
+          "Vol": 0.2
+        },
+        "timestamp": 0
+      }
+    ],
+    "pAI": [
+      {
+        "value": {
+          "AIOpinion": "**Opinion:** ⚠ **Cautious**  \n\n**Rationale:** The option assumes an underlying price of $100, yet Apple is trading around $270 (mid‑price, with a 52‑week high of $277 and a low of $169). At a $105 strike the contract is massively deep‑out‑of‑the‑money, and with a modest 20 % implied vol the chance of moving from $100 to $105 (or hitting the $130 knockout level) in 30 days is negligible. In short, the pricing model is mis‑aligned with the real market, making the trade unattractive.",
           "KOLevel": 130,
           "Maturity": 30,
           "PathNum": 1000,
