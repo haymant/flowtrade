@@ -346,7 +346,7 @@
       "id": "aAI",
       "sourceId": "tAI",
       "targetId": "pAI",
-      "expression": "func A_aAI_expr(answer interface{}) interface{} {\n\t// Arc expression: answer\n\treturn answer\n}",
+      "expression": "func A_aAI_expr(aORfq map[string]interface{}, answer string) interface{} {\n    if aORfq == nil {\n        aORfq = make(map[string]interface{})\n    }\n    aORfq[\"AIOpinion\"] = answer\n    return aORfq\n}",
       "direction": "OUT",
       "scriptLanguage": "go"
     }
