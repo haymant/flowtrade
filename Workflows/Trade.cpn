@@ -235,6 +235,15 @@
         "x": 1124.1484543460658,
         "y": 137.4828056031746
       }
+    },
+    {
+      "id": "p-9udxf",
+      "name": "Place #3a0",
+      "colorSet": "J",
+      "position": {
+        "x": 469.5759342070018,
+        "y": 349.2769848488791
+      }
     }
   ],
   "transitions": [
@@ -291,6 +300,21 @@
       "LlmVars": {},
       "LlmOptions": {},
       "Stream": false
+    },
+    {
+      "id": "tPrice",
+      "name": "tPrice",
+      "kind": "Auto",
+      "guardExpression": "true",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 162.59731997192102,
+        "y": 365.945506888793
+      },
+      "actionFunction": "func T_tPrice_action(aAIRfq map[string]interface{}, premium interface{}) map[string]interface{} {\n    if premium != nil {\n        aAIRfq[\"Premium\"] = premium\n    }\n    return aAIRfq\n}",
+      "actionFunctionOutput": [
+        "quote"
+      ]
     }
   ],
   "arcs": [
@@ -349,6 +373,20 @@
       "expression": "func A_aAI_expr(aORfq map[string]interface{}, answer string) interface{} {\n    if aORfq == nil {\n        aORfq = make(map[string]interface{})\n    }\n    aORfq[\"AIOpinion\"] = answer\n    return aORfq\n}",
       "direction": "OUT",
       "scriptLanguage": "go"
+    },
+    {
+      "id": "aAIRfq",
+      "sourceId": "pAI",
+      "targetId": "tPrice",
+      "expression": "aAIRfq",
+      "direction": "IN"
+    },
+    {
+      "id": "e-fcueq",
+      "sourceId": "tPrice",
+      "targetId": "p-9udxf",
+      "expression": "quote",
+      "direction": "OUT"
     }
   ],
   "endPlaces": [],
@@ -380,5 +418,19 @@
       }
     ]
   },
-  "subWorkflows": []
+  "subWorkflows": [
+    {
+      "id": "sw_tPrice",
+      "cpnId": "quickstart param",
+      "callTransitionId": "tPrice",
+      "autoStart": true,
+      "propagateOnComplete": true,
+      "inputMapping": {
+        "aAIRfq": "aAIRfq"
+      },
+      "outputMapping": {
+        "premium": "premium"
+      }
+    }
+  ]
 }
