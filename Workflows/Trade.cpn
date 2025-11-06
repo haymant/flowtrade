@@ -1,62 +1,7 @@
 {
-  "arcs": [
-    {
-      "direction": "IN",
-      "expression": "query",
-      "id": "e-fxz84",
-      "multiplicity": 1,
-      "sourceId": "pStock",
-      "targetId": "tSpot"
-    },
-    {
-      "direction": "OUT",
-      "expression": "tool_result",
-      "id": "aRes",
-      "multiplicity": 1,
-      "sourceId": "tSpot",
-      "targetId": "pYf"
-    },
-    {
-      "direction": "IN",
-      "expression": "token",
-      "id": "aIRfq",
-      "multiplicity": 1,
-      "sourceId": "pInitRFQ",
-      "targetId": "tRFQInput"
-    },
-    {
-      "direction": "OUT",
-      "expression": "aRfq",
-      "id": "aRfq",
-      "multiplicity": 1,
-      "sourceId": "tRFQInput",
-      "targetId": "pRFQ"
-    },
-    {
-      "direction": "IN",
-      "expression": "token",
-      "id": "aOSpot",
-      "multiplicity": 1,
-      "sourceId": "pYf",
-      "targetId": "tAI"
-    },
-    {
-      "direction": "IN",
-      "expression": "token",
-      "id": "aORfq",
-      "multiplicity": 1,
-      "sourceId": "pRFQ",
-      "targetId": "tAI"
-    },
-    {
-      "direction": "OUT",
-      "expression": "func A_aAI_expr(answer interface{}) interface{} {\n\t// Arc expression: answer\n\treturn answer\n}",
-      "id": "aAI",
-      "multiplicity": 1,
-      "sourceId": "tAI",
-      "targetId": "pAI"
-    }
-  ],
+  "id": "Trade",
+  "name": "Trade",
+  "description": "",
   "colorSets": [
     "colset STR = string;",
     "colset J = json;",
@@ -75,18 +20,6 @@
     "colset Status = string;",
     "colset Amount = int;"
   ],
-  "currentStep": 0,
-  "description": "",
-  "globalClock": 0,
-  "id": "Trade",
-  "initialMarking": {
-    "pAI": [
-      {
-        "timestamp": 0,
-        "value": "**Opinion:** Cautious  \n\n**Rationale:** The 30‑day call is struck at $105 while AAPL is trading around $270 – more than 2½ × the strike – and the assumed volatility (20 %) is modest. The probability of the stock falling back below the strike before expiry is extremely low, so the option’s price is dominated by time decay with little upside potential. Even though the underlying shows strong momentum and healthy fundamentals, this particular contract is far out‑of‑the‑money and not an attractive buy."
-      }
-    ]
-  },
   "jsonSchemas": [
     {
       "name": "RFQ",
@@ -257,84 +190,92 @@
       }
     }
   ],
-  "name": "Trade",
   "places": [
     {
-      "colorSet": "J",
       "id": "pStock",
       "name": "StockSymbol",
+      "colorSet": "J",
       "position": {
         "x": 120,
         "y": 80
       }
     },
     {
-      "colorSet": "J",
       "id": "pYf",
       "name": "pYf",
+      "colorSet": "J",
       "position": {
         "x": 640,
         "y": 80
       }
     },
     {
-      "colorSet": "J",
       "id": "pInitRFQ",
       "name": "pInitRFQ",
+      "colorSet": "J",
       "position": {
         "x": 120,
         "y": 200
       }
     },
     {
-      "colorSet": "J",
       "id": "pRFQ",
       "name": "pRFQ",
+      "colorSet": "J",
       "position": {
         "x": 549.4166,
         "y": 193.66667
       }
     },
     {
-      "colorSet": "STRING",
       "id": "pAI",
       "name": "pAI",
+      "colorSet": "STRING",
       "position": {
         "x": 1070.8068,
         "y": 138.5037
       }
     }
   ],
-  "status": "loaded",
   "transitions": [
     {
+      "id": "tSpot",
+      "name": "tSpot",
+      "kind": "Tools",
+      "guardExpression": "true",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 324.5,
+        "y": 97
+      },
       "Tools": [
         {
           "name": "mcp:https://data.lizhao.net/api/mcp:yahoo_quote"
         }
-      ],
-      "guardExpression": "true",
-      "id": "tSpot",
-      "kind": "Tools",
-      "name": "tSpot",
-      "position": {
-        "x": 324.5,
-        "y": 97
-      }
+      ]
     },
     {
-      "actionFunction": "func T_tRFQInput_action(aIRfq map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if aIRfq != nil {\n        for k, v := range aIRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}",
-      "guardExpression": "true",
       "id": "tRFQInput",
-      "kind": "Manual",
       "name": "tRFQInput",
+      "kind": "Manual",
+      "guardExpression": "true",
+      "scriptLanguage": "go",
       "position": {
         "x": 258.12268,
         "y": 222.81293
-      }
+      },
+      "actionFunction": "func T_tRFQInput_action(aIRfq map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if aIRfq != nil {\n        for k, v := range aIRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}"
     },
     {
-      "LlmOptions": {},
+      "id": "tAI",
+      "name": "tAI",
+      "kind": "LLM",
+      "guardExpression": "true",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 794.25464,
+        "y": 161.63455
+      },
       "LlmTemplate": {
         "messages": [
           {
@@ -347,14 +288,77 @@
           }
         ]
       },
-      "guardExpression": "true",
-      "id": "tAI",
-      "kind": "LLM",
-      "name": "tAI",
-      "position": {
-        "x": 794.25464,
-        "y": 161.63455
-      }
+      "LlmVars": {},
+      "LlmOptions": {},
+      "Stream": false
     }
-  ]
+  ],
+  "arcs": [
+    {
+      "id": "e-fxz84",
+      "sourceId": "pStock",
+      "targetId": "tSpot",
+      "expression": "query",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aRes",
+      "sourceId": "tSpot",
+      "targetId": "pYf",
+      "expression": "tool_result",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aIRfq",
+      "sourceId": "pInitRFQ",
+      "targetId": "tRFQInput",
+      "expression": "token",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aRfq",
+      "sourceId": "tRFQInput",
+      "targetId": "pRFQ",
+      "expression": "aRfq",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aOSpot",
+      "sourceId": "pYf",
+      "targetId": "tAI",
+      "expression": "token",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aORfq",
+      "sourceId": "pRFQ",
+      "targetId": "tAI",
+      "expression": "token",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aAI",
+      "sourceId": "tAI",
+      "targetId": "pAI",
+      "expression": "func A_aAI_expr(answer interface{}) interface{} {\n\t// Arc expression: answer\n\treturn answer\n}",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    }
+  ],
+  "endPlaces": [],
+  "initialMarking": {
+    "pAI": [
+      {
+        "value": "**Opinion:** Cautious  \n\n**Rationale:** The 30‑day call is struck at $105 while AAPL is trading around $270 – more than 2½ × the strike – and the assumed volatility (20 %) is modest. The probability of the stock falling back below the strike before expiry is extremely low, so the option’s price is dominated by time decay with little upside potential. Even though the underlying shows strong momentum and healthy fundamentals, this particular contract is far out‑of‑the‑money and not an attractive buy.",
+        "timestamp": 0
+      }
+    ]
+  },
+  "subWorkflows": []
 }
