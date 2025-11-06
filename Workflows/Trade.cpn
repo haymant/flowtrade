@@ -1,0 +1,201 @@
+{
+  "id": "Trade",
+  "name": "Trade",
+  "description": "",
+  "colorSets": [
+    "colset J = json;"
+  ],
+  "jsonSchemas": [],
+  "places": [
+    {
+      "id": "pStock",
+      "name": "StockSymbol",
+      "colorSet": "J",
+      "position": {
+        "x": 120,
+        "y": 80
+      }
+    },
+    {
+      "id": "pYf",
+      "name": "pYf",
+      "colorSet": "J",
+      "position": {
+        "x": 640,
+        "y": 80
+      }
+    },
+    {
+      "id": "pInitRFQ",
+      "name": "pInitRFQ",
+      "colorSet": "J",
+      "position": {
+        "x": 120,
+        "y": 200
+      }
+    },
+    {
+      "id": "pRFQ",
+      "name": "pRFQ",
+      "colorSet": "J",
+      "position": {
+        "x": 549.4166564941406,
+        "y": 193.66666412353516
+      }
+    },
+    {
+      "id": "p-8c2ut",
+      "name": "Place #8b4",
+      "colorSet": "INT",
+      "position": {
+        "x": 1070.8067045718346,
+        "y": 138.50368759647776
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "id": "tSpot",
+      "name": "tSpot",
+      "kind": "Tools",
+      "guardExpression": "true",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 324.5,
+        "y": 97
+      },
+      "Tools": [
+        {
+          "name": "mcp:https://data.lizhao.net/api/mcp:yahoo_quote",
+          "config": {}
+        }
+      ]
+    },
+    {
+      "id": "tRFQInput",
+      "name": "tRFQInput",
+      "kind": "Manual",
+      "guardExpression": "true",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 296.9166564941406,
+        "y": 215.66666412353516
+      },
+      "actionFunction": "func T_tRFQInput_action(aIRfq map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if aIRfq != nil {\n        for k, v := range aIRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}"
+    },
+    {
+      "id": "tAI",
+      "name": "tAI",
+      "kind": "LLM",
+      "guardExpression": "true",
+      "scriptLanguage": "go",
+      "position": {
+        "x": 794.2546269055663,
+        "y": 161.63455786244933
+      },
+      "LlmTemplate": {
+        "messages": [
+          {
+            "type": "system",
+            "text": "You are an experienced financial adviser specializing in listed equity option trading. Provide a concise qualitative opinion (bullish / neutral / cautious) and one short rationale."
+          },
+          {
+            "type": "user",
+            "text": "Based on current market environment, is the following option good to buy?\n{{aORfq}}, especially give comment on current spot price info at {{aOSpot}}"
+          }
+        ]
+      },
+      "LlmVars": {},
+      "LlmOptions": {},
+      "Stream": false
+    }
+  ],
+  "arcs": [
+    {
+      "id": "e-fxz84",
+      "sourceId": "pStock",
+      "targetId": "tSpot",
+      "expression": "query",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aRes",
+      "sourceId": "tSpot",
+      "targetId": "pYf",
+      "expression": "tool_result",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aIRfq",
+      "sourceId": "pInitRFQ",
+      "targetId": "tRFQInput",
+      "expression": "aIRfq",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aRfq",
+      "sourceId": "tRFQInput",
+      "targetId": "pRFQ",
+      "expression": "aRfq",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aOSpot",
+      "sourceId": "pYf",
+      "targetId": "tAI",
+      "expression": "aOSpot",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aORfq",
+      "sourceId": "pRFQ",
+      "targetId": "tAI",
+      "expression": "aORfq",
+      "direction": "IN",
+      "scriptLanguage": "go"
+    },
+    {
+      "id": "aAI",
+      "sourceId": "tAI",
+      "targetId": "p-8c2ut",
+      "expression": "answer",
+      "direction": "OUT",
+      "scriptLanguage": "go"
+    }
+  ],
+  "endPlaces": [],
+  "initialMarking": {
+    "StockSymbol": [
+      {
+        "value": {
+          "symbol": [
+            "AAPL"
+          ]
+        },
+        "timestamp": 0
+      }
+    ],
+    "pInitRFQ": [
+      {
+        "value": {
+          "KOLevel": 130,
+          "Maturity": 30,
+          "PathNum": 1000,
+          "Rate": 0.03,
+          "ReqID": "REQ-001",
+          "Spot": 100,
+          "Strike": 105,
+          "Underlying": "AAPL",
+          "Vol": 0.2
+        },
+        "timestamp": 0
+      }
+    ]
+  },
+  "subWorkflows": []
+}
