@@ -353,9 +353,29 @@
   ],
   "endPlaces": [],
   "initialMarking": {
-    "pAI": [
+    "StockSymbol": [
       {
-        "value": "**Opinion:** Cautious  \n\n**Rationale:** The 30‑day call is struck at $105 while AAPL is trading around $270 – more than 2½ × the strike – and the assumed volatility (20 %) is modest. The probability of the stock falling back below the strike before expiry is extremely low, so the option’s price is dominated by time decay with little upside potential. Even though the underlying shows strong momentum and healthy fundamentals, this particular contract is far out‑of‑the‑money and not an attractive buy.",
+        "value": {
+          "symbol": [
+            "AAPL"
+          ]
+        },
+        "timestamp": 0
+      }
+    ],
+    "pInitRFQ": [
+      {
+        "value": {
+          "KOLevel": 130,
+          "Maturity": 30,
+          "PathNum": 1000,
+          "Rate": 0.03,
+          "ReqID": "REQ-001",
+          "Spot": 100,
+          "Strike": 105,
+          "Underlying": "AAPL",
+          "Vol": 0.2
+        },
         "timestamp": 0
       }
     ]
