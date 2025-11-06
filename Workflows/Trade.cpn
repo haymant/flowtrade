@@ -378,23 +378,6 @@
         },
         "timestamp": 0
       }
-    ],
-    "pAI": [
-      {
-        "value": {
-          "AIOpinion": "**Opinion:** ⚠ **Cautious**  \n\n**Rationale:** The option assumes an underlying price of $100, yet Apple is trading around $270 (mid‑price, with a 52‑week high of $277 and a low of $169). At a $105 strike the contract is massively deep‑out‑of‑the‑money, and with a modest 20 % implied vol the chance of moving from $100 to $105 (or hitting the $130 knockout level) in 30 days is negligible. In short, the pricing model is mis‑aligned with the real market, making the trade unattractive.",
-          "KOLevel": 130,
-          "Maturity": 30,
-          "PathNum": 1000,
-          "Rate": 0.03,
-          "ReqID": "REQ-001",
-          "Spot": 100,
-          "Strike": 105,
-          "Underlying": "AAPL",
-          "Vol": 0.2
-        },
-        "timestamp": 0
-      }
     ]
   },
   "subWorkflows": []
