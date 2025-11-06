@@ -44,9 +44,9 @@
       }
     },
     {
-      "id": "p-8c2ut",
-      "name": "Place #8b4",
-      "colorSet": "INT",
+      "id": "pAI",
+      "name": "pAI",
+      "colorSet": "STRING",
       "position": {
         "x": 1070.8067045718346,
         "y": 138.50368759647776
@@ -162,7 +162,7 @@
     {
       "id": "aAI",
       "sourceId": "tAI",
-      "targetId": "p-8c2ut",
+      "targetId": "pAI",
       "expression": "answer",
       "direction": "OUT",
       "scriptLanguage": "go"
