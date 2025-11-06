@@ -230,7 +230,7 @@
     {
       "id": "pAI",
       "name": "pAI",
-      "colorSet": "STRING",
+      "colorSet": "J",
       "position": {
         "x": 1124.1484543460658,
         "y": 137.4828056031746
