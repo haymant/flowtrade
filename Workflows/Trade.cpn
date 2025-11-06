@@ -232,8 +232,8 @@
       "name": "pAI",
       "colorSet": "STRING",
       "position": {
-        "x": 1070.8068,
-        "y": 138.5037
+        "x": 1124.1484543460658,
+        "y": 137.4828056031746
       }
     }
   ],
@@ -330,7 +330,7 @@
       "id": "aOSpot",
       "sourceId": "pYf",
       "targetId": "tAI",
-      "expression": "token",
+      "expression": "aOSpot",
       "direction": "IN",
       "scriptLanguage": "go"
     },
@@ -338,7 +338,7 @@
       "id": "aORfq",
       "sourceId": "pRFQ",
       "targetId": "tAI",
-      "expression": "token",
+      "expression": "aORfq",
       "direction": "IN",
       "scriptLanguage": "go"
     },
