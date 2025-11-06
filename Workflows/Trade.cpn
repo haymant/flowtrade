@@ -379,14 +379,16 @@
       "sourceId": "pAI",
       "targetId": "tPrice",
       "expression": "aAIRfq",
-      "direction": "IN"
+      "direction": "IN",
+      "scriptLanguage": "go"
     },
     {
       "id": "e-fcueq",
       "sourceId": "tPrice",
       "targetId": "p-9udxf",
       "expression": "quote",
-      "direction": "OUT"
+      "direction": "OUT",
+      "scriptLanguage": "go"
     }
   ],
   "endPlaces": [],
