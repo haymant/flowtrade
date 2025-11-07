@@ -382,10 +382,19 @@
   ],
   "endPlaces": [],
   "initialMarking": {
-    "pAI": [
+    "pStock": [
       {
         "value": {
-          "AIOpinion": "**Opinion:** Cautious  \n\n**Rationale:** The option you’ve described assumes a spot of $100 for AAPL, but the market is trading around $270 (mid‑$260‑$275 range). At that price the 30‑day, 20 % vol, $105 strike call would already be deep‑in‑the‑money, and the “KO‑Level” 130 is far below the current level, meaning the barrier would have been breached long ago. In addition, AAPL’s actual implied volatility is noticeably higher than 20 %, so the model inputs are inconsistent with today’s environment – making the trade risky unless you can reconcile the spot/vol mismatch.",
+          "symbol": [
+            "AAPL"
+          ]
+        },
+        "timestamp": 0
+      }
+    ],
+    "pInitRFQ": [
+      {
+        "value": {
           "KOLevel": 130,
           "Maturity": 30,
           "PathNum": 1000,
