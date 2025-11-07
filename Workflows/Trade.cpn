@@ -411,7 +411,7 @@
         "aAIRfq": "rfq"
       },
       "outputMapping": {
-        "quote": "Premium"
+        "premium": "Premium"
       }
     }
   ]
