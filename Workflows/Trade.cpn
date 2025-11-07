@@ -372,29 +372,20 @@
       "scriptLanguage": "go"
     },
     {
-      "id": "e-fcueq",
+      "id": "aPx",
       "sourceId": "tPrice",
       "targetId": "p-9udxf",
-      "expression": "quote",
+      "expression": "func A_aPx_expr(qAIRfq map[string]interface{}, quote float64) interface{} {\n    if qAIRfq == nil {\n        qAIRfq = make(map[string]interface{})\n    }\n    qAIRfq[\"premium\"] = answer\n    return qAIRfq\n}",
       "direction": "OUT",
       "scriptLanguage": "go"
     }
   ],
   "endPlaces": [],
   "initialMarking": {
-    "pStock": [
+    "pAI": [
       {
         "value": {
-          "symbol": [
-            "AAPL"
-          ]
-        },
-        "timestamp": 0
-      }
-    ],
-    "pInitRFQ": [
-      {
-        "value": {
+          "AIOpinion": "**Opinion:** **Cautious** – the option is not attractive at current market levels.\n\n**Rationale (one‑sentence):** The contract is a deep‑out‑of‑the‑money call (strike $105) while AAPL is trading near **$270**, so even with a 30‑day horizon and modest 20 % implied volatility the probability of finishing in‑the‑money is very low; the premium is likely to be dominated by time decay rather than any realistic upside.  \n\n**Spot‑price context:**  \n- Current regular‑market price: **$269.77** (down 0.14 % on the day).  \n- 52‑week high $277.32, low $169.21 – the stock is still well above the option’s strike.  \n- Dividend of **$0.26** (yield ≈ 0.39 %) and a risk‑free rate of **3 %** further reduce the call’s forward value.  \n\nGiven the large gap between spot and strike, the option would need an implausibly large move (> 60 %) in just one month to become profitable, so a purchase would be speculative at best. Consider either a nearer‑term, nearer‑the‑money contract or a different strategy (e.g., buying the stock, a spread, or a put) if you remain bullish on AAPL.",
           "KOLevel": 130,
           "Maturity": 30,
           "PathNum": 1000,
