@@ -375,7 +375,7 @@
       "id": "aPx",
       "sourceId": "tPrice",
       "targetId": "p-9udxf",
-      "expression": "func A_aPx_expr(qAIRfq map[string]interface{}, quote float64) interface{} {\n    if qAIRfq == nil {\n        qAIRfq = make(map[string]interface{})\n    }\n    qAIRfq[\"premium\"] = answer\n    return qAIRfq\n}",
+      "expression": "quote",
       "direction": "OUT",
       "scriptLanguage": "go"
     }
