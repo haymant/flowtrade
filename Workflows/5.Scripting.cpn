@@ -1,6 +1,5 @@
 {
   "id": "5.Scripting",
-  "name": "Monte Carlo KO Pricing (Go Script)",
   "description": "Go Scripting Example: Monte Carlo simulation for knockout option pricing with Go functions",
   "colorSets": [
     "colset STR = string;",
