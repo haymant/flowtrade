@@ -11,7 +11,6 @@
   "places": [
     {
       "id": "rfq",
-      "name": "RFQ",
       "colorSet": "J",
       "position": {
         "x": 185.18433,
@@ -20,7 +19,6 @@
     },
     {
       "id": "EndPrices",
-      "name": "End Prices",
       "colorSet": "J",
       "position": {
         "x": 554.0323,
@@ -29,7 +27,6 @@
     },
     {
       "id": "Payoffs",
-      "name": "Payoffs",
       "colorSet": "J",
       "position": {
         "x": 947.4424,
@@ -38,7 +35,6 @@
     },
     {
       "id": "Premium",
-      "name": "Premium",
       "colorSet": "REAL",
       "position": {
         "x": 1338.0184,
@@ -49,7 +45,6 @@
   "transitions": [
     {
       "id": "t_sim",
-      "name": "SimulateEndPrices",
       "kind": "Auto",
       "scriptLanguage": "go",
       "position": {
@@ -63,7 +58,6 @@
     },
     {
       "id": "t_pay",
-      "name": "CalcPayoffs",
       "kind": "Auto",
       "scriptLanguage": "go",
       "position": {
@@ -77,7 +71,6 @@
     },
     {
       "id": "t_avg",
-      "name": "AggregatePremium",
       "kind": "Auto",
       "scriptLanguage": "go",
       "position": {
@@ -143,23 +136,6 @@
   "endPlaces": [
     "Premium"
   ],
-  "initialMarking": {
-    "RFQ": [
-      {
-        "value": {
-          "KOLevel": 130,
-          "Maturity": 30,
-          "PathNum": 1000,
-          "Rate": 0.03,
-          "ReqID": "REQ-001",
-          "Spot": 100,
-          "Strike": 105,
-          "Underlying": "XYZ",
-          "Vol": 0.2
-        },
-        "timestamp": 0
-      }
-    ]
-  },
+  "initialMarking": {},
   "subWorkflows": []
 }
