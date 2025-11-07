@@ -417,10 +417,10 @@
       "autoStart": true,
       "propagateOnComplete": true,
       "inputMapping": {
-        "aAIRfq": "aAIRfq"
+        "aAIRfq": "rfq"
       },
       "outputMapping": {
-        "premium": "premium"
+        "premium": "aAIRfq"
       }
     }
   ]
