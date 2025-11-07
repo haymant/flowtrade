@@ -382,19 +382,10 @@
   ],
   "endPlaces": [],
   "initialMarking": {
-    "pStock": [
+    "pAI": [
       {
         "value": {
-          "symbol": [
-            "AAPL"
-          ]
-        },
-        "timestamp": 0
-      }
-    ],
-    "pInitRFQ": [
-      {
-        "value": {
+          "AIOpinion": "**Opinion:** **Cautious**  \n\n**Rationale:** The option you’re looking at (30‑day call, K = 105, σ = 20 %) is modeled on a spot of 100, but Apple’s actual market price is ~ $270. That makes the contract effectively a deep‑in‑the‑money call with almost no time value left – you’d be paying a premium that is almost identical to buying the shares outright, while the low implied volatility (≈20 %) offers little upside on the remaining month. With a dividend of $0.26 and an earnings release looming, the modest forward‑price move you could capture is limited, so a direct stock position or a higher‑strike, higher‑volatility option would be more efficient.  \n\n**Spot‑price snapshot:**  \n\n- **Current price:** $269.77 (pre‑market $270.15) – up ~‑0.14 % intraday.  \n- **52‑week range:** $169.21 – $277.32 (price near the high‑end).  \n- **Dividend:** $0.26 per share (ex‑date Nov 10 2025), yield ≈0.39 %.  \n- **Earnings:** Next call scheduled for late Oct 2025; market may price in earnings surprise.  \n\nGiven the disparity between the option’s assumed spot ($100) and the real price (~$270), plus the limited volatility cushion, buying this specific contract is not compelling at present. Consider either the underlying stock or a different strike/expiry that better aligns with the current market environment.",
           "KOLevel": 130,
           "Maturity": 30,
           "PathNum": 1000,
