@@ -389,6 +389,7 @@
           "KOLevel": 130,
           "Maturity": 30,
           "PathNum": 1000,
+          "Premium": 0.7363461746420005,
           "Rate": 0.03,
           "ReqID": "REQ-001",
           "Spot": 100,
@@ -411,7 +412,7 @@
         "aAIRfq": "rfq"
       },
       "outputMapping": {
-        "premium": "Premium"
+        "premium": "premium"
       }
     }
   ]
