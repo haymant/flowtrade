@@ -1,15 +1,87 @@
 {
-  "id": "Trade",
-  "description": "",
+  "arcs": [
+    {
+      "direction": "IN",
+      "expression": "query",
+      "id": "e-fxz84",
+      "multiplicity": 1,
+      "sourceId": "pStock",
+      "targetId": "tSpot"
+    },
+    {
+      "direction": "OUT",
+      "expression": "tool_result",
+      "id": "aRes",
+      "multiplicity": 1,
+      "sourceId": "tSpot",
+      "targetId": "pYf"
+    },
+    {
+      "direction": "IN",
+      "expression": "token",
+      "id": "aIRfq",
+      "multiplicity": 1,
+      "sourceId": "pInitRFQ",
+      "targetId": "tRFQInput"
+    },
+    {
+      "direction": "OUT",
+      "expression": "aRfq",
+      "id": "aRfq",
+      "multiplicity": 1,
+      "sourceId": "tRFQInput",
+      "targetId": "pRFQ"
+    },
+    {
+      "direction": "IN",
+      "expression": "token",
+      "id": "aOSpot",
+      "multiplicity": 1,
+      "sourceId": "pYf",
+      "targetId": "tAI"
+    },
+    {
+      "direction": "IN",
+      "expression": "token",
+      "id": "aORfq",
+      "multiplicity": 1,
+      "sourceId": "pRFQ",
+      "targetId": "tAI"
+    },
+    {
+      "direction": "OUT",
+      "expression": "func A_aAI_expr(aORfq map[string]interface{}, answer string) interface{} {\n    if aORfq == nil {\n        aORfq = make(map[string]interface{})\n    }\n    aORfq[\"AIOpinion\"] = answer\n    return aORfq\n}",
+      "id": "aAI",
+      "multiplicity": 1,
+      "sourceId": "tAI",
+      "targetId": "pAI"
+    },
+    {
+      "direction": "IN",
+      "expression": "token",
+      "id": "aAIRfq",
+      "multiplicity": 1,
+      "sourceId": "pAI",
+      "targetId": "tPrice"
+    },
+    {
+      "direction": "OUT",
+      "expression": "quote",
+      "id": "aPx",
+      "multiplicity": 1,
+      "sourceId": "tPrice",
+      "targetId": "p-9udxf"
+    }
+  ],
   "colorSets": [
     "colset STR = string;",
     "colset J = json;",
     "colset REAL = real;",
     "colset INT = int;",
+    "colset RFQ = json;",
     "colset Quote = json;",
     "colset Order = json;",
     "colset RFQ = json<RFQ>;",
-    "colset RFQ = json;",
     "colset STRING = string;",
     "colset JSON = string;",
     "colset MARKDOWN = string;",
@@ -19,6 +91,38 @@
     "colset Status = string;",
     "colset Amount = int;"
   ],
+  "currentStep": 0,
+  "description": "",
+  "globalClock": 0,
+  "id": "Trade",
+  "initialMarking": {
+    "pInitRFQ": [
+      {
+        "timestamp": 0,
+        "value": {
+          "KOLevel": 130,
+          "Maturity": 30,
+          "PathNum": 1000,
+          "Rate": 0.03,
+          "ReqID": "REQ-001",
+          "Spot": 100,
+          "Strike": 105,
+          "Underlying": "AAPL",
+          "Vol": 0.2
+        }
+      }
+    ],
+    "pStock": [
+      {
+        "timestamp": 0,
+        "value": {
+          "symbol": [
+            "AAPL"
+          ]
+        }
+      }
+    ]
+  },
   "jsonSchemas": [
     {
       "name": "RFQ",
@@ -191,90 +295,97 @@
   ],
   "places": [
     {
-      "id": "pStock",
       "colorSet": "J",
+      "id": "pStock",
       "position": {
         "x": 120,
-        "y": 72.8044704085603
+        "y": 72.804474
       }
     },
     {
-      "id": "pYf",
       "colorSet": "J",
+      "id": "pYf",
       "position": {
         "x": 640,
         "y": 80
       }
     },
     {
-      "id": "pInitRFQ",
       "colorSet": "J",
+      "id": "pInitRFQ",
       "position": {
         "x": 120,
         "y": 200
       }
     },
     {
-      "id": "pRFQ",
       "colorSet": "J",
+      "id": "pRFQ",
       "position": {
         "x": 549.4166,
         "y": 193.66667
       }
     },
     {
-      "id": "pAI",
       "colorSet": "J",
+      "id": "pAI",
       "position": {
-        "x": 1124.1484543460658,
-        "y": 137.4828056031746
+        "x": 1124.1484,
+        "y": 137.4828
       }
     },
     {
-      "id": "p-9udxf",
       "colorSet": "J",
+      "id": "p-9udxf",
       "position": {
-        "x": 469.5759342070018,
-        "y": 349.2769848488791
+        "x": 469.57593,
+        "y": 349.27698
       }
+    }
+  ],
+  "status": "loaded",
+  "subWorkflows": [
+    {
+      "autoStart": true,
+      "callTransitionId": "tPrice",
+      "cpnId": "5.Scripting",
+      "id": "sw_tPrice",
+      "inputMapping": {
+        "aAIRfq": "rfq"
+      },
+      "outputMapping": {
+        "premium": "premium"
+      },
+      "propagateOnComplete": true
     }
   ],
   "transitions": [
     {
-      "id": "tSpot",
-      "kind": "Tools",
-      "guardExpression": "true",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 324.5,
-        "y": 97
-      },
       "Tools": [
         {
           "name": "mcp:https://data.lizhao.net/api/mcp:yahoo_quote"
         }
-      ]
+      ],
+      "guardExpression": "true",
+      "id": "tSpot",
+      "kind": "Tools",
+      "position": {
+        "x": 324.5,
+        "y": 97
+      }
     },
     {
+      "actionFunction": "func T_tRFQInput_action(aIRfq map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if aIRfq != nil {\n        for k, v := range aIRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}",
+      "guardExpression": "true",
       "id": "tRFQInput",
       "kind": "Manual",
-      "guardExpression": "true",
-      "scriptLanguage": "go",
       "position": {
         "x": 258.12268,
         "y": 222.81293
-      },
-      "actionFunction": "func T_tRFQInput_action(aIRfq map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if aIRfq != nil {\n        for k, v := range aIRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}"
+      }
     },
     {
-      "id": "tAI",
-      "kind": "LLM",
-      "guardExpression": "true",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 794.25464,
-        "y": 161.63455
-      },
+      "LlmOptions": {},
       "LlmTemplate": {
         "messages": [
           {
@@ -287,140 +398,25 @@
           }
         ]
       },
-      "LlmVars": {},
-      "LlmOptions": {},
-      "Stream": false
+      "guardExpression": "true",
+      "id": "tAI",
+      "kind": "LLM",
+      "position": {
+        "x": 794.25464,
+        "y": 161.63455
+      }
     },
     {
-      "id": "tPrice",
-      "kind": "Auto",
-      "guardExpression": "true",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 162.59731997192102,
-        "y": 365.945506888793
-      },
       "actionFunction": "func T_tPrice_action(aAIRfq map[string]interface{}, premium interface{}) map[string]interface{} {\n    if premium != nil {\n        aAIRfq[\"Premium\"] = premium\n    }\n    return aAIRfq\n}",
       "actionFunctionOutput": [
         "quote"
-      ]
-    }
-  ],
-  "arcs": [
-    {
-      "id": "e-fxz84",
-      "sourceId": "pStock",
-      "targetId": "tSpot",
-      "expression": "query",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "aRes",
-      "sourceId": "tSpot",
-      "targetId": "pYf",
-      "expression": "tool_result",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "aIRfq",
-      "sourceId": "pInitRFQ",
-      "targetId": "tRFQInput",
-      "expression": "token",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "aRfq",
-      "sourceId": "tRFQInput",
-      "targetId": "pRFQ",
-      "expression": "aRfq",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "aOSpot",
-      "sourceId": "pYf",
-      "targetId": "tAI",
-      "expression": "aOSpot",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "aORfq",
-      "sourceId": "pRFQ",
-      "targetId": "tAI",
-      "expression": "aORfq",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "aAI",
-      "sourceId": "tAI",
-      "targetId": "pAI",
-      "expression": "func A_aAI_expr(aORfq map[string]interface{}, answer string) interface{} {\n    if aORfq == nil {\n        aORfq = make(map[string]interface{})\n    }\n    aORfq[\"AIOpinion\"] = answer\n    return aORfq\n}",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "aAIRfq",
-      "sourceId": "pAI",
-      "targetId": "tPrice",
-      "expression": "aAIRfq",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "aPx",
-      "sourceId": "tPrice",
-      "targetId": "p-9udxf",
-      "expression": "quote",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    }
-  ],
-  "endPlaces": [],
-  "initialMarking": {
-    "pStock": [
-      {
-        "value": {
-          "symbol": [
-            "AAPL"
-          ]
-        },
-        "timestamp": 0
-      }
-    ],
-    "pInitRFQ": [
-      {
-        "value": {
-          "KOLevel": 130,
-          "Maturity": 30,
-          "PathNum": 1000,
-          "Rate": 0.03,
-          "ReqID": "REQ-001",
-          "Spot": 100,
-          "Strike": 105,
-          "Underlying": "AAPL",
-          "Vol": 0.2
-        },
-        "timestamp": 0
-      }
-    ]
-  },
-  "subWorkflows": [
-    {
-      "id": "sw_tPrice",
-      "cpnId": "5.Scripting",
-      "callTransitionId": "tPrice",
-      "autoStart": true,
-      "propagateOnComplete": true,
-      "inputMapping": {
-        "aAIRfq": "rfq"
-      },
-      "outputMapping": {
-        "premium": "premium"
+      ],
+      "guardExpression": "true",
+      "id": "tPrice",
+      "kind": "Auto",
+      "position": {
+        "x": 162.59732,
+        "y": 365.9455
       }
     }
   ]
