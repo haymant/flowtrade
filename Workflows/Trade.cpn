@@ -192,16 +192,14 @@
   "places": [
     {
       "id": "pStock",
-      "name": "StockSymbol",
       "colorSet": "J",
       "position": {
         "x": 120,
-        "y": 80
+        "y": 72.8044704085603
       }
     },
     {
       "id": "pYf",
-      "name": "pYf",
       "colorSet": "J",
       "position": {
         "x": 640,
@@ -210,7 +208,6 @@
     },
     {
       "id": "pInitRFQ",
-      "name": "pInitRFQ",
       "colorSet": "J",
       "position": {
         "x": 120,
@@ -219,7 +216,6 @@
     },
     {
       "id": "pRFQ",
-      "name": "pRFQ",
       "colorSet": "J",
       "position": {
         "x": 549.4166,
@@ -228,7 +224,6 @@
     },
     {
       "id": "pAI",
-      "name": "pAI",
       "colorSet": "J",
       "position": {
         "x": 1124.1484543460658,
@@ -237,7 +232,6 @@
     },
     {
       "id": "p-9udxf",
-      "name": "Place #3a0",
       "colorSet": "J",
       "position": {
         "x": 469.5759342070018,
@@ -248,7 +242,6 @@
   "transitions": [
     {
       "id": "tSpot",
-      "name": "tSpot",
       "kind": "Tools",
       "guardExpression": "true",
       "scriptLanguage": "go",
@@ -264,7 +257,6 @@
     },
     {
       "id": "tRFQInput",
-      "name": "tRFQInput",
       "kind": "Manual",
       "guardExpression": "true",
       "scriptLanguage": "go",
@@ -276,7 +268,6 @@
     },
     {
       "id": "tAI",
-      "name": "tAI",
       "kind": "LLM",
       "guardExpression": "true",
       "scriptLanguage": "go",
@@ -302,7 +293,6 @@
     },
     {
       "id": "tPrice",
-      "name": "tPrice",
       "kind": "Auto",
       "guardExpression": "true",
       "scriptLanguage": "go",
@@ -392,7 +382,7 @@
   ],
   "endPlaces": [],
   "initialMarking": {
-    "StockSymbol": [
+    "pStock": [
       {
         "value": {
           "symbol": [
