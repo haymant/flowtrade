@@ -382,10 +382,19 @@
   ],
   "endPlaces": [],
   "initialMarking": {
-    "pAI": [
+    "pStock": [
       {
         "value": {
-          "AIOpinion": "**Opinion:** ⚠️ **Cautious – likely not a good buy**\n\n**Rationale:**  \nThe option you’re looking at is a 30‑day, knock‑out (KO) contract with a barrier at 130 USD and a strike of 105 USD. In the model you supplied the underlying “spot” is 100 USD, but the real‑time market price for AAPL is ≈ 269.8 USD (post‑market). Because the market price already sits well above the 130 USD KO barrier, the barrier would have been breached long ago, rendering the contract void (worth essentially zero). Even ignoring the barrier, a 105‑strike call on a stock trading near 270 USD is deep‑in‑the‑money, and the premium you’d pay would be almost the intrinsic value plus little time value – there’s little upside relative to the cost.\n\n**Bottom line:** With the current spot far above the KO level, the option is effectively knocked‑out. Unless you have a very specific structured‑product rationale that isn’t evident here, it’s prudent to avoid buying this contract.",
+          "symbol": [
+            "AAPL"
+          ]
+        },
+        "timestamp": 0
+      }
+    ],
+    "pInitRFQ": [
+      {
+        "value": {
           "KOLevel": 130,
           "Maturity": 30,
           "PathNum": 1000,
