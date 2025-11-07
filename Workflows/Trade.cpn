@@ -125,6 +125,73 @@
   },
   "jsonSchemas": [
     {
+      "name": "ProductSchema",
+      "schema": {
+        "properties": {
+          "price": {
+            "type": "number"
+          },
+          "productId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "productId",
+          "price"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "name": "RFQ",
+      "schema": {
+        "$schema": "https://json-schema.org/draft-07/schema",
+        "description": "Generated from JSON data",
+        "properties": {
+          "KOLevel": {
+            "type": "integer"
+          },
+          "Maturity": {
+            "type": "integer"
+          },
+          "PathNum": {
+            "type": "integer"
+          },
+          "Rate": {
+            "type": "number"
+          },
+          "ReqID": {
+            "type": "string"
+          },
+          "Spot": {
+            "type": "integer"
+          },
+          "Strike": {
+            "type": "integer"
+          },
+          "Underlying": {
+            "type": "string"
+          },
+          "Vol": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "KOLevel",
+          "Maturity",
+          "PathNum",
+          "Rate",
+          "ReqID",
+          "Spot",
+          "Strike",
+          "Underlying",
+          "Vol"
+        ],
+        "title": "Generated Schema",
+        "type": "object"
+      }
+    },
+    {
       "name": "Order",
       "schema": {
         "$schema": "https://json-schema.org/draft-07/schema",
@@ -222,73 +289,6 @@
           "customerId",
           "total"
         ],
-        "type": "object"
-      }
-    },
-    {
-      "name": "ProductSchema",
-      "schema": {
-        "properties": {
-          "price": {
-            "type": "number"
-          },
-          "productId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "productId",
-          "price"
-        ],
-        "type": "object"
-      }
-    },
-    {
-      "name": "RFQ",
-      "schema": {
-        "$schema": "https://json-schema.org/draft-07/schema",
-        "description": "Generated from JSON data",
-        "properties": {
-          "KOLevel": {
-            "type": "integer"
-          },
-          "Maturity": {
-            "type": "integer"
-          },
-          "PathNum": {
-            "type": "integer"
-          },
-          "Rate": {
-            "type": "number"
-          },
-          "ReqID": {
-            "type": "string"
-          },
-          "Spot": {
-            "type": "integer"
-          },
-          "Strike": {
-            "type": "integer"
-          },
-          "Underlying": {
-            "type": "string"
-          },
-          "Vol": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "KOLevel",
-          "Maturity",
-          "PathNum",
-          "Rate",
-          "ReqID",
-          "Spot",
-          "Strike",
-          "Underlying",
-          "Vol"
-        ],
-        "title": "Generated Schema",
         "type": "object"
       }
     }
