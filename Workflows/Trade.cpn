@@ -1,6 +1,5 @@
 {
   "id": "Trade",
-  "name": "Trade",
   "description": "",
   "colorSets": [
     "colset STR = string;",
@@ -393,10 +392,19 @@
   ],
   "endPlaces": [],
   "initialMarking": {
-    "pAI": [
+    "StockSymbol": [
       {
         "value": {
-          "AIOpinion": "**Opinion:** Cautious  \n\n**Rationale:** The quoted market price for AAPL is around $270, far above the option’s assumed spot of $100 and its $105 strike. At that level the option would already be deep‑in‑the‑money (if it’s a call) and its pricing (vol 0.20, 30‑day expiry) is inconsistent with the actual market data, suggesting a data mismatch or mis‑pricing; thus the trade is not advisable without correcting the underlying assumptions.",
+          "symbol": [
+            "AAPL"
+          ]
+        },
+        "timestamp": 0
+      }
+    ],
+    "pInitRFQ": [
+      {
+        "value": {
           "KOLevel": 130,
           "Maturity": 30,
           "PathNum": 1000,
