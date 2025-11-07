@@ -420,7 +420,7 @@
         "aAIRfq": "rfq"
       },
       "outputMapping": {
-        "premium": "aAIRfq"
+        "premium": "premium"
       }
     }
   ]
