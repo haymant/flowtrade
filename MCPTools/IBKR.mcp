@@ -1,8 +1,1432 @@
 {
-  "id": "",
-  "name": "",
-  "baseUrl": "",
+  "id": "IBKR",
+  "name": "IBKR",
+  "baseUrl": "http://localhost:8000/api/v1/mcp",
   "timeoutMs": 8000,
-  "tools": [],
-  "resources": []
+  "tools": [
+    {
+      "inputSchema": {
+        "properties": {
+          "clientId": {
+            "default": 2,
+            "title": "Clientid",
+            "type": "integer"
+          },
+          "host": {
+            "default": "127.0.0.1",
+            "title": "Host",
+            "type": "string"
+          },
+          "port": {
+            "default": 7496,
+            "title": "Port",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "name": "ibkr_connect",
+      "description": "Connect to TWS/IB Gateway.\n        \n        Args:\n            host: TWS/Gateway host (default: 127.0.0.1)\n            port: TWS/Gateway port (7496 for TWS, 4001 for IB Gateway Paper, 4002 for Live)\n            clientId: Unique client ID (default: 1)\n            \n        Returns:\n            Connection status with host, port, and clientId",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_disconnect",
+      "description": "Disconnect from TWS/IB Gateway.\n        \n        Returns:\n            Disconnection status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_get_status",
+      "description": "Get connection status.\n        \n        Returns:\n            Current connection status (connected/disconnected)",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_get_current_time",
+      "description": "Get current server time from TWS/Gateway.\n        \n        Returns:\n            Server time as ISO string",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_get_managed_accounts",
+      "description": "Get list of managed accounts.\n        \n        Returns:\n            List of account IDs accessible to this connection",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "pattern": {
+            "title": "Pattern",
+            "type": "string"
+          }
+        },
+        "required": [
+          "pattern"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_search_symbols",
+      "description": "Search for symbols matching a pattern.\n        \n        Args:\n            pattern: Symbol search pattern (e.g., 'AAPL', 'MSFT')\n            \n        Returns:\n            List of matching contracts with symbol, name, and exchange",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "secType": {
+            "default": "STK",
+            "title": "Sectype",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_contract_details",
+      "description": "Get detailed information about a contract.\n        \n        Args:\n            symbol: Contract symbol (e.g., 'AAPL')\n            secType: Security type (STK, OPT, FUT, CASH, etc.)\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Detailed contract information including trading hours, lot size, etc.",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "marketRuleId": {
+            "title": "Marketruleid",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "marketRuleId"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_market_rule",
+      "description": "Get price increment rules for a market.\n        \n        Args:\n            marketRuleId: Market rule ID from contract details\n            \n        Returns:\n            List of price increments with low/high edge and increment",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "underlyingConId": {
+            "title": "Underlyingconid",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "underlyingConId"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_option_chain_params",
+      "description": "Get option chain parameters for an underlying contract.\n        \n        Args:\n            underlyingConId: Contract ID of the underlying\n            \n        Returns:\n            Available exchanges, strikes, and expirations",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "barSize": {
+            "default": "1 hour",
+            "title": "Barsize",
+            "type": "string"
+          },
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "duration": {
+            "default": "1 D",
+            "title": "Duration",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "useRTH": {
+            "default": true,
+            "title": "Userth",
+            "type": "boolean"
+          },
+          "whatToShow": {
+            "default": "TRADES",
+            "title": "Whattoshow",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_historical_data",
+      "description": "Get historical market data.\n        \n        Args:\n            symbol: Contract symbol (e.g., 'AAPL')\n            duration: Time span (e.g., '1 D', '1 W', '1 M', '1 Y')\n            barSize: Bar size (1 min, 5 mins, 15 mins, 1 hour, 1 day, etc.)\n            whatToShow: Data type (TRADES, MIDPOINT, BID, ASK, etc.)\n            useRTH: Use regular trading hours only (default: True)\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Historical bars with OHLCV data",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "useRTH": {
+            "default": true,
+            "title": "Userth",
+            "type": "boolean"
+          },
+          "whatToShow": {
+            "default": "TRADES",
+            "title": "Whattoshow",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_head_timestamp",
+      "description": "Get earliest available data point for a contract.\n        \n        Args:\n            symbol: Contract symbol\n            whatToShow: Data type (TRADES, MIDPOINT, BID, ASK, etc.)\n            useRTH: Use regular trading hours only\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Earliest timestamp for which data is available",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "marketDataType": {
+            "title": "Marketdatatype",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "marketDataType"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_set_market_data_type",
+      "description": "Set market data type for streaming quotes.\n        \n        Args:\n            marketDataType: 1=Live, 2=Frozen, 3=Delayed, 4=Delayed-Frozen\n            \n        Returns:\n            Confirmation of market data type setting",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "duration": {
+            "default": "1 day",
+            "title": "Duration",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "useRTH": {
+            "default": true,
+            "title": "Userth",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_histogram_data",
+      "description": "Get histogram data showing price distribution.\n        \n        Args:\n            symbol: Contract symbol\n            duration: Time period (e.g., '1 day', '1 week')\n            useRTH: Use regular trading hours only\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Price histogram showing volume at each price level",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "reportType": {
+            "default": "ReportsFinSummary",
+            "title": "Reporttype",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_fundamental_data",
+      "description": "Get fundamental data for a contract.\n        \n        Args:\n            symbol: Contract symbol\n            reportType: Type of report (ReportsFinSummary, ReportSnapshot, ReportRatios, ReportsFinStatements, RESC, CalendarReport)\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Fundamental data in XML format",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "limitPrice": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Limitprice"
+          },
+          "orderType": {
+            "default": "MKT",
+            "title": "Ordertype",
+            "type": "string"
+          },
+          "quantity": {
+            "title": "Quantity",
+            "type": "integer"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol",
+          "action",
+          "quantity"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_place_order",
+      "description": "Place a stock order.\n        \n        Args:\n            symbol: Stock symbol (e.g., 'AAPL')\n            action: BUY or SELL\n            quantity: Number of shares\n            orderType: MKT, LMT, STP, etc. (default: MKT)\n            limitPrice: Limit price (required for LMT orders)\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Order details with orderId and status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "orderId": {
+            "title": "Orderid",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "orderId"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_cancel_order",
+      "description": "Cancel an order.\n        \n        Args:\n            orderId: Order ID to cancel\n            \n        Returns:\n            Cancellation confirmation",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_get_open_orders",
+      "description": "Get all open orders.\n        \n        Returns:\n            List of open orders with details",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_get_all_orders",
+      "description": "Get all orders (including filled and cancelled).\n        \n        Returns:\n            List of all orders with details",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "auxPrice": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Auxprice"
+          },
+          "limitPrice": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Limitprice"
+          },
+          "orderId": {
+            "title": "Orderid",
+            "type": "integer"
+          },
+          "quantity": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Quantity"
+          }
+        },
+        "required": [
+          "orderId"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_modify_order",
+      "description": "Modify an existing order.\n        \n        Args:\n            orderId: Order ID to modify\n            quantity: New quantity (optional)\n            limitPrice: New limit price (optional)\n            auxPrice: New aux price for stop orders (optional)\n            \n        Returns:\n            Modified order confirmation",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "exchange": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Exchange"
+          },
+          "secType": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sectype"
+          },
+          "symbol": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Symbol"
+          }
+        },
+        "type": "object"
+      },
+      "name": "ibkr_get_executions",
+      "description": "Get execution history.\n        \n        Args:\n            symbol: Filter by symbol (optional)\n            secType: Filter by security type (optional)\n            exchange: Filter by exchange (optional)\n            \n        Returns:\n            List of executions with fill details",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "entryPrice": {
+            "title": "Entryprice",
+            "type": "number"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "quantity": {
+            "title": "Quantity",
+            "type": "integer"
+          },
+          "stopLossPrice": {
+            "title": "Stoplossprice",
+            "type": "number"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "takeProfitPrice": {
+            "title": "Takeprofitprice",
+            "type": "number"
+          }
+        },
+        "required": [
+          "symbol",
+          "action",
+          "quantity",
+          "entryPrice",
+          "takeProfitPrice",
+          "stopLossPrice"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_place_bracket_order",
+      "description": "Place a bracket order (entry + take profit + stop loss).\n        \n        Args:\n            symbol: Stock symbol\n            action: BUY or SELL\n            quantity: Number of shares\n            entryPrice: Entry limit price\n            takeProfitPrice: Take profit limit price\n            stopLossPrice: Stop loss price\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            All three order IDs (parent, takeProfit, stopLoss)",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "orderId": {
+            "title": "Orderid",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "orderId"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_order_status",
+      "description": "Get status of a specific order.\n        \n        Args:\n            orderId: Order ID to query\n            \n        Returns:\n            Current order status and fill details",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "account": {
+            "default": "",
+            "title": "Account",
+            "type": "string"
+          },
+          "tags": {
+            "default": "NetLiquidation,TotalCashValue,SettledCash,BuyingPower,GrossPositionValue",
+            "title": "Tags",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "name": "ibkr_get_account_summary",
+      "description": "Get account summary with key metrics.\n        \n        Args:\n            account: Account ID (empty for all accounts)\n            tags: Comma-separated list of tags to retrieve\n            \n        Returns:\n            Account summary with requested metrics",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "account": {
+            "default": "",
+            "title": "Account",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "name": "ibkr_get_positions",
+      "description": "Get current portfolio positions.\n        \n        Args:\n            account: Account ID (empty for all accounts)\n            \n        Returns:\n            List of positions with contract details and P&L",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "account": {
+            "default": "",
+            "title": "Account",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "name": "ibkr_get_account_values",
+      "description": "Get detailed account values and portfolio data.\n        \n        Args:\n            account: Account ID (uses first available if not specified)\n            \n        Returns:\n            Comprehensive account values including cash, margins, and portfolio",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "account": {
+            "default": "",
+            "title": "Account",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "name": "ibkr_get_pnl",
+      "description": "Get real-time P&L for account.\n        \n        Args:\n            account: Account ID (uses first available if not specified)\n            \n        Returns:\n            Daily and unrealized P&L",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "account": {
+            "title": "Account",
+            "type": "string"
+          },
+          "conId": {
+            "title": "Conid",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "account",
+          "conId"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_pnl_single",
+      "description": "Get real-time P&L for a single position.\n        \n        Args:\n            account: Account ID\n            conId: Contract ID\n            \n        Returns:\n            Position-specific P&L details",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_get_news_providers",
+      "description": "Get list of available news providers.\n        \n        Returns:\n            List of news providers with codes and names",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "providerCodes": {
+            "default": "BRFUPDN",
+            "title": "Providercodes",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "totalResults": {
+            "default": 10,
+            "title": "Totalresults",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_news_articles",
+      "description": "Get news articles for a contract.\n        \n        Args:\n            symbol: Contract symbol\n            providerCodes: News provider codes (e.g., 'BRFUPDN', 'DJNL')\n            totalResults: Maximum number of articles to retrieve\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            List of news articles with headlines and timestamps",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "articleId": {
+            "title": "Articleid",
+            "type": "string"
+          },
+          "providerCode": {
+            "title": "Providercode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "providerCode",
+          "articleId"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_news_article",
+      "description": "Get full text of a news article.\n        \n        Args:\n            providerCode: News provider code\n            articleId: Article ID from news article list\n            \n        Returns:\n            Full article text",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "expiration": {
+            "title": "Expiration",
+            "type": "string"
+          },
+          "right": {
+            "title": "Right",
+            "type": "string"
+          },
+          "strike": {
+            "title": "Strike",
+            "type": "number"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "underlyingPrice": {
+            "title": "Underlyingprice",
+            "type": "number"
+          },
+          "volatility": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Volatility"
+          }
+        },
+        "required": [
+          "symbol",
+          "expiration",
+          "strike",
+          "right",
+          "underlyingPrice"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_calculate_option_price",
+      "description": "Calculate option price and greeks.\n        \n        Args:\n            symbol: Underlying symbol\n            expiration: Option expiration (YYYYMMDD format)\n            strike: Strike price\n            right: Call ('C') or Put ('P')\n            underlyingPrice: Current underlying price for calculation\n            volatility: Implied volatility (optional, will be calculated if not provided)\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Option price, implied volatility, and greeks",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "expiration": {
+            "title": "Expiration",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol",
+          "expiration"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_option_chain",
+      "description": "Get option chain for a specific expiration.\n        \n        Args:\n            symbol: Underlying symbol\n            expiration: Option expiration (YYYYMMDD format)\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Full option chain with calls and puts",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "expiration": {
+            "title": "Expiration",
+            "type": "string"
+          },
+          "limitPrice": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Limitprice"
+          },
+          "orderType": {
+            "default": "MKT",
+            "title": "Ordertype",
+            "type": "string"
+          },
+          "quantity": {
+            "title": "Quantity",
+            "type": "integer"
+          },
+          "right": {
+            "title": "Right",
+            "type": "string"
+          },
+          "strike": {
+            "title": "Strike",
+            "type": "number"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol",
+          "expiration",
+          "strike",
+          "right",
+          "action",
+          "quantity"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_place_option_order",
+      "description": "Place an option order.\n        \n        Args:\n            symbol: Underlying symbol\n            expiration: Option expiration (YYYYMMDD format)\n            strike: Strike price\n            right: Call ('C') or Put ('P')\n            action: BUY or SELL\n            quantity: Number of contracts\n            orderType: MKT, LMT, etc. (default: MKT)\n            limitPrice: Limit price (required for LMT orders)\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Order confirmation with orderId",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_get_scanner_parameters",
+      "description": "Get available scanner parameters and filter options.\n        \n        Returns:\n            Scanner parameters XML with available scan types and filters",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "abovePrice": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Aboveprice"
+          },
+          "aboveVolume": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Abovevolume"
+          },
+          "belowPrice": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Belowprice"
+          },
+          "instrument": {
+            "default": "STK",
+            "title": "Instrument",
+            "type": "string"
+          },
+          "locationCode": {
+            "default": "STK.US.MAJOR",
+            "title": "Locationcode",
+            "type": "string"
+          },
+          "marketCapAbove": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Marketcapabove"
+          },
+          "marketCapBelow": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Marketcapbelow"
+          },
+          "numberOfRows": {
+            "default": 50,
+            "title": "Numberofrows",
+            "type": "integer"
+          },
+          "scanCode": {
+            "title": "Scancode",
+            "type": "string"
+          },
+          "stockTypeFilter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Stocktypefilter"
+          }
+        },
+        "required": [
+          "scanCode"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_run_market_scanner",
+      "description": "Run a market scanner to find securities matching criteria.\n        \n        Args:\n            scanCode: Scanner type (e.g., 'TOP_PERC_GAIN', 'MOST_ACTIVE', 'HOT_BY_VOLUME')\n            instrument: Security type (STK, ETF, etc.)\n            locationCode: Market location (e.g., 'STK.US.MAJOR', 'STK.US')\n            numberOfRows: Maximum results to return (default: 50)\n            abovePrice: Filter: price above this value\n            belowPrice: Filter: price below this value\n            aboveVolume: Filter: volume above this value\n            marketCapAbove: Filter: market cap above this value\n            marketCapBelow: Filter: market cap below this value\n            stockTypeFilter: Filter: CORP or ETF\n            \n        Returns:\n            List of contracts matching scanner criteria with rank and details",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "pattern": {
+            "title": "Pattern",
+            "type": "string"
+          }
+        },
+        "required": [
+          "pattern"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_matching_symbols",
+      "description": "Search for symbols using smart matching.\n        \n        Args:\n            pattern: Search pattern (can be partial symbol or company name)\n            \n        Returns:\n            List of matching contracts with descriptions",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "numberOfTicks": {
+            "default": 100,
+            "title": "Numberofticks",
+            "type": "integer"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          },
+          "tickType": {
+            "default": "Last",
+            "title": "Ticktype",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_tick_by_tick_data",
+      "description": "Get historical tick-by-tick data.\n        \n        Args:\n            symbol: Contract symbol\n            tickType: Last, BidAsk, MidPoint, or AllLast\n            numberOfTicks: Number of ticks to retrieve (max: 1000)\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            Tick-by-tick historical data",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "bboExchange": {
+            "title": "Bboexchange",
+            "type": "string"
+          }
+        },
+        "required": [
+          "bboExchange"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_smart_components",
+      "description": "Get mapping of single letter codes to exchange names.\n        \n        Args:\n            bboExchange: Exchange code from market data\n            \n        Returns:\n            Map of exchange codes to names",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "conId": {
+            "title": "Conid",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "conId"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_security_definition_by_conid",
+      "description": "Get contract details by contract ID.\n        \n        Args:\n            conId: Contract ID\n            \n        Returns:\n            Full contract details",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_get_wsh_meta_data",
+      "description": "Get Wall Street Horizon metadata for available event types.\n        \n        Returns:\n            Available WSH event types and categories",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "conId": {
+            "title": "Conid",
+            "type": "integer"
+          },
+          "endDate": {
+            "default": "",
+            "title": "Enddate",
+            "type": "string"
+          },
+          "startDate": {
+            "default": "",
+            "title": "Startdate",
+            "type": "string"
+          },
+          "totalLimit": {
+            "default": 10,
+            "title": "Totallimit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "conId"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_get_wsh_event_data",
+      "description": "Get Wall Street Horizon event data for a contract.\n        \n        Args:\n            conId: Contract ID\n            startDate: Start date (YYYYMMDD format, empty for today)\n            endDate: End date (YYYYMMDD format, empty for far future)\n            totalLimit: Maximum events to retrieve\n            \n        Returns:\n            Corporate events from Wall Street Horizon",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "secType": {
+            "default": "STK",
+            "title": "Sectype",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_start_market_data_resource",
+      "description": "Start streaming market data to a resource.\n        \n        This starts a background task that continuously updates the resource\n        ibkr://market-data/{resource_id}. Clients can subscribe to the resource\n        to receive notifications when data changes.\n        \n        Resource ID format:\n        - Stocks (STK): Just the symbol (e.g., \"AAPL\" → ibkr://market-data/AAPL)\n        - Forex (CASH): symbol.currency (e.g., \"USD\" + \"JPY\" → ibkr://market-data/USD.JPY)\n        - Others: symbol or symbol.identifier\n        \n        This is the MCP-recommended pattern for streaming data - much more\n        efficient than polling!\n        \n        Args:\n            symbol: Stock/currency symbol (e.g., \"AAPL\", \"USD\", \"EUR\")\n            secType: Security type (STK, OPT, FUT, CASH, BOND, etc.)\n            exchange: Exchange (SMART for smart routing, IDEALPRO for forex, etc.)\n            currency: Currency code (USD, EUR, GBP, JPY, SGD, etc.)\n            \n        Returns:\n            JSON with resource URI and subscription status\n            \n        Example workflows:\n            # Stock: Apple\n            result = ibkr_start_market_data_resource(\"AAPL\", \"STK\", \"SMART\", \"USD\")\n            // Resource: ibkr://market-data/AAPL\n            \n            # Forex: USD/JPY\n            result = ibkr_start_market_data_resource(\"USD\", \"CASH\", \"IDEALPRO\", \"JPY\")\n            // Resource: ibkr://market-data/USD.JPY\n            \n            # Forex: EUR/USD\n            result = ibkr_start_market_data_resource(\"EUR\", \"CASH\", \"IDEALPRO\", \"USD\")\n            // Resource: ibkr://market-data/EUR.USD",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "resource_id": {
+            "title": "Resource Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "resource_id"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_stop_market_data_resource",
+      "description": "Stop streaming market data to a resource.\n        \n        Cancels the background task and clears cached data for a resource.\n        \n        Args:\n            resource_id: Resource identifier (e.g., \"AAPL\", \"USD.JPY\", \"EUR.USD\")\n            \n        Returns:\n            JSON with status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "account": {
+            "title": "Account",
+            "type": "string"
+          }
+        },
+        "required": [
+          "account"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_start_portfolio_resource",
+      "description": "Start streaming portfolio/account updates to a resource.\n        \n        This starts a background task that continuously updates the resource\n        ibkr://portfolio/{account} with position and account value changes.\n        \n        Args:\n            account: Account identifier (e.g., \"DU1234567\", \"U6162000\")\n            \n        Returns:\n            JSON with resource URI and subscription status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "account": {
+            "title": "Account",
+            "type": "string"
+          }
+        },
+        "required": [
+          "account"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_stop_portfolio_resource",
+      "description": "Stop streaming portfolio updates to a resource.\n        \n        Args:\n            account: Account identifier to stop streaming\n            \n        Returns:\n            JSON with status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "allMessages": {
+            "default": true,
+            "title": "Allmessages",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "name": "ibkr_start_news_resource",
+      "description": "Start streaming news bulletins to a resource.\n        \n        This starts a background task that updates the resource ibkr://news-bulletins\n        with TWS/IB Gateway system messages and trading alerts.\n        \n        Args:\n            allMessages: True for all bulletins, False for account-specific only\n            \n        Returns:\n            JSON with resource URI and subscription status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_stop_news_resource",
+      "description": "Stop streaming news bulletins to a resource.\n        \n        Returns:\n            JSON with status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "currency": {
+            "default": "USD",
+            "title": "Currency",
+            "type": "string"
+          },
+          "exchange": {
+            "default": "SMART",
+            "title": "Exchange",
+            "type": "string"
+          },
+          "secType": {
+            "default": "STK",
+            "title": "Sectype",
+            "type": "string"
+          },
+          "symbol": {
+            "default": "*",
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "name": "ibkr_start_tick_news_resource",
+      "description": "Start streaming real-time news headlines (like TWS News tab).\n        \n        This streams breaking news, company announcements, and market headlines.\n        Different from news-bulletins which are system messages.\n        \n        IMPORTANT: symbol='*' only enables aggregation mode. To receive news, you must\n        subscribe to actual symbols first (e.g., 'AAPL', 'MSFT'). The '*' aggregates\n        news from all subscribed symbols.\n        \n        Example usage:\n            1. ibkr_start_tick_news_resource(symbol='AAPL')  # Subscribe to AAPL\n            2. ibkr_start_tick_news_resource(symbol='MSFT')  # Subscribe to MSFT\n            3. ibkr_start_tick_news_resource(symbol='*')     # Enable aggregation (optional)\n            4. Read ibkr://tick-news/* to get all news from AAPL and MSFT\n        \n        Args:\n            symbol: Stock symbol (e.g., 'AAPL', 'MSFT') or '*' to enable aggregation\n            secType: Security type (default: STK)\n            exchange: Exchange (default: SMART)\n            currency: Currency (default: USD)\n            \n        Returns:\n            JSON with resource URI and subscription status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "properties": {
+          "symbol": {
+            "title": "Symbol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "symbol"
+        ],
+        "type": "object"
+      },
+      "name": "ibkr_stop_tick_news_resource",
+      "description": "Stop streaming tick news for a symbol.\n        \n        Args:\n            symbol: Stock symbol or '*' to stop all\n            \n        Returns:\n            JSON with status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_start_broadtape_news_resource",
+      "description": "Start streaming aggregated news headlines from all available providers.\n        \n        This subscribes to BroadTape feeds from ALL news providers your IB account\n        has access to (e.g., Briefing Trader, Benzinga, Fly on the Wall).\n        \n        Note: This requires active news subscriptions in your IB account.\n        \n        Returns:\n            JSON with resource URI and subscription status",
+      "enabled": true
+    },
+    {
+      "inputSchema": {
+        "type": "object"
+      },
+      "name": "ibkr_stop_broadtape_news_resource",
+      "description": "Stop streaming aggregated BroadTape news.\n        \n        Returns:\n            JSON with status",
+      "enabled": true
+    }
+  ],
+  "resources": [
+    {
+      "description": "Get current news bulletins from TWS/IB Gateway.\n        \n        This resource provides TWS system messages, trading alerts, and account notifications.\n        \n        Usage:\n            1. Call ibkr_start_news_resource tool to start streaming\n            2. Subscribe to this resource: ibkr://news-bulletins\n            3. Read resource to get current bulletins\n            4. Receive notifications when new bulletins arrive\n        \n        Returns:\n            JSON string with news bulletins\n        ",
+      "mimeType": "text/plain",
+      "name": "get_news_bulletins_resource",
+      "uri": "ibkr://news-bulletins"
+    },
+    {
+      "description": "Get aggregated real-time news headlines from all subscribed providers.\n        \n        This resource streams news from ALL available news providers (like BRF, BZ, FLY)\n        similar to the TWS News tab. It aggregates BroadTape feeds from all providers\n        your account has access to.\n        \n        Usage:\n            1. Call ibkr_start_broadtape_news_resource tool to start streaming\n            2. Subscribe to this resource: ibkr://broadtape-news\n            3. Read resource to get current headlines\n            4. Receive notifications when new headlines arrive from any provider\n        \n        Returns:\n            JSON string with aggregated news headlines from all providers\n        ",
+      "mimeType": "text/plain",
+      "name": "get_broadtape_news_resource",
+      "uri": "ibkr://broadtape-news"
+    }
+  ],
+  "prompts": [
+    {
+      "arguments": [
+        {
+          "description": "",
+          "name": "symbol",
+          "required": false
+        }
+      ],
+      "name": "setup_trading_workspace",
+      "description": "Complete trading workspace setup with market data, portfolio, and news monitoring.\n        \n        This prompt guides you through setting up a comprehensive trading environment by combining\n        connection, streaming, and monitoring tools. It simplifies initial setup for portfolio\n        oversight, ensuring real-time visibility into positions, market data, and news.\n        \n        Args:\n            symbol: Stock symbol to monitor (default: AAPL)\n            \n        Returns:\n            Step-by-step workflow for workspace setup",
+      "enabled": true
+    },
+    {
+      "arguments": [
+        {
+          "description": "",
+          "name": "target_allocations",
+          "required": false
+        }
+      ],
+      "name": "rebalance_portfolio",
+      "description": "Portfolio rebalancing workflow to align holdings with target allocations.\n        \n        This prompt guides you through comparing current portfolio holdings against target\n        allocations and executing rebalancing trades. It mirrors TWS's Model Portfolios and\n        Allocation Order Tool, automating portfolio alignment for diversification and risk control.\n        \n        Args:\n            target_allocations: JSON string of target allocations, e.g. '{\"AAPL\": 30, \"MSFT\": 25, \"GOOGL\": 20, \"SPY\": 25}'\n            \n        Returns:\n            Step-by-step rebalancing workflow",
+      "enabled": true
+    },
+    {
+      "arguments": [
+        {
+          "description": "",
+          "name": "benchmark",
+          "required": false
+        }
+      ],
+      "name": "assess_portfolio_risk",
+      "description": "Assess and optimize portfolio risk with beta weighting and what-if scenarios.\n        \n        This prompt focuses on risk analysis, inspired by TWS's Risk Navigator for beta-weighted\n        deltas, VaR, and scenario testing. It helps evaluate and mitigate portfolio risks.\n        \n        Args:\n            benchmark: Benchmark symbol for beta weighting (default: SPX)\n            \n        Returns:\n            Step-by-step risk assessment workflow",
+      "enabled": true
+    },
+    {
+      "arguments": [
+        {
+          "description": "",
+          "name": "symbol",
+          "required": false
+        },
+        {
+          "description": "",
+          "name": "entry_price",
+          "required": false
+        },
+        {
+          "description": "",
+          "name": "take_profit",
+          "required": false
+        },
+        {
+          "description": "",
+          "name": "stop_loss",
+          "required": false
+        }
+      ],
+      "name": "execute_bracket_order",
+      "description": "Execute a bracket order with take-profit and stop-loss for risk management.\n        \n        This prompt guides you through executing bracket orders (entry with attached take-profit\n        and stop-loss) to manage risk. It leverages TWS's advanced order types for portfolio\n        execution, automating position sizing and status monitoring.\n        \n        Args:\n            symbol: Stock symbol (default: AAPL)\n            entry_price: Entry limit price (0 = use market price)\n            take_profit: Take profit price (0 = calculate from entry)\n            stop_loss: Stop loss price (0 = calculate from entry)\n            \n        Returns:\n            Step-by-step bracket order workflow",
+      "enabled": true
+    },
+    {
+      "arguments": [
+        {
+          "description": "",
+          "name": "symbol",
+          "required": false
+        },
+        {
+          "description": "",
+          "name": "strategy_type",
+          "required": false
+        }
+      ],
+      "name": "execute_options_strategy",
+      "description": "Execute an options strategy for portfolio hedging or income generation.\n        \n        This prompt guides you through options-based portfolio strategies, drawing from TWS's\n        OptionTrader for chains and spreads. It combines contract details, market data, and\n        order tools to execute protective strategies like covered calls and collars.\n        \n        Args:\n            symbol: Underlying stock symbol (default: AAPL)\n            strategy_type: Strategy type - covered_call, protective_put, collar, iron_condor, etc.\n            \n        Returns:\n            Step-by-step options strategy workflow",
+      "enabled": true
+    },
+    {
+      "arguments": [
+        {
+          "description": "",
+          "name": "symbol",
+          "required": false
+        },
+        {
+          "description": "",
+          "name": "benchmark",
+          "required": false
+        }
+      ],
+      "name": "analyze_market_conditions",
+      "description": "Perform comprehensive market analysis combining real-time data, historical trends, \n        news sentiment, and options activity.\n        \n        This prompt guides you through multi-dimensional market analysis using TWS's suite\n        of tools: real-time quotes, historical data, news feeds, and options chains. It\n        provides a systematic approach to understanding market conditions before making\n        trading decisions.\n        \n        Args:\n            symbol: Stock symbol to analyze (default: AAPL)\n            benchmark: Benchmark index for comparison (default: SPX)\n            \n        Returns:\n            Step-by-step market analysis workflow",
+      "enabled": true
+    }
+  ],
+  "resourceTemplates": [
+    {
+      "uri": "ibkr://market-data/{resource_id}",
+      "name": "get_market_data_resource",
+      "description": "Get current market data snapshot for a symbol.\n        \n        This resource provides real-time market data that updates automatically.\n        Subscribe to this resource to receive notifications when data changes.\n        \n        Resource ID format:\n        - Stocks: Just the symbol (e.g., \"AAPL\", \"MSFT\")\n        - Forex: symbol.currency (e.g., \"USD.JPY\", \"EUR.USD\", \"USD.SGD\")\n        - Others: symbol or symbol.identifier as appropriate\n        \n        Usage:\n            1. Call ibkr_start_market_data_resource tool to start streaming\n            2. Subscribe to this resource: ibkr://market-data/{resource_id}\n            3. Read resource to get current snapshot\n            4. Receive notifications when data updates\n            5. Re-read resource when notified to get latest data\n        \n        Args:\n            resource_id: Resource identifier (e.g., \"AAPL\", \"USD.JPY\", \"EUR.USD\")\n            \n        Returns:\n            JSON string with current market data or error message",
+      "mimeType": "text/plain",
+      "enabled": true
+    },
+    {
+      "uri": "ibkr://portfolio/{account}",
+      "name": "get_portfolio_resource",
+      "description": "Get current portfolio/account updates for an account.\n        \n        This resource provides real-time portfolio and account value updates.\n        \n        Usage:\n            1. Call ibkr_start_portfolio_resource tool to start streaming\n            2. Subscribe to this resource: ibkr://portfolio/{account}\n            3. Read resource to get current snapshot\n            4. Receive notifications when portfolio/account updates\n        \n        Args:\n            account: Account identifier (e.g., \"DU1234567\", \"U6162000\")\n            \n        Returns:\n            JSON string with current portfolio/account data",
+      "mimeType": "text/plain",
+      "enabled": true
+    },
+    {
+      "uri": "ibkr://tick-news/{symbol}",
+      "name": "get_tick_news_resource",
+      "description": "Get real-time news headlines for a symbol.\n        \n        This provides the same news you see in TWS Station's News tab.\n        Streams breaking news, company announcements, and market-moving headlines.\n        \n        Special symbol: Use '*' to get all tick news across all subscribed symbols.\n        \n        Args:\n            symbol: Stock symbol (e.g., 'AAPL', 'MSFT') or '*' for all news\n            \n        Usage:\n            1. Call ibkr_start_tick_news_resource tool to subscribe\n            2. Subscribe to this resource: ibkr://tick-news/AAPL\n            3. Read resource to get recent headlines\n            4. Receive notifications when new headlines arrive\n        \n        Returns:\n            JSON string with news headlines",
+      "mimeType": "text/plain",
+      "enabled": true
+    }
+  ]
 }
