@@ -2,7 +2,7 @@
   "id": "IBKR",
   "name": "IBKR",
   "baseUrl": "http://localhost:8000/api/v1/mcp",
-  "type": "SSE",
+  "type": "HTTP",
   "timeoutMs": 8000,
   "tools": [
     {
