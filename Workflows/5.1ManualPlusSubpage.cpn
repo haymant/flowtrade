@@ -392,7 +392,7 @@
         "timestamp": 0
       }
     ],
-    "pInitRFQ": [
+    "pRFQ": [
       {
         "value": {
           "KOLevel": 130,
