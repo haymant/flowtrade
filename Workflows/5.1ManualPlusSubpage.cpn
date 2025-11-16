@@ -382,19 +382,10 @@
   ],
   "endPlaces": [],
   "initialMarking": {
-    "pStock": [
+    "pAI": [
       {
         "value": {
-          "symbol": [
-            "AAPL"
-          ]
-        },
-        "timestamp": 0
-      }
-    ],
-    "pRFQ": [
-      {
-        "value": {
+          "AIOpinion": "**Opinion:** Cautious  \n\n**Rationale:** The option is a 30‑day knockout (KO) call with a barrier at 130. Apple is trading around $272 — well above the KO level — meaning the barrier has already been breached, so the contract would have been knocked out and is effectively worthless despite being deep‑in‑the‑money (strike 105). Even ignoring the barrier, the deep‑ITM position would be very expensive relative to the modest 20 % implied volatility. In short, the current spot price makes this option an unattractive buy.",
           "KOLevel": 130,
           "Maturity": 30,
           "PathNum": 1000,
