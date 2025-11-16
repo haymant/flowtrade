@@ -136,6 +136,23 @@
   "endPlaces": [
     "Premium"
   ],
-  "initialMarking": {},
+  "initialMarking": {
+    "rfq": [
+      {
+        "value": {
+          "KOLevel": 130,
+          "Maturity": 30,
+          "PathNum": 1000,
+          "Rate": 0.03,
+          "ReqID": "REQ-001",
+          "Spot": 100,
+          "Strike": 105,
+          "Underlying": "XYZ",
+          "Vol": 0.2
+        },
+        "timestamp": 0
+      }
+    ]
+  },
   "subWorkflows": []
 }

@@ -1,605 +1,430 @@
 {
-  "id": "5.1ManualPlusSubpage",
-  "description": "Manual RFQ flow that calls a pricing subpage and supports ACK/REJ and multi-order placement.",
-  "colorSets": [
-    "colset STR = string;",
-    "colset J = json;",
-    "colset REAL = real;",
-    "colset INT = int;",
-    "colset Quote = json;",
-    "colset Order = json;",
-    "colset RFQ = json<RFQ>;",
-    "colset RFQ = json;",
-    "colset STRING = string;",
-    "colset JSON = string;",
-    "colset MARKDOWN = string;",
-    "colset AnyData = json;",
-    "colset OrderTyped = json<OrderSchema>;",
-    "colset Product = json<ProductSchema>;",
-    "colset Status = string;",
-    "colset Amount = int;"
-  ],
-  "jsonSchemas": [
-    {
-      "name": "RFQ",
-      "schema": {
-        "$schema": "https://json-schema.org/draft-07/schema",
-        "description": "Generated from JSON data",
-        "properties": {
-          "KOLevel": {
-            "type": "integer"
-          },
-          "Maturity": {
-            "type": "integer"
-          },
-          "PathNum": {
-            "type": "integer"
-          },
-          "Rate": {
-            "type": "number"
-          },
-          "ReqID": {
-            "type": "string"
-          },
-          "Spot": {
-            "type": "integer"
-          },
-          "Strike": {
-            "type": "integer"
-          },
-          "Underlying": {
-            "type": "string"
-          },
-          "Vol": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "KOLevel",
-          "Maturity",
-          "PathNum",
-          "Rate",
-          "ReqID",
-          "Spot",
-          "Strike",
-          "Underlying",
-          "Vol"
+    "success": true,
+    "data": {
+        "id": "Trade",
+        "description": "",
+        "colorSets": [
+            "colset STR = string;",
+            "colset J = json;",
+            "colset REAL = real;",
+            "colset INT = int;",
+            "colset Quote = json;",
+            "colset Order = json;",
+            "colset RFQ = json<RFQ>;",
+            "colset RFQ = json;",
+            "colset STRING = string;",
+            "colset JSON = string;",
+            "colset MARKDOWN = string;",
+            "colset AnyData = json;",
+            "colset OrderTyped = json<OrderSchema>;",
+            "colset Product = json<ProductSchema>;",
+            "colset Status = string;",
+            "colset Amount = int;"
         ],
-        "title": "Generated Schema",
-        "type": "object"
-      }
-    },
-    {
-      "name": "Order",
-      "schema": {
-        "$schema": "https://json-schema.org/draft-07/schema",
-        "description": "Generated from JSON data",
-        "properties": {
-          "AIOpinion": {
-            "description": "",
-            "type": "string"
-          },
-          "Amount": {
-            "description": "",
-            "type": "number"
-          },
-          "KOLevel": {
-            "type": "integer"
-          },
-          "Maturity": {
-            "type": "integer"
-          },
-          "Rate": {
-            "type": "number"
-          },
-          "Spot": {
-            "type": "integer"
-          },
-          "Strike": {
-            "type": "integer"
-          },
-          "Underlying": {
-            "type": "string"
-          },
-          "Vol": {
-            "type": "number"
-          }
-        },
-        "required": [
-          "KOLevel",
-          "Maturity",
-          "Rate",
-          "Spot",
-          "Strike",
-          "Underlying",
-          "Vol"
-        ],
-        "title": "Generated Schema",
-        "type": "object"
-      }
-    },
-    {
-      "name": "OrderSchema",
-      "schema": {
-        "properties": {
-          "customerId": {
-            "description": "Customer identifier",
-            "type": "string"
-          },
-          "items": {
-            "description": "Order items",
-            "items": {
-              "properties": {
-                "price": {
-                  "type": "number"
-                },
-                "productId": {
-                  "type": "string"
-                },
-                "quantity": {
-                  "type": "integer"
+        "jsonSchemas": [
+            {
+                "name": "RFQ",
+                "schema": {
+                    "$schema": "https://json-schema.org/draft-07/schema",
+                    "description": "Generated from JSON data",
+                    "properties": {
+                        "KOLevel": {
+                            "type": "integer"
+                        },
+                        "Maturity": {
+                            "type": "integer"
+                        },
+                        "PathNum": {
+                            "type": "integer"
+                        },
+                        "Rate": {
+                            "type": "number"
+                        },
+                        "ReqID": {
+                            "type": "string"
+                        },
+                        "Spot": {
+                            "type": "integer"
+                        },
+                        "Strike": {
+                            "type": "integer"
+                        },
+                        "Underlying": {
+                            "type": "string"
+                        },
+                        "Vol": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "KOLevel",
+                        "Maturity",
+                        "PathNum",
+                        "Rate",
+                        "ReqID",
+                        "Spot",
+                        "Strike",
+                        "Underlying",
+                        "Vol"
+                    ],
+                    "title": "Generated Schema",
+                    "type": "object"
                 }
-              },
-              "type": "object"
             },
-            "type": "array"
-          },
-          "orderId": {
-            "description": "Unique order identifier",
-            "type": "string"
-          },
-          "status": {
-            "enum": [
-              "pending",
-              "processing",
-              "completed",
-              "cancelled"
+            {
+                "name": "Order",
+                "schema": {
+                    "$schema": "https://json-schema.org/draft-07/schema",
+                    "description": "Generated from JSON data",
+                    "properties": {
+                        "AIOpinion": {
+                            "description": "",
+                            "type": "string"
+                        },
+                        "Amount": {
+                            "description": "",
+                            "type": "number"
+                        },
+                        "KOLevel": {
+                            "type": "integer"
+                        },
+                        "Maturity": {
+                            "type": "integer"
+                        },
+                        "Rate": {
+                            "type": "number"
+                        },
+                        "Spot": {
+                            "type": "integer"
+                        },
+                        "Strike": {
+                            "type": "integer"
+                        },
+                        "Underlying": {
+                            "type": "string"
+                        },
+                        "Vol": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "KOLevel",
+                        "Maturity",
+                        "Rate",
+                        "Spot",
+                        "Strike",
+                        "Underlying",
+                        "Vol"
+                    ],
+                    "title": "Generated Schema",
+                    "type": "object"
+                }
+            },
+            {
+                "name": "OrderSchema",
+                "schema": {
+                    "properties": {
+                        "customerId": {
+                            "description": "Customer identifier",
+                            "type": "string"
+                        },
+                        "items": {
+                            "description": "Order items",
+                            "items": {
+                                "properties": {
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "productId": {
+                                        "type": "string"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "orderId": {
+                            "description": "Unique order identifier",
+                            "type": "string"
+                        },
+                        "status": {
+                            "enum": [
+                                "pending",
+                                "processing",
+                                "completed",
+                                "cancelled"
+                            ],
+                            "type": "string"
+                        },
+                        "total": {
+                            "description": "Order total amount",
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "orderId",
+                        "customerId",
+                        "total"
+                    ],
+                    "type": "object"
+                }
+            },
+            {
+                "name": "ProductSchema",
+                "schema": {
+                    "properties": {
+                        "price": {
+                            "type": "number"
+                        },
+                        "productId": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "productId",
+                        "price"
+                    ],
+                    "type": "object"
+                }
+            }
+        ],
+        "places": [
+            {
+                "id": "pStock",
+                "colorSet": "J",
+                "position": {
+                    "x": 120,
+                    "y": 72.8044704085603
+                }
+            },
+            {
+                "id": "pYf",
+                "colorSet": "J",
+                "position": {
+                    "x": 640,
+                    "y": 80
+                }
+            },
+            {
+                "id": "pInitRFQ",
+                "colorSet": "J",
+                "position": {
+                    "x": 120,
+                    "y": 200
+                }
+            },
+            {
+                "id": "pRFQ",
+                "colorSet": "J",
+                "position": {
+                    "x": 549.4166,
+                    "y": 193.66667
+                }
+            },
+            {
+                "id": "pAI",
+                "colorSet": "J",
+                "position": {
+                    "x": 1124.1484543460658,
+                    "y": 137.4828056031746
+                }
+            },
+            {
+                "id": "p-9udxf",
+                "colorSet": "J",
+                "position": {
+                    "x": 469.5759342070018,
+                    "y": 349.2769848488791
+                }
+            }
+        ],
+        "transitions": [
+            {
+                "id": "tSpot",
+                "kind": "Tools",
+                "guardExpression": "true",
+                "scriptLanguage": "go",
+                "position": {
+                    "x": 324.5,
+                    "y": 97
+                },
+                "Tools": [
+                    {
+                        "name": "mcp:https://data.lizhao.net/api/mcp:yahoo_quote"
+                    }
+                ]
+            },
+            {
+                "id": "tRFQInput",
+                "kind": "Manual",
+                "guardExpression": "true",
+                "scriptLanguage": "go",
+                "position": {
+                    "x": 258.12268,
+                    "y": 222.81293
+                },
+                "actionFunction": "func T_tRFQInput_action(aIRfq map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if aIRfq != nil {\n        for k, v := range aIRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}"
+            },
+            {
+                "id": "tAI",
+                "kind": "LLM",
+                "guardExpression": "true",
+                "scriptLanguage": "go",
+                "position": {
+                    "x": 794.25464,
+                    "y": 161.63455
+                },
+                "LlmTemplate": {
+                    "messages": [
+                        {
+                            "text": "You are an experienced financial adviser specializing in listed equity option trading. Provide a concise qualitative opinion (bullish / neutral / cautious) and one short rationale.",
+                            "type": "system"
+                        },
+                        {
+                            "text": "Based on current market environment, is the following option good to buy?\n{{aORfq}}, especially give comment on current spot price info at {{aOSpot}}",
+                            "type": "user"
+                        }
+                    ]
+                },
+                "LlmVars": {},
+                "LlmOptions": {},
+                "Stream": false
+            },
+            {
+                "id": "tPrice",
+                "kind": "Auto",
+                "guardExpression": "true",
+                "scriptLanguage": "go",
+                "position": {
+                    "x": 162.59731997192102,
+                    "y": 365.945506888793
+                },
+                "actionFunction": "func T_tPrice_action(aAIRfq map[string]interface{}, premium interface{}) map[string]interface{} {\n    if premium != nil {\n        aAIRfq[\"Premium\"] = premium\n    }\n    return aAIRfq\n}",
+                "actionFunctionOutput": [
+                    "quote"
+                ]
+            }
+        ],
+        "arcs": [
+            {
+                "id": "e-fxz84",
+                "sourceId": "pStock",
+                "targetId": "tSpot",
+                "expression": "query",
+                "direction": "IN",
+                "scriptLanguage": "go"
+            },
+            {
+                "id": "aRes",
+                "sourceId": "tSpot",
+                "targetId": "pYf",
+                "expression": "tool_result",
+                "direction": "OUT",
+                "scriptLanguage": "go"
+            },
+            {
+                "id": "aIRfq",
+                "sourceId": "pInitRFQ",
+                "targetId": "tRFQInput",
+                "expression": "token",
+                "direction": "IN",
+                "scriptLanguage": "go"
+            },
+            {
+                "id": "aRfq",
+                "sourceId": "tRFQInput",
+                "targetId": "pRFQ",
+                "expression": "aRfq",
+                "direction": "OUT",
+                "scriptLanguage": "go"
+            },
+            {
+                "id": "aOSpot",
+                "sourceId": "pYf",
+                "targetId": "tAI",
+                "expression": "aOSpot",
+                "direction": "IN",
+                "scriptLanguage": "go"
+            },
+            {
+                "id": "aORfq",
+                "sourceId": "pRFQ",
+                "targetId": "tAI",
+                "expression": "aORfq",
+                "direction": "IN",
+                "scriptLanguage": "go"
+            },
+            {
+                "id": "aAI",
+                "sourceId": "tAI",
+                "targetId": "pAI",
+                "expression": "func A_aAI_expr(aORfq map[string]interface{}, answer string) interface{} {\n    if aORfq == nil {\n        aORfq = make(map[string]interface{})\n    }\n    aORfq[\"AIOpinion\"] = answer\n    return aORfq\n}",
+                "direction": "OUT",
+                "scriptLanguage": "go"
+            },
+            {
+                "id": "aAIRfq",
+                "sourceId": "pAI",
+                "targetId": "tPrice",
+                "expression": "aAIRfq",
+                "direction": "IN",
+                "scriptLanguage": "go"
+            },
+            {
+                "id": "e-fcueq",
+                "sourceId": "tPrice",
+                "targetId": "p-9udxf",
+                "expression": "quote",
+                "direction": "OUT",
+                "scriptLanguage": "go"
+            }
+        ],
+        "endPlaces": [],
+        "initialMarking": {
+            "pStock": [
+                {
+                    "value": {
+                        "symbol": [
+                            "AAPL"
+                        ]
+                    },
+                    "timestamp": 0
+                }
             ],
-            "type": "string"
-          },
-          "total": {
-            "description": "Order total amount",
-            "type": "number"
-          }
+            "pInitRFQ": [
+                {
+                    "value": {
+                        "KOLevel": 130,
+                        "Maturity": 30,
+                        "PathNum": 1000,
+                        "Rate": 0.03,
+                        "ReqID": "REQ-001",
+                        "Spot": 100,
+                        "Strike": 105,
+                        "Underlying": "AAPL",
+                        "Vol": 0.2
+                    },
+                    "timestamp": 0
+                }
+            ]
         },
-        "required": [
-          "orderId",
-          "customerId",
-          "total"
-        ],
-        "type": "object"
-      }
-    },
-    {
-      "name": "ProductSchema",
-      "schema": {
-        "properties": {
-          "price": {
-            "type": "number"
-          },
-          "productId": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "productId",
-          "price"
-        ],
-        "type": "object"
-      }
-    }
-  ],
-  "places": [
-    {
-      "id": "EmptyRFQ",
-      "colorSet": "RFQ",
-      "position": {
-        "x": 346.0086,
-        "y": 411.36053
-      }
-    },
-    {
-      "id": "RFQ",
-      "colorSet": "RFQ",
-      "position": {
-        "x": 437.64835,
-        "y": 148.71881
-      }
-    },
-    {
-      "id": "NewQuote",
-      "colorSet": "Quote",
-      "position": {
-        "x": 1061.0964,
-        "y": 249.75426
-      }
-    },
-    {
-      "id": "revquote",
-      "colorSet": "Quote",
-      "position": {
-        "x": 1334.5079,
-        "y": 228.97142
-      }
-    },
-    {
-      "id": "RejectedQuote",
-      "colorSet": "Quote",
-      "position": {
-        "x": 1715.3119,
-        "y": 100.18903
-      }
-    },
-    {
-      "id": "NewOrder",
-      "colorSet": "Order",
-      "position": {
-        "x": 1723.7808,
-        "y": 244.53687
-      }
-    },
-    {
-      "id": "p-ybw8g",
-      "colorSet": "RFQ",
-      "position": {
-        "x": 814.8582,
-        "y": 247.25897
-      }
-    },
-    {
-      "id": "p-63byi",
-      "colorSet": "Quote",
-      "position": {
-        "x": 1157.8845,
-        "y": 440.65942
-      }
-    },
-    {
-      "id": "p-vxbb9",
-      "colorSet": "RFQ",
-      "position": {
-        "x": 842.4437,
-        "y": -102.50405
-      }
-    },
-    {
-      "id": "prfq1",
-      "colorSet": "J",
-      "position": {
-        "x": 335.45715,
-        "y": 34.844807
-      }
-    },
-    {
-      "id": "psymb",
-      "colorSet": "J",
-      "position": {
-        "x": 228.50954,
-        "y": -17.353472
-      }
-    }
-  ],
-  "transitions": [
-    {
-      "id": "t_fill",
-      "kind": "Manual",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 567.3887,
-        "y": 433.29462
-      },
-      "formSchema": "RFQ",
-      "actionFunction": "func t_fill_action(newRfq map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if newRfq != nil {\n        for k, v := range newRfq {\n            base[k] = v\n        }\n    }\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}",
-      "actionFunctionOutput": [
-        "rfq"
-      ]
-    },
-    {
-      "id": "t_price",
-      "kind": "Auto",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 591.1794,
-        "y": 114.80888
-      },
-      "actionFunction": "func t_price_action(rfq map[string]interface{}, premium interface{}) map[string]interface{} {\n    if premium != nil {\n        rfq[\"Premium\"] = premium\n    }\n    return rfq\n}",
-      "actionFunctionOutput": [
-        "rfq"
-      ]
-    },
-    {
-      "id": "t_build",
-      "kind": "Auto",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 825.2911,
-        "y": 57.172237
-      },
-      "actionFunction": "func t_build_action(rfq1 map[string]interface{}) map[string]interface{} {\n    S := 100.0\n    if v, ok := rfq1[\"Spot\"].(float64); ok { S = v }\n    K := 100.0\n    if v, ok := rfq1[\"Strike\"].(float64); ok { K = v }\n    r := 0.03\n    if v, ok := rfq1[\"Rate\"].(float64); ok { r = v }\n    T := 30.0\n    if v, ok := rfq1[\"Maturity\"].(float64); ok { T = v }\n    premium := 0.0\n    if v, ok := rfq1[\"Premium\"].(float64); ok { premium = v }\n    reqID := \"REQ-001\"\n    if v, ok := rfq1[\"ReqID\"].(string); ok && v != \"\" { reqID = v }\n    quote := map[string]interface{}{\n        \"QuoteID\": reqID + \"-Q1\",\n        \"OrgReqID\": rfq1[\"ReqID\"],\n        \"Underlying\": rfq1[\"Underlying\"],\n        \"Spot\": S,\n        \"Strike\": K,\n        \"KOLevel\": rfq1[\"KOLevel\"],\n        \"Vol\": rfq1[\"Vol\"],\n        \"Rate\": r,\n        \"Maturity\": T,\n        \"Premium\": premium,\n        \"AIOpinion\": rfq1[\"AIOpinion\"],\n        \"Status\": \"NEW\",\n    }\n    return quote\n}",
-      "actionFunctionOutput": [
-        "quote"
-      ]
-    },
-    {
-      "id": "t_review",
-      "kind": "Manual",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 1099.9738,
-        "y": 58.245476
-      },
-      "actionFunction": "func t_review_action(q map[string]interface{}, formData map[string]interface{}) map[string]interface{} {\n    base := make(map[string]interface{})\n    if q != nil {\n        for k, v := range q {\n            base[k] = v\n        }\n    }\n    base[\"Status\"] = \"ACK\"\n    base[\"QuoteID\"] = \"xxxxx\"\n    if formData != nil {\n        for k, v := range formData {\n            base[k] = v\n        }\n    }\n    return base\n}",
-      "actionFunctionOutput": [
-        "revQ"
-      ]
-    },
-    {
-      "id": "t_order",
-      "kind": "Manual",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 1423.138,
-        "y": 458.14746
-      },
-      "formSchema": "Order",
-      "actionFunction": "func t_order_action(q map[string]interface{}) map[string]interface{} {\n return q\n}",
-      "actionFunctionOutput": [
-        "order"
-      ]
-    },
-    {
-      "id": "tRej",
-      "kind": "Auto",
-      "guardExpression": "rquote[\"Status\"] == \"REJ\"",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 1485.8538,
-        "y": 9.46244
-      },
-      "actionFunction": "nil"
-    },
-    {
-      "id": "tAck",
-      "kind": "Auto",
-      "guardExpression": "rquote[\"Status\"] == \"ACK\"",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 1507.0892,
-        "y": 214.14828
-      },
-      "actionFunction": "nil"
-    },
-    {
-      "id": "t_ai",
-      "kind": "LLM",
-      "guardExpression": "true",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 470.40533,
-        "y": -79.41517
-      },
-      "LlmTemplate": {
-        "messages": [
-          {
-            "text": "You are an experienced financial adviser specializing in listed equity option trading. Provide a concise qualitative opinion (bullish / neutral / cautious) and one short rationale.",
-            "type": "system"
-          },
-          {
-            "text": "Based on current market environment, is the following option good to buy?\n{{rfq}}, especially give comment on current spot price info at {{quote}}",
-            "type": "user"
-          }
+        "subWorkflows": [
+            {
+                "id": "sw_tPrice",
+                "cpnId": "quickstart param",
+                "callTransitionId": "tPrice",
+                "autoStart": true,
+                "propagateOnComplete": true,
+                "inputMapping": {
+                    "aAIRfq": "rfq"
+                },
+                "outputMapping": {
+                    "premium": "aAIRfq"
+                }
+            }
         ]
-      },
-      "LlmVars": {},
-      "LlmOptions": {},
-      "Stream": false
-    },
-    {
-      "id": "tSpot",
-      "kind": "Tools",
-      "guardExpression": "true",
-      "scriptLanguage": "go",
-      "position": {
-        "x": 214.99199,
-        "y": 212.65584
-      },
-      "Tools": [
-        {
-          "name": "mcp:https://data.lizhao.net/api/mcp:yahoo_quote"
-        }
-      ]
     }
-  ],
-  "arcs": [
-    {
-      "id": "a_fill_out",
-      "sourceId": "t_fill",
-      "targetId": "RFQ",
-      "expression": "return_rfq",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "a_build_out",
-      "sourceId": "t_build",
-      "targetId": "NewQuote",
-      "expression": "return_quote",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "a_ack_in",
-      "sourceId": "NewQuote",
-      "targetId": "t_review",
-      "expression": "token",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "a_ack_out",
-      "sourceId": "t_review",
-      "targetId": "revquote",
-      "expression": "return_revQ",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "a_ord_out1",
-      "sourceId": "t_order",
-      "targetId": "NewOrder",
-      "expression": "return_order",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-p-ybw8g--t_build--of1se",
-      "sourceId": "p-ybw8g",
-      "targetId": "t_build",
-      "expression": "rfq1",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-ggj78",
-      "sourceId": "revquote",
-      "targetId": "tRej",
-      "expression": "rquote",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-t-ixbgi--RejectedQuote--ngxfd",
-      "sourceId": "tRej",
-      "targetId": "RejectedQuote",
-      "expression": "return rquote",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-e0keb",
-      "sourceId": "revquote",
-      "targetId": "tAck",
-      "expression": "rquote",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-qamkz",
-      "sourceId": "tAck",
-      "targetId": "p-63byi",
-      "expression": "return rquote",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-p-63byi--t_order--b50ek",
-      "sourceId": "p-63byi",
-      "targetId": "t_order",
-      "expression": "q",
-      "direction": "IN",
-      "readonly": true,
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-RFQ--t-64vlf--ge1s6",
-      "sourceId": "RFQ",
-      "targetId": "t_ai",
-      "expression": "rfq",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-47pxf",
-      "sourceId": "t_ai",
-      "targetId": "p-vxbb9",
-      "expression": "return (function(_t,_a) if type(_t)=='table' then local c={}; for k,v in pairs(_t) do c[k]=v end; c.AIOpinion=_a; return c else return {Original=_t, AIOpinion=_a} end end)(rfq, answer)",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-p-vxbb9--t_price--s11yz",
-      "sourceId": "p-vxbb9",
-      "targetId": "t_price",
-      "expression": "rfq",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-y2nbr",
-      "sourceId": "t_price",
-      "targetId": "p-ybw8g",
-      "expression": "return rfq",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-h5pmg",
-      "sourceId": "tSpot",
-      "targetId": "prfq1",
-      "expression": "tool_result",
-      "direction": "OUT",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-EmptyRFQ--t_fill--b6gpv",
-      "sourceId": "EmptyRFQ",
-      "targetId": "t_fill",
-      "expression": "newRfq",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-my6sn",
-      "sourceId": "psymb",
-      "targetId": "tSpot",
-      "expression": "symb",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    },
-    {
-      "id": "e-prfq1--t_ai--h8kg8",
-      "sourceId": "prfq1",
-      "targetId": "t_ai",
-      "expression": "quote",
-      "direction": "IN",
-      "scriptLanguage": "go"
-    }
-  ],
-  "endPlaces": [
-    "RejectedQuote",
-    "NewOrder"
-  ],
-  "initialMarking": {
-    "EmptyRFQ": [
-      {
-        "value": {
-          "KOLevel": 130,
-          "Maturity": 30,
-          "PathNum": 1000,
-          "Rate": 0.03,
-          "ReqID": "REQ-001",
-          "Spot": 100,
-          "Strike": 105,
-          "Underlying": "AAPL",
-          "Vol": 0.2
-        },
-        "timestamp": 0
-      }
-    ]
-  },
-  "subWorkflows": [
-    {
-      "id": "sw-price",
-      "cpnId": "quickstart param",
-      "callTransitionId": "t_price",
-      "autoStart": true,
-      "propagateOnComplete": true,
-      "inputMapping": {
-        "rfq": "rfq"
-      },
-      "outputMapping": {
-        "premium": "premium"
-      }
-    }
-  ]
 }
