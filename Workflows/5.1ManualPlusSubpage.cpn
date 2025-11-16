@@ -1,6 +1,5 @@
 {
   "id": "5.1ManualPlusSubpage",
-  "name": "Manual RFQ → Quote → Order (with Subpage)",
   "description": "Manual RFQ flow that calls a pricing subpage and supports ACK/REJ and multi-order placement.",
   "colorSets": [
     "colset STR = string;",
@@ -193,7 +192,6 @@
   "places": [
     {
       "id": "EmptyRFQ",
-      "name": "EmptyRFQ",
       "colorSet": "RFQ",
       "position": {
         "x": 346.0086,
@@ -202,7 +200,6 @@
     },
     {
       "id": "RFQ",
-      "name": "RFQ",
       "colorSet": "RFQ",
       "position": {
         "x": 437.64835,
@@ -211,7 +208,6 @@
     },
     {
       "id": "NewQuote",
-      "name": "NewQuote",
       "colorSet": "Quote",
       "position": {
         "x": 1061.0964,
@@ -220,7 +216,6 @@
     },
     {
       "id": "revquote",
-      "name": "ReviewedQuote",
       "colorSet": "Quote",
       "position": {
         "x": 1334.5079,
@@ -229,7 +224,6 @@
     },
     {
       "id": "RejectedQuote",
-      "name": "RejectedQuote",
       "colorSet": "Quote",
       "position": {
         "x": 1715.3119,
@@ -238,7 +232,6 @@
     },
     {
       "id": "NewOrder",
-      "name": "NewOrder",
       "colorSet": "Order",
       "position": {
         "x": 1723.7808,
@@ -247,7 +240,6 @@
     },
     {
       "id": "p-ybw8g",
-      "name": "PV",
       "colorSet": "RFQ",
       "position": {
         "x": 814.8582,
@@ -256,7 +248,6 @@
     },
     {
       "id": "p-63byi",
-      "name": "AckedQuote",
       "colorSet": "Quote",
       "position": {
         "x": 1157.8845,
@@ -265,7 +256,6 @@
     },
     {
       "id": "p-vxbb9",
-      "name": "AIRfq",
       "colorSet": "RFQ",
       "position": {
         "x": 842.4437,
@@ -274,7 +264,6 @@
     },
     {
       "id": "prfq1",
-      "name": "PxRFQ",
       "colorSet": "J",
       "position": {
         "x": 335.45715,
@@ -283,7 +272,6 @@
     },
     {
       "id": "psymb",
-      "name": "Symbol",
       "colorSet": "J",
       "position": {
         "x": 228.50954,
@@ -294,7 +282,6 @@
   "transitions": [
     {
       "id": "t_fill",
-      "name": "FillRFQ",
       "kind": "Manual",
       "scriptLanguage": "go",
       "position": {
@@ -309,7 +296,6 @@
     },
     {
       "id": "t_price",
-      "name": "PriceRFQ (Subpage Call)",
       "kind": "Auto",
       "scriptLanguage": "go",
       "position": {
@@ -323,7 +309,6 @@
     },
     {
       "id": "t_build",
-      "name": "BuildQuote",
       "kind": "Auto",
       "scriptLanguage": "go",
       "position": {
@@ -337,7 +322,6 @@
     },
     {
       "id": "t_review",
-      "name": "ReviewQuote",
       "kind": "Manual",
       "scriptLanguage": "go",
       "position": {
@@ -351,7 +335,6 @@
     },
     {
       "id": "t_order",
-      "name": "PlaceOrder (keeps quote)",
       "kind": "Manual",
       "scriptLanguage": "go",
       "position": {
@@ -366,7 +349,6 @@
     },
     {
       "id": "tRej",
-      "name": "isRejected?",
       "kind": "Auto",
       "guardExpression": "rquote[\"Status\"] == \"REJ\"",
       "scriptLanguage": "go",
@@ -378,7 +360,6 @@
     },
     {
       "id": "tAck",
-      "name": "isAcked",
       "kind": "Auto",
       "guardExpression": "rquote[\"Status\"] == \"ACK\"",
       "scriptLanguage": "go",
@@ -390,7 +371,6 @@
     },
     {
       "id": "t_ai",
-      "name": "AI Assist",
       "kind": "LLM",
       "guardExpression": "true",
       "scriptLanguage": "go",
@@ -416,7 +396,6 @@
     },
     {
       "id": "tSpot",
-      "name": "GetSpotPx",
       "kind": "Tools",
       "guardExpression": "true",
       "scriptLanguage": "go",
@@ -603,16 +582,6 @@
           "Strike": 105,
           "Underlying": "AAPL",
           "Vol": 0.2
-        },
-        "timestamp": 0
-      }
-    ],
-    "Symbol": [
-      {
-        "value": {
-          "symbol": [
-            "AAPL"
-          ]
         },
         "timestamp": 0
       }
